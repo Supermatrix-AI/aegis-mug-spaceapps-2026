@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { INITIAL_EXPERIMENT_RECORDS } from '../data/nasaCatalog.ts';
 import {
  BASS2_TESTS,BASS2_SEGMENTS,validateBass2Table,BASS2_TABLE51_URL,
 } from '../data/bass2Table51.ts';
@@ -70,6 +71,17 @@ describe('BASS-II NASA Table 5.1 evidence atlas', () => {
     expect(csv).toContain('SOURCE_REPORTED');
     expect(csv).toContain('SOURCE_MATCHED');
     expect(csv).toContain('""'); // explicit CSV empty field for unknown oxygen and missing rates
+  });
+
+  it('matches all five existing source-reported core PMMA runs without silently altering them', () => {
+    for (const t of BASS2_TESTS.filter(t=>[1,5,9,15,20].includes(Number(t.id.slice(1))))) {
+      const current=INITIAL_EXPERIMENT_RECORDS.find(r=>r.experimentId==='EXP-BASS2-'+t.id);
+      expect(current, 'Core record missing for '+t.id).toBeDefined();
+      expect(current?.oxygenPercent).toBe(t.initialOxygenVolPercent);
+      expect(current?.airflowVelocity).toBe(t.velocitiesCmPerSecond[0]);
+      expect(current?.reportedValue).toBe(t.spreadRatesMmPerSecond[0]);
+      expect(current?.units).toBe('mm/s');
+    }
   });
 
   it('cites report sections for each curated scientific takeaway', () => {
