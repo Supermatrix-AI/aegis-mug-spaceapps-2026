@@ -22,3 +22,8 @@ AegisμG supports **optional** server-side Gemini integration (`@google/genai`, 
 ## 3. Digital Twin Additions
 
 The exploratory 0D oxygen-balance module (`src/utils/digitalTwin.ts`), unit tests (`src/tests/digitalTwin.test.ts`), and React UI (`src/components/DigitalTwin.tsx`) were authored with AI coding assistance on November 14, 2026 UTC under developer supervision via PR #1 (`feature/aegis-digital-twin-v1`), then reviewed, verified, and reconciled into the main workspace. Its input parameters and calculated time series are hypothetical (`HYPOTHETICAL` / `NOT-NASA-DATA`), never NASA-supplied measurements. Verification of any physical claims remains the responsibility of a qualified researcher. See `DIGITAL_TWIN_METHOD.md`.
+
+
+## 4. BASS-II Table 5.1 Scientific Upgrade
+
+OpenAI ChatGPT assisted with the manual transcription architecture, evidence-comparison logic, React visualization and tests on November 14, 2026. NASA/TM-20210011385 is the original source. All measurements are source-reported; numeric values and counts require human comparison against the original table before release. AI did not create new NASA experiment measurements, and the analytic directionality check is explicitly descriptive rather than causal.

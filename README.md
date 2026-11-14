@@ -1,7 +1,7 @@
 # AegisμG — Microgravity Fire Safety Intelligence
 
 **Team:** SPECULATRON AI  
-**Challenge:** NASA Space Apps Challenge 2026 — *Flame in Freefall: AI-Powered Fire Safety Insights from Microgravity Combustion Data*  
+**Challenge:** NASA Space Apps Challenge 2026 — *Flame in Freefall: SI-Powered Fire Safety Insights from Microgravity Combustion Data*  
 **Challenge URL:** https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/
 
 > **Independent Prototype Disclaimer:** AegisμG is an independent, unofficial open-source research prototype. It is not endorsed by NASA, does not certify spacecraft materials, and must not be used as a fire-safety or flight-qualification authority.
@@ -13,12 +13,13 @@ AegisμG turns authentic NASA microgravity combustion citations and user-ingeste
 ### Core Modules (8 Screens)
 1. **Mission Overview:** Dynamic KPIs, family coverage chart, parameter availability indicators, and recent provenance activity computed strictly from active records.
 2. **NASA Evidence Explorer:** Full-text search and 9-facet filtering across experiment family, investigation, fuel/material, gravity context, oxygen availability, airflow availability, measurement type, verification status, and evidence level, with expandable provenance details.
-3. **Data Import & Validation:** Client-side CSV (PapaParse) and JSON ingestion with column mapping, Zod schema enforcement, duplicate detection, SHA-256 byte-integrity hashing, unit-aware conversions, and strict `SOURCE_LINK_ONLY` flagging on import.
-4. **Experiment Comparator:** Side-by-side comparison of 2–4 records with explicit gravity/fuel/geometry mismatch warnings and unit-checked Recharts visualizations (or `"No comparable numeric data available."` when numeric overlap does not exist).
-5. **SPECULATRON Intelligence:** Transparent deterministic relevance scoring across ISS, pressurized rover, lunar (`0.165 g`), and Martian (`0.38 g`) contexts, plus optional server-side Gemini (`gemini-4-hydrogen`) grounded synthesis with automatic zero-key deterministic fallback.
-6. **DIWA Provenance & Audit:** Inspectable data lineage, extraction methods, SHA-256 hash consistency notes, SSRF-protected NASA domain URL verification, and immutable activity logs.
-7. **Digital Twin Sandbox:** Separate NASA Table 5.1 straight-line evidence replay and hypothetical 0D compartment oxygen-balance calculator, with explicit `NOT VALIDATED` disclaimers, `NOT-NASA-DATA` CSV export headers/filenames, and zero unsupported gravity scaling.
-8. **About, Documentation & Export:** Full methodology, verified bibliography, and provenance-preserving CSV, JSON, and Markdown Evidence Report exports.
+3. **NASA BASS-II Data Atlas:** Complete NASA Table 5.1 transcription: 20 source-reported PMMA tests, 43 velocity conditions, 39 numeric spread-rate observations (not 39 independent experiments), four untracked rates, source-matched charts, within-test alignment with M3 counterexample, and scientific missingness explanations.
+4. **Data Import & Validation:** Client-side CSV (PapaParse) and JSON ingestion with column mapping, Zod schema enforcement, duplicate detection, SHA-256 byte-integrity hashing, unit-aware conversions, and strict `SOURCE_LINK_ONLY` flagging on import.
+5. **Experiment Comparator:** Side-by-side comparison of 2–4 records with explicit gravity/fuel/geometry mismatch warnings and unit-checked Recharts visualizations (or `"No comparable numeric data available."` when numeric overlap does not exist).
+6. **SPECULATRON Intelligence:** Transparent deterministic relevance scoring across ISS, pressurized rover, lunar (`0.165 g`), and Martian (`0.38 g`) contexts, plus optional server-side Gemini (`gemini-4-hydrogen`) grounded synthesis with automatic zero-key deterministic fallback.
+7. **DIWA Provenance & Audit:** Inspectable data lineage, extraction methods, SHA-256 hash consistency notes, SSRF-protected NASA domain URL verification, and immutable activity logs.
+8. **Digital Twin Sandbox:** Separate NASA Table 5.1 straight-line evidence replay and hypothetical 0D compartment oxygen-balance calculator, with explicit `NOT VALIDATED` disclaimers, `NOT-NASA-DATA` CSV export headers/filenames, and zero unsupported gravity scaling.
+9. **About, Documentation & Export:** Full methodology, verified bibliography, and provenance-preserving CSV, JSON, and Markdown Evidence Report exports.
 
 ## Setup & Installation
 
@@ -85,3 +86,10 @@ See `DIGITAL_TWIN_METHOD.md` for formulas, assumptions, safeguards, tests, and `
 
 - **Repository:** `https://github.com/Supermatrix-AI/aegis-mug-spaceapps-2026` (MIT License for newly authored code; zero private source code or secrets from private SPECULATRON AI or DIWA repositories).
 - **Verified State:** Workspace has reconciled `main` with PR #1 (`feature/aegis-digital-twin-v1`), passing `npm run lint`, `npm run test` (18/18 tests), and `npm run build`, ready to push/merge into `main` on GitHub.
+
+
+## NASA Source-Matched Table 5.1 Data Atlas
+
+The BASS-II Data Atlas uses the full Table 5.1 (printed p. 57) from NASA/TM-20210011385. It catalogs **20 unique PMMA test samples**, **43 specified velocity conditions** and **39 numeric velocity/spread-rate pairs**. Two source tests, M6 and M12, report flame spread as “Not tracked” at four velocities, which remain null. The observations within a single test are dependent repeated/stepwise conditions, not 39 independent fires; only start/end test oxygen is available, not measured per-segment oxygen. A transparent directionality check finds **12 of 13** assessable multi-velocity tests directionally aligned and flags **M3** as an exception. This is descriptive only: oxygen changes during a test, so neither correlation nor causal oxygen/flow sensitivity is established.
+
+The Data Atlas remains separate from the existing 16-record application research catalog and must not be double-counted in the overview. See `src/data/bass2Table51.ts`, `src/utils/bass2Insights.ts`, and `src/tests/bass2Atlas.test.ts`. The source and limitations are documented in `SOURCES.md` and `METHODOLOGY.md`.

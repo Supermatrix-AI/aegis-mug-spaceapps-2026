@@ -33,3 +33,10 @@
 2. **Table 5.1 (p. 57) omitted uncertainty & multi-step runs:** Per-test error bounds are not reported (`null`); tests `M6` and `M12` report spread rate as `"Not tracked"`, and 15 of 20 M-series tests stepped across multiple velocities in one burn and were excluded from single-condition `EXPERIMENT_RUN` rows.
 3. **Table 7.1 (p. 96) footnote `b` & figure-only spread rates:** Tests `GMT45-T1` and `GMT45-T2` carry footnote `b` (*"O2 reading in these two tests might be inaccurate"*); steady spread rates are plotted in Fig. 7.4 (p. 98) rather than tabulated numerically, so `EXP-BASS2-GMT178-T11` preserves `reportedValue: null`.
 4. **Section 1.4–1.5 sensor saturation & exclusions (pp. 7–10):** The CSA-CP CO sensor saturated (`> 1,000 ppm`) on the `2.8% CO2` outlier burn, and `15` of `34` returned samples were excluded from the `Φ_global = 1.3` calculation (`8` modified on orbit, `7` too short for O2 depletion).
+
+
+## Complete BASS-II PMMA Table 5.1 Data Atlas (2026 hackathon enhancement)
+
+**Source:** [NASA/TM-20210011385 BASS-II Summary Report](https://ntrs.nasa.gov/citations/20210011385), Table 5.1, printed p. 57; related discussion in Sections 5.4–5.7, pp. 60–63. The Data Atlas transcribes all 20 published test samples M1–M20, with 43 reported velocity conditions, 39 paired numeric spread-rate observations, and four “Not tracked” spread rates for M6/M12. It preserves independent fields for each test's initial/final oxygen, thickness, width, one-/two-sided fuel arrangement, burn time, and source locator. **Oxygen at each velocity segment was not directly reported in Table 5.1** and is never fabricated or implicitly treated as constant.
+
+NASA documents a broad relationship between ventilation, thickness, and flame spreading, but multiple variables change during these tests. The app flags M3 as a directional exception rather than forcing a universal trend. This data is manually source-matched and not an independent NASA endorsement or validated predictive model. Detailed data schema: `src/data/bass2Table51.ts`.

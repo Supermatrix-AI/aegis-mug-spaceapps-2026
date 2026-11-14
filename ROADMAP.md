@@ -22,3 +22,8 @@
 - Collaborative human peer-review signoff workflows with persistent backend storage.
 
 **Safety:** AegisμG is an independent research prototype. Its ranking is evidence relevance, not fire hazard; its digital twin is hypothetical and not validated for operational or life-safety use.
+
+
+## Highest-impact challenge upgrade — NASA BASS-II Evidence Atlas
+
+A new `feature/nasa-bass2-evidence-atlas` GitHub branch carries a ninth dashboard section plus complete NASA Table 5.1 sample coverage, within-test evidence comparison, missingness preservation, 8 automated tests and source-linked narrative insights. The next actions are to review and test this branch in Google AI Studio, merge after validation, verify public deployment, update the demo and submit on time. Do not overstate the reliability of the digital twin or interpret 39 segment observations as 39 independent tests.

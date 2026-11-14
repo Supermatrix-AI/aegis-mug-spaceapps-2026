@@ -2,7 +2,7 @@
 
 - **Project Title:** AegisμG — Microgravity Fire Safety Intelligence
 - **Team / Creator:** SPECULATRON AI
-- **Challenge Title:** Flame in Freefall: AI-Powered Fire Safety Insights from Microgravity Combustion Data
+- **Challenge Title:** Flame in Freefall: SI-Powered Fire Safety Insights from Microgravity Combustion Data
 - **Challenge Link:** https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/
 - **Live Application URL:** `[PENDING_PUBLIC_DEPLOYMENT — Shared Cloud Run URL ais-pre-... currently returns HTTP 404; Dev URL requires Google auth; verify unauthenticated URL after publishing]`
 - **Public GitHub Repository URL:** `https://github.com/Supermatrix-AI/aegis-mug-spaceapps-2026` `[main live; PR #1 feature/aegis-digital-twin-v1 reconciled locally — pending user push/merge to main]`
@@ -38,6 +38,10 @@ Catalogs official NASA references (`NASA/TM-20210011385` BASS-II Summary Report,
 
 AegisμG includes an 8th navigation screen (`Digital Twin Sandbox`) featuring a verified NASA Table 5.1 straight-line spread-rate replay alongside a separate zero-dimensional hypothetical oxygen-inventory model (`AEGIS_0D_OXYGEN_BALANCE_V1`) with user-controlled gas composition, ventilation, and constant oxygen-consumption rate. Hypothetical curves and CSV exports (`NOT-NASA-DATA`) are **never labeled as NASA measurements**, and the model is **not validated** for fire growth, suppression, spacecraft design, or partial gravity; see `DIGITAL_TWIN_METHOD.md`.
 
+## Full NASA BASS-II Evidence Atlas
+
+The BASS-II Table 5.1 Data Atlas adds complete source-matched coverage of **20 PMMA test samples**, **43 reported airflow conditions**, and **39 numeric flame-spread observations** (four velocity conditions have untracked rates). These are observations within 20 tests, not 39 independent flames. Per-segment oxygen measurements and uncertainty bounds are not reported in the table; only test-start/test-end oxygen is shown. A descriptive directional test finds **12 of 13** assessable multi-velocity tests aligned and identifies **M3 as an exception**, avoiding an unjustified universal causal claim. The linked primary NASA report supports every row.
+
 ## Limitations
 
 - While `NASA/TM-20210011385` report findings and representative single-condition runs are ingested, full NASA PSI raw video/radiometry telemetry archives (`PSI-25`, `PSI-98`) require interactive portal download and researcher CSV/JSON import because NASA PSI does not expose an unrestricted public API.
@@ -60,7 +64,7 @@ AegisμG includes an 8th navigation screen (`Digital Twin Sandbox`) featuring a 
 4. **Slide 4 — Scientific Guardrails & Import:** Null preservation (`"Not reported / Not verified"`), Zod validation, duplicate checks, and dimension-checked unit conversions.
 5. **Slide 5 — Comparator & SPECULATRON Ranking:** Side-by-side compatibility warnings and completeness-gated deterministic ranking (research triage, never fire-risk certification).
 6. **Slide 6 — DIWA Provenance & Zero-Key AI:** Source-to-claim audit matrix, SHA-256 consistency hashing, SSRF-safe NASA URL checks, and optional grounded Gemini with deterministic fallback.
-7. **Slide 7 — Impact, Tests & Open Release:** 18/18 automated validation tests passing (11 scientific + 7 digital twin invariants), 8 dashboard screens, MIT-licensed public repository (`Supermatrix-AI/aegis-mug-spaceapps-2026`), and full CSV/JSON/Markdown exports.
+7. **Slide 7 — Impact, Tests & Open Release:** 18/18 automated validation tests passing (11 scientific + 7 digital twin invariants), 9 dashboard screens, MIT-licensed public repository (`Supermatrix-AI/aegis-mug-spaceapps-2026`), and full CSV/JSON/Markdown exports.
 
 ### Public Release Verification Note
 
@@ -68,3 +72,10 @@ As verified on November 13–14, 2026:
 - GitHub `main` holds the Phase 3 codebase, and PR #1 (`feature/aegis-digital-twin-v1`) has been reviewed, verified, and reconciled locally in the workspace (passing `npm run lint`, `npm run test`, and `npm run build`) pending user push/merge on GitHub.
 - The Shared Cloud Run URL (`https://ais-pre-vle43tr4bszlmmgual4rke-566753127465.asia-east1.run.app`) currently returns HTTP 404, and the Dev URL requires Google authentication; publish to a public unauthenticated host and verify in an incognito browser before finalizing the NASA Space Apps portal submission.
 
+
+
+## Final Demo Upgrade Note
+
+Suggested 30-second message (verify against final live app): “What makes fire behave differently in space? AegisμG brings actual NASA BASS-II measurements into an evidence-first intelligence dashboard. Explore all 20 reported PMMA test samples and 39 measured flow–spread pairs, see missing values instead of invented ones, and inspect an exception to a common trend. SPECULATRON ranks research relevance, DIWA traces the sources, and our clearly hypothetical digital twin illustrates—not certifies—future research questions.”
+
+**Release gate:** Include the Atlas and its new automated tests as passed ONLY after the source branch is merged and tested in AI Studio. Do not claim a final live URL or NASA submission confirmation without verification.
