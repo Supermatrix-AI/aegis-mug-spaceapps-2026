@@ -8,6 +8,7 @@ import {
   RELEVANCE_FORMULA_DESCRIPTION,
 } from '../utils/scoring.ts';
 import { OriginTag, VerificationTag } from './ScientificLabels.tsx';
+import { BASS2_RESEARCH_INSIGHTS, computeBass2Summary } from '../utils/bass2Insights.ts';
 
 interface SpeculatronIntelligenceProps {
   records: ExperimentRecord[];
@@ -101,6 +102,36 @@ export const SpeculatronIntelligence: React.FC<SpeculatronIntelligenceProps> = (
           </select>
         </div>
       </header>
+
+      {/* NASA evidence-derived SI insights: source-reported, not hazard predictions */}
+      <section className="rounded-lg border border-teal-700/40 bg-[#0D1422] p-5 space-y-3">
+        <h2 className="text-base font-semibold text-slate-100">
+          Evidence intelligence: NASA BASS-II Table 5.1
+        </h2>
+        <p className="text-xs text-slate-400">
+          The separate Data Atlas transcribes 20 NASA PMMA test samples, 43 reported airflow
+          conditions and 39 numeric flame-spread observations. These are not 39 independent
+          experimental fires. Our transparent alignment check finds
+          {' '}{computeBass2Summary().alignedWithinTest} of
+          {' '}{computeBass2Summary().assessableMultiConditionTests} assessable multi-velocity
+          tests align directionally; M3 is a counterexample. Causation is NOT established
+          because oxygen and other conditions changed within tests.
+        </p>
+        <div className="grid gap-3 md:grid-cols-3">
+          {BASS2_RESEARCH_INSIGHTS.map((insight) => (
+            <article key={insight.id} className="rounded border border-slate-800 p-3 space-y-2">
+              <h3 className="text-sm font-semibold text-teal-300">{insight.title}</h3>
+              <p className="text-xs text-slate-300">{insight.statement}</p>
+              <p className="text-xs text-amber-300">{insight.limitation}</p>
+              <p className="text-[11px] font-mono text-slate-400">{insight.citation}</p>
+            </article>
+          ))}
+        </div>
+        <a href="https://ntrs.nasa.gov/citations/20210011385" target="_blank"
+          rel="noopener noreferrer" className="text-xs underline text-teal-400">
+          Primary NASA BASS-II report
+        </a>
+      </section>
 
       {/* Non-Certification & Formula Transparency Banner */}
       <section className="rounded-lg border border-slate-800 bg-[#0D1422] p-5 space-y-3">
