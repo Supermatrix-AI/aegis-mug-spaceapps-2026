@@ -6,6 +6,7 @@ import { AlertTriangle, Download, RotateCcw, FlaskConical } from 'lucide-react';
 import type { ExperimentRecord } from '../types/scientific.ts';
 import {
   DEFAULT_OXYGEN_SCENARIO,
+  computeScenarioDiagnostics,
   replayConstantRate,
   simulateOxygenScenario,
   validateOxygenScenario,
@@ -62,6 +63,7 @@ export const DigitalTwin: React.FC<Props> = ({ records }) => {
   const [replayMinutes, setReplayMinutes] = useState(5);
   const errors = validateOxygenScenario(scenario);
   const result = errors.length ? null : simulateOxygenScenario(scenario);
+  const diagnostics = errors.length ? null : computeScenarioDiagnostics(scenario);
 
   const sourceRuns = records.filter((r) =>
     r.recordLevel === 'EXPERIMENT_RUN' &&
@@ -111,7 +113,10 @@ export const DigitalTwin: React.FC<Props> = ({ records }) => {
       <section className="rounded-lg border border-slate-800 bg-[#0D1422] p-5 space-y-4">
         <div className="flex flex-wrap items-start justify-between gap-2">
           <div>
-            <h2 className="text-lg font-semibold text-slate-100">1. NASA BASS-II evidence replay</h2>
+            <div className="text-[11px] font-mono uppercase tracking-wider text-teal-400">
+              NASA MEASURED DATA · NASA/TM-20210011385 Table 5.1
+            </div>
+            <h2 className="text-lg font-semibold text-slate-100 mt-0.5">1. NASA BASS-II evidence replay</h2>
             <p className="text-xs text-slate-400 mt-1">
               Select a published single-condition Table 5.1 PMMA spread-rate measurement.
               The straight line illustrates distance = reported rate × elapsed time,
@@ -200,6 +205,9 @@ export const DigitalTwin: React.FC<Props> = ({ records }) => {
       <section className="rounded-lg border border-slate-800 bg-[#0D1422] p-5 space-y-4">
         <div className="flex flex-wrap gap-3 justify-between items-start">
           <div className="space-y-1">
+            <div className="text-[11px] font-mono uppercase tracking-wider text-amber-400">
+              HYPOTHETICAL MODEL OUTPUT · NOT-NASA-DATA
+            </div>
             <div className="flex flex-wrap items-center gap-2">
               <h2 className="text-lg font-semibold text-slate-100">2. Hypothetical 0D oxygen-balance model</h2>
               <OriginTag origin="HYPOTHETICAL" />
@@ -277,6 +285,43 @@ export const DigitalTwin: React.FC<Props> = ({ records }) => {
             <p className={result.depleted ? 'text-xs text-red-300 leading-relaxed' : 'text-xs text-amber-300 leading-relaxed'}>
               {result.warning}
             </p>
+
+            {diagnostics && (
+              <div className="rounded border border-slate-800 bg-[#070B14] p-4 space-y-3">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <div className="text-xs font-semibold text-slate-200">
+                    Conservation Check &amp; Local Parameter Sensitivity (Uncalibrated 0D Balance)
+                  </div>
+                  <div className="text-[11px] font-mono text-slate-400 tabular-nums">
+                    n_gas = {diagnostics.nGasMol} mol · n_O₂(0) = {diagnostics.initialOxygenMol} mol ·{' '}
+                    {diagnostics.steadyStateOxygenPercent !== null
+                      ? `Asymptote = ${diagnostics.steadyStateOxygenPercent.toFixed(2)}% (τ = ${diagnostics.residenceTimeMinutes} min)`
+                      : 'Sealed enclosure (no inlet dilution)'}
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                  {diagnostics.sensitivity.map((item) => (
+                    <div
+                      key={item.multiplierLabel}
+                      className="rounded border border-slate-800 bg-[#0D1422] p-3 text-xs space-y-1"
+                    >
+                      <div className="flex items-center justify-between text-slate-400 font-mono">
+                        <span>{item.multiplierLabel}</span>
+                        <span className="tabular-nums">{item.consumptionMgPerSecond} mg/s</span>
+                      </div>
+                      <div className="font-mono text-sm text-amber-300 tabular-nums">
+                        End O₂: {item.finalOxygenPercent.toFixed(2)}%
+                      </div>
+                      <div className="font-mono text-[11px] text-slate-400 tabular-nums">
+                        Huggett equiv: {item.assumedHeatReleaseW.toFixed(2)} W
+                        {item.depleted ? ' · DEPLETED' : ''}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             <button
               type="button"
               onClick={() => exportPoints(result.points)}

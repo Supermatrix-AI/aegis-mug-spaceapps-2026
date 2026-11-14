@@ -89,6 +89,60 @@ export const DiwaProvenance: React.FC<DiwaProvenanceProps> = ({
         </p>
       </header>
 
+      {/* Explicit 6-Stage DIWA Evidence Assurance Chain */}
+      <section className="rounded-lg border border-slate-800 bg-[#0D1422] p-5 space-y-3">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <h2 className="text-base font-semibold text-slate-100">
+            DIWA Evidence Assurance Chain
+          </h2>
+          <span className="text-xs font-mono text-teal-400">
+            Zero Auto-Promotion · Explicit Null &amp; Origin Separation
+          </span>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-2 text-xs">
+          {[
+            {
+              stage: '1. SOURCE',
+              metric: `${sources.length} NASA URLs`,
+              detail: 'Verified NTRS, PSI, OCHMO, Space Apps references',
+            },
+            {
+              stage: '2. EXPERIMENT',
+              metric: `${records.length} + 20 runs`,
+              detail: 'Core catalog + full Table 5.1 PMMA series',
+            },
+            {
+              stage: '3. MEASUREMENT',
+              metric: `${records.reduce((a, r) => a + r.measurements.length, 0)} + 43 segs`,
+              detail: 'Original units preserved; untracked rates kept null',
+            },
+            {
+              stage: '4. CLAIM',
+              metric: `${records.reduce((a, r) => a + r.findings.length, 0)} findings`,
+              detail: 'Explicit verification status & citation locators',
+            },
+            {
+              stage: '5. INTERPRETATION',
+              metric: '12/13 + M3',
+              detail: 'Deterministic ranking & AI-assisted labeled separately',
+            },
+            {
+              stage: '6. RECOMMENDATION',
+              metric: 'PSI-25/98 Next',
+              detail: 'Research follow-up only — never safety certification',
+            },
+          ].map((node) => (
+            <div key={node.stage} className="rounded border border-slate-800 bg-[#070B14] p-3 space-y-1">
+              <div className="font-mono text-[11px] font-semibold text-teal-400">{node.stage}</div>
+              <div className="font-mono text-sm font-semibold text-slate-100 tabular-nums">
+                {node.metric}
+              </div>
+              <div className="text-[11px] text-slate-400 leading-snug">{node.detail}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* Integrity Caveat & SSRF-Safe NASA URL Verifier */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         <section className="lg:col-span-5 rounded-lg border border-slate-800 bg-[#0D1422] p-5 space-y-3">

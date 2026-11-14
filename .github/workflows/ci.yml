@@ -2,7 +2,7 @@ name: AegisMuG Validation
 
 on:
   push:
-    branches: [main, feature/aegis-digital-twin-v1]
+    branches: [main, feature/aegis-digital-twin-v1, feature/nasa-bass2-evidence-atlas]
   pull_request:
     branches: [main]
 

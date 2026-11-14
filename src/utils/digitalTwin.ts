@@ -140,3 +140,66 @@ export function replayConstantRate(reportedSpreadMmPerSec: number, minutes = 5) 
   }
   return points;
 }
+
+export interface ScenarioDiagnostics {
+  nGasMol: number;
+  initialOxygenMol: number;
+  steadyStateOxygenPercent: number | null;
+  residenceTimeMinutes: number | null;
+  sensitivity: Array<{
+    multiplierLabel: '0.5× sink' | '1.0× baseline' | '2.0× sink';
+    consumptionMgPerSecond: number;
+    finalOxygenPercent: number;
+    assumedHeatReleaseW: number;
+    depleted: boolean;
+  }>;
+}
+
+export function computeScenarioDiagnostics(s: OxygenScenario): ScenarioDiagnostics {
+  const pressurePa = s.pressureKPa * 1000;
+  const temperatureK = s.temperatureC + 273.15;
+  const nGasMol = (pressurePa * s.volumeM3) / (R * temperatureK);
+  const initialOxygenMol = nGasMol * (s.initialOxygenPercent / 100);
+  const flowM3PerSecond = s.ventilationLpm / 60000;
+  const lambda = flowM3PerSecond / s.volumeM3;
+  const oxygenSinkMolPerSecond = (s.oxygenConsumptionMgPerSecond * 1e-6) / O2_KG_PER_MOL;
+  const sinkFractionPerSecond = oxygenSinkMolPerSecond / nGasMol;
+
+  const steadyStateOxygenPercent =
+    lambda > 0
+      ? Number((Math.max(0, s.inletOxygenPercent / 100 - sinkFractionPerSecond / lambda) * 100).toFixed(4))
+      : null;
+
+  const residenceTimeMinutes =
+    lambda > 0 ? Number((1 / lambda / 60).toFixed(2)) : null;
+
+  const multipliers: Array<{ label: '0.5× sink' | '1.0× baseline' | '2.0× sink'; factor: number }> = [
+    { label: '0.5× sink', factor: 0.5 },
+    { label: '1.0× baseline', factor: 1 },
+    { label: '2.0× sink', factor: 2 },
+  ];
+
+  const sensitivity = multipliers.map(({ label, factor }) => {
+    const scaledRate = Math.min(10000, Number((s.oxygenConsumptionMgPerSecond * factor).toFixed(6)));
+    const sim = simulateOxygenScenario({
+      ...s,
+      oxygenConsumptionMgPerSecond: scaledRate,
+    });
+    return {
+      multiplierLabel: label,
+      consumptionMgPerSecond: scaledRate,
+      finalOxygenPercent: sim.finalOxygenPercent,
+      assumedHeatReleaseW: sim.assumedHeatReleaseW,
+      depleted: sim.depleted,
+    };
+  });
+
+  return {
+    nGasMol: Number(nGasMol.toFixed(4)),
+    initialOxygenMol: Number(initialOxygenMol.toFixed(4)),
+    steadyStateOxygenPercent,
+    residenceTimeMinutes,
+    sensitivity,
+  };
+}
+

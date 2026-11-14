@@ -34,4 +34,11 @@ Two to four records may be compared side by side. AegisμG enforces:
 
 ## 4. Digital Twin Sandbox (Exploratory, Unvalidated)
 
-The Digital Twin Sandbox contains an evidence replay (`d = v_reported × t` illustration from Table 5.1) and a separate zero-dimensional oxygen inventory calculation (`AEGIS_0D_OXYGEN_BALANCE_V1`). Gravity labels do not change calculations. No CFD, radiative transfer, ignition model, flame spread prediction, safety threshold, or validated spacecraft hazard model is implemented. Full formulation and limits: `DIGITAL_TWIN_METHOD.md`.
+The Digital Twin Sandbox contains an evidence replay (`d = v_reported × t` illustration from Table 5.1) and a separate zero-dimensional oxygen inventory calculation (`AEGIS_0D_OXYGEN_BALANCE_V1`) with ideal-gas molar diagnostics and local `0.5× / 1.0× / 2.0×` prescribed-sink sensitivity sweeps. Gravity labels do not change calculations. No CFD, radiative transfer, ignition model, flame spread prediction, safety threshold, or validated spacecraft hazard model is implemented. Full formulation and limits: `DIGITAL_TWIN_METHOD.md`.
+
+## 5. BASS-II Table 5.1 Segment Analysis & DIWA 6-Stage Evidence Chain
+
+- **Independent Sample vs Sequential Segment Discipline:** `src/data/bass2Table51.ts` separates `20` unique PMMA burns (`M1`–`M20`) from `43` velocity condition segments (`39` numeric spread rates, `4` explicit `"Not tracked"` nulls in `M6` & `M12`) so stepped segments are never miscounted as `43` independent fires.
+- **Within-Test Directional Association:** Across `13` tests containing `>= 2` tracked distinct airflow velocities, `12` show monotonic upward association while `1` (`M3`: `0.029 mm/s` at `10 cm/s` vs `0.024 mm/s` at `20 cm/s`) breaks monotonicity. Because chamber `O2` depleted during each burn without per-segment `O2` tabulation, association does not isolate causal velocity slopes.
+- **DIWA 6-Stage Traceability:** Every claim in **AEGIS SCIENTIFIC BRIEFING** and **DIWA Provenance** traces explicitly across `1. SOURCE -> 2. EXPERIMENT -> 3. MEASUREMENT -> 4. CLAIM -> 5. INTERPRETATION -> 6. RECOMMENDATION`.
+

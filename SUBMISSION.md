@@ -5,7 +5,7 @@
 - **Challenge Title:** Flame in Freefall: AI-Powered Fire Safety Insights from Microgravity Combustion Data
 - **Challenge Link:** https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/
 - **Live Application URL:** `[PENDING_PUBLIC_DEPLOYMENT — Shared Cloud Run URL ais-pre-... currently returns HTTP 404; Dev URL requires Google auth; verify unauthenticated URL after publishing]`
-- **Public GitHub Repository URL:** `https://github.com/Supermatrix-AI/aegis-mug-spaceapps-2026` `[main live; PR #1 feature/aegis-digital-twin-v1 reconciled locally — pending user push/merge to main]`
+- **Public GitHub Repository URL:** `https://github.com/Supermatrix-AI/aegis-mug-spaceapps-2026` `[main live at 5f024bea6d; PR #2 feature/nasa-bass2-evidence-atlas & Phase 5 enhancements reconciled locally — pending user push/merge to main]`
 
 ## Problem Definition
 
@@ -32,11 +32,11 @@ Helps combustion researchers, mission safety analysts, and student teams rapidly
 
 ## NASA Data Usage
 
-Catalogs official NASA references (`NASA/TM-20210011385` BASS-II Summary Report, `PSI-25`, `PSI-98` Saffire-I, `OCHMO-TB-008`, NASA PSI Combustion Index, and NTRS Portal) with clickable citations and retrieval timestamps. Includes verified report-level findings, O2-consumption calorimetry and equivalence-ratio derivations (`13.1 kJ/g O2`, `< 100 W` typical HRR, `Φ_global = 1.3`), and 7 individual single-condition test runs (`Table 5.1` & `Table 7.1`) from `NASA/TM-20210011385`.
+Catalogs `8` official NASA references (`NASA/TM-20210011385` BASS-II Summary Report, `PSI-25`, `PSI-98` Saffire-I, `OCHMO-TB-008`, NASA PSI Combustion Index, and NTRS Portal) with clickable citations and retrieval timestamps. Includes `16` core catalog records (O2-consumption calorimetry `13.1 kJ/g O2`, `< 100 W` typical HRR, `Φ_global = 1.3`, and Table 5.1/7.1 runs) plus the complete **`20`-test / `43`-segment BASS-II Table 5.1 Atlas** (`M1`–`M20`, `39` numeric spread observations, `4` explicit `"Not tracked"` nulls in `M6`/`M12`, and the `M3` counterexample).
 
 ## Exploratory Digital Twin Sandbox
 
-AegisμG includes an 8th navigation screen (`Digital Twin Sandbox`) featuring a verified NASA Table 5.1 straight-line spread-rate replay alongside a separate zero-dimensional hypothetical oxygen-inventory model (`AEGIS_0D_OXYGEN_BALANCE_V1`) with user-controlled gas composition, ventilation, and constant oxygen-consumption rate. Hypothetical curves and CSV exports (`NOT-NASA-DATA`) are **never labeled as NASA measurements**, and the model is **not validated** for fire growth, suppression, spacecraft design, or partial gravity; see `DIGITAL_TWIN_METHOD.md`.
+AegisμG includes the **Digital Twin Sandbox** featuring a verified NASA Table 5.1 straight-line spread-rate replay alongside a separate zero-dimensional hypothetical oxygen-inventory model (`AEGIS_0D_OXYGEN_BALANCE_V1`) with ideal-gas molar diagnostics, a `0.5× / 1.0× / 2.0×` prescribed-sink sensitivity strip, user-controlled gas composition, ventilation, and constant oxygen-consumption rate. Hypothetical curves and CSV exports (`NOT-NASA-DATA`) are **never labeled as NASA measurements**, and the model is **not validated** for fire growth, suppression, spacecraft design, or partial gravity; see `DIGITAL_TWIN_METHOD.md`.
 
 ## Limitations
 
@@ -60,11 +60,11 @@ AegisμG includes an 8th navigation screen (`Digital Twin Sandbox`) featuring a 
 4. **Slide 4 — Scientific Guardrails & Import:** Null preservation (`"Not reported / Not verified"`), Zod validation, duplicate checks, and dimension-checked unit conversions.
 5. **Slide 5 — Comparator & SPECULATRON Ranking:** Side-by-side compatibility warnings and completeness-gated deterministic ranking (research triage, never fire-risk certification).
 6. **Slide 6 — DIWA Provenance & Zero-Key AI:** Source-to-claim audit matrix, SHA-256 consistency hashing, SSRF-safe NASA URL checks, and optional grounded Gemini with deterministic fallback.
-7. **Slide 7 — Impact, Tests & Open Release:** 18/18 automated validation tests passing (11 scientific + 7 digital twin invariants), 8 dashboard screens, MIT-licensed public repository (`Supermatrix-AI/aegis-mug-spaceapps-2026`), and full CSV/JSON/Markdown exports.
+7. **Slide 7 — Impact, Tests & Open Release:** 34/34 automated validation tests passing across 4 suites, 9 dashboard screens (including BASS-II Table 5.1 Atlas & 6-step Guided Scientific Demo), MIT-licensed public repository (`Supermatrix-AI/aegis-mug-spaceapps-2026`), and full CSV/JSON/Markdown exports.
 
 ### Public Release Verification Note
 
-As verified on November 13–14, 2026:
-- GitHub `main` holds the Phase 3 codebase, and PR #1 (`feature/aegis-digital-twin-v1`) has been reviewed, verified, and reconciled locally in the workspace (passing `npm run lint`, `npm run test`, and `npm run build`) pending user push/merge on GitHub.
-- The Shared Cloud Run URL (`https://ais-pre-vle43tr4bszlmmgual4rke-566753127465.asia-east1.run.app`) currently returns HTTP 404, and the Dev URL requires Google authentication; publish to a public unauthenticated host and verify in an incognito browser before finalizing the NASA Space Apps portal submission.
+As verified on November 14, 2026:
+- GitHub `main` (`5f024bea6d`) and PR #2 (`feature/nasa-bass2-evidence-atlas`, `759a6fc9fd`) plus Phase 5 Scientific Briefings, Guided Demo, and Digital Twin diagnostics have been reconciled locally in the workspace (passing `npm run lint`, `npm run test` with `34/34` tests, and `npm run build`) pending user push/merge to `main` on GitHub.
+- Verify an unauthenticated public deployment URL in an incognito browser before finalizing the NASA Space Apps portal submission.
 

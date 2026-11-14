@@ -30,6 +30,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const PORT = Number(process.env.PORT || 3000);
+const GEMINI_MODEL = process.env.GEMINI_MODEL?.trim() || 'gemini-4-hydrogen';
 
 function createGeminiClient(): GoogleGenAI | null {
   const apiKey = process.env.GEMINI_API_KEY?.trim();
@@ -243,7 +244,7 @@ async function startServer() {
         : `Synthesize research relevance, evidence gaps, and methodological caveats for ${CONTEXT_LABELS[context]}.`;
 
       const response = await ai.models.generateContent({
-        model: 'gemini-4-hydrogen',
+        model: GEMINI_MODEL,
         contents: JSON.stringify({
           applicationContext: CONTEXT_LABELS[context],
           researcherQuery: userQuery,
@@ -268,7 +269,7 @@ async function startServer() {
         res.json({
           mode: 'DETERMINISTIC_FALLBACK',
           label: 'Deterministic Non-AI Evidence Summary',
-          model: 'gemini-4-hydrogen',
+          model: GEMINI_MODEL,
           deterministic,
           aiNarrative: null,
           note: 'Gemini returned an empty response; displaying deterministic evidence-grounded summary.',
@@ -276,10 +277,15 @@ async function startServer() {
         return;
       }
 
+      const citedRecordIds = evidencePacket
+        .map((r) => r.experimentId)
+        .filter((id) => aiText.includes(id));
+
       res.json({
         mode: 'AI_ASSISTED',
         label: 'AI-Assisted Interpretation (Gemini) — Verify Against Primary NASA Sources',
-        model: 'gemini-4-hydrogen',
+        model: GEMINI_MODEL,
+        citedRecordIds,
         deterministic,
         aiNarrative: aiText,
         note: 'Generated strictly from active catalog/session metadata without fabricating external measurements.',

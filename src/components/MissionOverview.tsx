@@ -17,6 +17,8 @@ import {
   FlaskConical,
   ShieldCheck,
   ExternalLink,
+  Layers3,
+  Play,
 } from 'lucide-react';
 import type {
   ExperimentRecord,
@@ -30,6 +32,7 @@ import { VerificationTag } from './ScientificLabels.tsx';
 export type NavSection =
   | 'overview'
   | 'explorer'
+  | 'evidence-atlas'
   | 'import'
   | 'comparator'
   | 'intelligence'
@@ -43,6 +46,7 @@ interface MissionOverviewProps {
   provenanceEvents: ProvenanceEvent[];
   importJobs: ImportJob[];
   onNavigate: (section: NavSection) => void;
+  onStartDemo?: () => void;
 }
 
 export const MissionOverview: React.FC<MissionOverviewProps> = ({
@@ -51,6 +55,7 @@ export const MissionOverview: React.FC<MissionOverviewProps> = ({
   provenanceEvents,
   importJobs,
   onNavigate,
+  onStartDemo,
 }) => {
   const verifiedCount = records.filter(
     (r) => r.verificationStatus === 'HUMAN_VERIFIED' || r.verificationStatus === 'SOURCE_MATCHED'
@@ -135,23 +140,77 @@ export const MissionOverview: React.FC<MissionOverviewProps> = ({
           </div>
 
           <div className="flex flex-col sm:flex-row lg:flex-col gap-2.5 shrink-0">
+            {onStartDemo && (
+              <button
+                type="button"
+                onClick={onStartDemo}
+                className="inline-flex items-center justify-center gap-2 rounded-md bg-amber-500 hover:bg-amber-400 px-4 py-2.5 min-h-[44px] text-sm font-medium text-slate-950 transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+              >
+                <Play className="w-4 h-4" />
+                <span>Start Scientific Demo</span>
+              </button>
+            )}
             <button
               type="button"
               onClick={() => onNavigate('explorer')}
-              className="inline-flex items-center justify-center gap-2 rounded-md bg-teal-600 hover:bg-teal-500 px-4 py-2.5 text-sm font-medium text-slate-950 transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+              className="inline-flex items-center justify-center gap-2 rounded-md bg-teal-600 hover:bg-teal-500 px-4 py-2.5 min-h-[44px] text-sm font-medium text-slate-950 transition-colors whitespace-nowrap shrink-0 cursor-pointer"
             >
               <Database className="w-4 h-4" />
               <span>Explore NASA Evidence</span>
             </button>
             <button
               type="button"
+              onClick={() => onNavigate('evidence-atlas')}
+              className="inline-flex items-center justify-center gap-2 rounded-md border border-slate-700 bg-slate-900 hover:bg-slate-800 px-4 py-2.5 min-h-[44px] text-sm font-medium text-slate-100 transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+            >
+              <Layers3 className="w-4 h-4 text-teal-400" />
+              <span>Open BASS-II Table 5.1 Atlas</span>
+            </button>
+            <button
+              type="button"
               onClick={() => onNavigate('import')}
-              className="inline-flex items-center justify-center gap-2 rounded-md border border-slate-700 bg-slate-900 hover:bg-slate-800 px-4 py-2.5 text-sm font-medium text-slate-100 transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+              className="inline-flex items-center justify-center gap-2 rounded-md border border-slate-700 bg-slate-900 hover:bg-slate-800 px-4 py-2.5 min-h-[44px] text-sm font-medium text-slate-100 transition-colors whitespace-nowrap shrink-0 cursor-pointer"
             >
               <FileUp className="w-4 h-4 text-amber-400" />
               <span>Import CSV / JSON Data</span>
             </button>
           </div>
+        </div>
+      </section>
+
+      {/* First-Screen Executive Value Strip */}
+      <section aria-label="Problem Solution Differentiator Value" className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+        <div className="rounded-lg border border-slate-800 bg-[#0D1422] p-4 space-y-1.5">
+          <div className="text-[11px] font-mono uppercase tracking-wider text-amber-400">
+            The Problem
+          </div>
+          <p className="text-xs text-slate-300 leading-relaxed">
+            NASA microgravity fire data spans scattered PSI investigations and technical reports with missing metrics, varying units, and incompatible spacecraft scales.
+          </p>
+        </div>
+        <div className="rounded-lg border border-slate-800 bg-[#0D1422] p-4 space-y-1.5">
+          <div className="text-[11px] font-mono uppercase tracking-wider text-teal-400">
+            The Solution
+          </div>
+          <p className="text-xs text-slate-300 leading-relaxed">
+            AegisμG provides a verification-gated, citation-traceable dashboard uniting Table 5.1 BASS-II PMMA data, deterministic relevance ranking, and zero-key fallback analysis.
+          </p>
+        </div>
+        <div className="rounded-lg border border-slate-800 bg-[#0D1422] p-4 space-y-1.5">
+          <div className="text-[11px] font-mono uppercase tracking-wider text-sky-400">
+            The Differentiator
+          </div>
+          <p className="text-xs text-slate-300 leading-relaxed">
+            Zero invented numbers: null spread rates (M6, M12), unmeasured segment O₂, the M3 non-monotonic counterexample, and strict 0 g vs Moon/Mars boundaries stay explicit.
+          </p>
+        </div>
+        <div className="rounded-lg border border-slate-800 bg-[#0D1422] p-4 space-y-1.5">
+          <div className="text-[11px] font-mono uppercase tracking-wider text-emerald-400">
+            The Value
+          </div>
+          <p className="text-xs text-slate-300 leading-relaxed">
+            Accelerates literature triage for ISS, pressurized rover, lunar, and Martian habitat researchers while keeping human reviewer sign-off mandatory.
+          </p>
         </div>
       </section>
 
@@ -260,8 +319,8 @@ export const MissionOverview: React.FC<MissionOverviewProps> = ({
               No experiment records loaded. Import CSV or JSON records to view family coverage.
             </div>
           ) : (
-            <div className="h-72 w-full">
-              <ResponsiveContainer width="100%" height="100%">
+            <div className="h-72 w-full min-w-0">
+              <ResponsiveContainer width="100%" height="100%" minWidth={0}>
                 <BarChart data={familyData} margin={{ top: 8, right: 16, left: 0, bottom: 20 }}>
                   <CartesianGrid strokeDasharray="3 3" stroke="#1E293B" />
                   <XAxis

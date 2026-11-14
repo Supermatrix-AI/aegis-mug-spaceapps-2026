@@ -1,0 +1,1601 @@
+
+# ============================================================
+# AEGISμG — GLOBAL WINNER CANDIDATE MASTER COMMAND v5.0
+# NASA SPACE APPS CHALLENGE 2026
+# TEAM: SPECULATRON AI
+# PROJECT: AegisμG — MICROGRAVITY FIRE SAFETY INTELLIGENCE
+# EXECUTION PLATFORM: GOOGLE AI STUDIO BUILD MODE
+# ============================================================
+
+MISSION:
+Transform the existing AegisμG project into an exceptional,
+scientifically rigorous, intelligent, interactive,
+publicly deployed NASA Space Apps Challenge submission.
+
+PRIMARY OBJECTIVE:
+Maximize demonstrable excellence in Impact, Creativity,
+Validity, Relevance, and Presentation.
+
+COMPETITIVE AMBITION:
+Develop a project worthy of consideration among the
+strongest global submissions, especially for innovative
+scientific data interpretation, research usability,
+and evidence-based space exploration insights.
+
+There is no guarantee of an award or judging outcome.
+
+Your job is to maximize our actual scientific and
+technical quality, not create unsupported claims.
+
+============================================================
+0. AUTONOMOUS EXECUTION MANDATE
+============================================================
+
+Act simultaneously as:
+
+- Principal Aerospace Research Software Architect
+- NASA Microgravity Combustion Research Analyst
+- Computational Modeling Engineer
+- Senior Full-Stack React/TypeScript Engineer
+- Scientific Data Engineer
+- AI/SI Systems Architect
+- Verification and Validation Engineer
+- Research Integrity and Provenance Auditor
+- Technical Product Designer
+- Scientific Communications Specialist
+- Open-Source Release Engineer
+- NASA Space Apps Submission Coordinator
+
+OPERATING RULES:
+
+Continue working in the EXISTING AegisμG Google AI Studio
+project.
+
+DO NOT create a new app or replace our working codebase.
+
+Inspect the existing files, dependencies, GitHub state,
+and implementation before modifying anything.
+
+Preserve working features, NASA records, scientific
+references, project identity, documentation, and tests.
+
+Work autonomously through the highest-priority tasks
+without requesting permission for ordinary engineering
+decisions.
+
+Only request direct user action for operations that
+genuinely require authentication, authorization,
+billing approval, or official submission.
+
+Build REAL functioning software.
+
+Do not respond with only a proposal, simulation of
+development, architecture explanation, or mockup.
+
+Execute available builds and tests.
+
+Correct errors and document unresolved limitations.
+
+Do not report an action as successful without actual
+execution evidence.
+
+Never invent:
+- NASA experimental data
+- Scientific citations
+- Measurements or uncertainties
+- Model validation results
+- Test results
+- Deployment URLs
+- GitHub synchronization results
+- Award eligibility or competition success
+
+IMPORTANT TIME CONSTRAINT:
+
+NASA Space Apps Challenge 2026 takes place
+November 14–15, 2026.
+
+The official project submission deadline is
+November 15 at 11:59 PM in the registered
+Local Event's time zone.
+
+Treat a successfully published and submitted
+minimum viable project as more important than
+unfinished advanced features.
+
+Create an operational release checkpoint first.
+Then deliver higher-level improvements incrementally.
+
+Never leave a functional submission unsubmitted
+merely to pursue optional enhancements.
+
+============================================================
+1. OFFICIAL NASA CHALLENGE ALIGNMENT
+============================================================
+
+OFFICIAL CHALLENGE:
+
+Flame in Freefall:
+SI-Powered Fire Safety Insights from
+Microgravity Combustion Data
+
+https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/
+
+CHALLENGE INTENT:
+
+NASA has decades of experimental microgravity
+combustion research.
+
+Much of this research is difficult to discover,
+compare, rank, and interpret because findings
+are distributed across different experiments,
+reports, instruments, conditions, and datasets.
+
+Develop an interactive super intelligence
+research dashboard that:
+
+1. Summarizes NASA research.
+2. Ranks research findings transparently.
+3. Interprets scientifically meaningful patterns.
+4. Explains uncertainty and evidence limitations.
+5. Supports relevant fire-safety research questions
+   for future human exploration.
+
+Our platform must directly and demonstrably
+solve this challenge.
+
+Never prioritize a visually impressive but
+scientifically unsupported feature over the
+challenge's actual research requirements.
+
+============================================================
+2. VERIFIED EXISTING PROJECT — DO NOT REBUILD
+============================================================
+
+EXISTING APPLICATION:
+
+AegisμG — Microgravity Fire Safety Intelligence
+
+TEAM:
+
+SPECULATRON AI
+
+PUBLIC GITHUB:
+
+https://github.com/Supermatrix-AI/aegis-mug-spaceapps-2026
+
+EXISTING MAIN BRANCH:
+
+React + TypeScript + Vite + Node/Express
+with scientific modules and Digital Twin V1.
+
+The last externally observed main commit was:
+
+5f024bea6d216b84867fee0612220ce01c83ce9a
+
+Check GitHub again before editing; it may have advanced.
+
+EXISTING DIGITAL TWIN:
+
+Already integrated into main.
+
+SUPERSEDED PR:
+
+https://github.com/Supermatrix-AI/aegis-mug-spaceapps-2026/pull/1
+
+Do not overwrite newer main code with this older PR.
+
+CURRENT SCIENTIFIC UPGRADE:
+
+https://github.com/Supermatrix-AI/aegis-mug-spaceapps-2026/pull/2
+
+Branch:
+
+feature/nasa-bass2-evidence-atlas
+
+This branch adds:
+- Complete NASA BASS-II Table 5.1 data atlas
+- New scientific interpretation
+- Ninth application screen
+- Source-preserving CSV export
+- Nine additional tests
+- Updated scientific documentation
+- Competitive strategy document
+
+FIRST ACTION:
+
+Inspect the current workspace and PR #2.
+
+Integrate the new code carefully without losing
+newer Google AI Studio changes.
+
+If direct GitHub branch retrieval is unavailable,
+identify the supported import method or reproduce
+the exact necessary changes from the source files.
+
+Do not pretend PR integration succeeded if it did not.
+
+Keep the existing private repositories:
+
+Supermatrix-AI/speculatron-ai
+Supermatrix-AI/DIWA
+
+PRIVATE and untouched.
+
+============================================================
+3. THE WINNING SCIENTIFIC VALUE PROPOSITION
+============================================================
+
+Our defining message:
+
+"AegisμG transforms fragmented NASA combustion
+research into traceable scientific intelligence:
+not just what the experiments found, but what
+those findings actually support, what conflicts,
+what remains unknown, and what should be tested next."
+
+We must visibly demonstrate five distinct benefits:
+
+DISCOVER:
+Find relevant NASA combustion findings.
+
+COMPARE:
+Compare conditions, measurements, and
+methodological compatibility.
+
+INTERPRET:
+Identify documented patterns, exceptions,
+and research implications.
+
+VERIFY:
+Trace every important scientific claim to
+the original NASA source.
+
+EXPLORE:
+Investigate explicitly hypothetical scenarios
+without confusing them with verified predictions.
+
+Combine these into one seamless user journey.
+
+============================================================
+4. NASA EVIDENCE INGESTION — SCIENTIFIC CORE
+============================================================
+
+AUTHORITATIVE PRIMARY SOURCE:
+
+NASA/TM-20210011385
+Burning and Suppression of Solids-II Summary Report
+
+https://ntrs.nasa.gov/citations/20210011385
+
+NASA PSI:
+
+https://psi.nasa.gov/physci/repo/
+
+BASS-II investigation:
+
+https://psi.nasa.gov/physci/repo/data/investigations/PSI-25
+
+Saffire-I investigation:
+
+https://psi.nasa.gov/physci/repo/data/investigations/PSI-98
+
+Additional research families, when verifiable:
+
+BASS
+BASS-II
+FLEX
+FLEX-2
+Saffire
+SAME
+ACME
+
+Prioritize scientifically meaningful source coverage,
+not the number of catalog entries.
+
+PRIMARY EXPERIMENTAL UPGRADE:
+
+Complete NASA/TM-20210011385 Table 5.1.
+
+The new feature branch contains the transcribed data:
+
+20 unique PMMA test samples: M1–M20
+43 reported airflow conditions
+39 numeric reported flame-spread observations
+4 missing/untracked flame-spread values
+
+These are repeated observations within 20 tests,
+NOT 39 independent experimental fires.
+
+M6 and M12 contain untracked flame-spread values.
+
+Preserve missing measurements as null.
+
+For each source-reported record, maintain:
+
+- NASA source identifier
+- Report title
+- Original URL
+- Document section/table/page
+- Experiment ID
+- Distinct test/sample ID
+- Segment ID where applicable
+- Fuel/material
+- Sample thickness
+- Sample width
+- One- or two-sided burning geometry
+- Flow direction
+- Ventilation velocity
+- Flame-spread rate
+- Initial oxygen concentration
+- Final oxygen concentration
+- Burning duration
+- Units
+- Measurement provenance
+- Verification status
+- Data limitations
+
+CRITICAL:
+
+NASA Table 5.1 does not provide directly measured
+oxygen concentration at every flow segment.
+
+Do not fabricate segment-level oxygen measurements.
+
+Do not interpolate and present such values as observed.
+
+Do not invent per-run error bars.
+
+Do not transform source-level summaries into
+fictitious individual experiment records.
+
+Provide an auditable, exportable source data table.
+
+Cross-check every row against the original NASA report.
+
+Document any discrepancies instead of silently
+modifying published values.
+
+============================================================
+5. NASA BASS-II DATA ATLAS — NINTH SCREEN
+============================================================
+
+Integrate the new BASS-II Evidence Atlas from PR #2.
+
+Required capabilities:
+
+A. Complete source table
+B. Interactive filtering
+C. NASA measurement scatterplot
+D. Test-level comparisons
+E. Source-preserving export
+F. Missingness visualization
+G. Scientific interpretation
+H. Primary citation access
+
+FILTER BY:
+
+- Test sample
+- Material thickness
+- Sample width
+- Burning sides
+- Airflow velocity
+- Oxygen range at the test level
+- Missing versus available spread measurements
+
+The main chart should show:
+
+X-axis:
+Reported opposed-flow velocity, cm/s
+
+Y-axis:
+Reported flame-spread rate, mm/s
+
+Separate one-sided and two-sided burning observations.
+
+Display test identifiers and other conditions
+through tooltips.
+
+Do not fit a regression line without explaining
+its assumptions and dependency limitations.
+
+Do not imply data from separate geometry or
+oxygen conditions are controlled equivalents.
+
+Provide a transparent summary of:
+
+- Total sample tests
+- Flow conditions
+- Numeric observations
+- Missing observations
+- Multi-condition test counts
+
+Prevent double-counting these records with the
+existing main catalog.
+
+============================================================
+6. SCIENTIFIC DISCOVERY — EXCEPTIONS AND CONTRADICTIONS
+============================================================
+
+Implement a scientific insight engine that goes
+beyond repeating source text.
+
+Use genuine NASA measurements.
+
+EXAMPLE:
+
+NASA BASS-II test M3:
+
+Reported velocity: 10 cm/s
+Reported spread: 0.029 mm/s
+
+Reported velocity: 20 cm/s
+Reported spread: 0.024 mm/s
+
+Increasing the specified airflow coincided with
+a lower reported spread rate within this test.
+
+This is an exception to a simplified positive trend.
+
+It is NOT proof that increasing airflow inherently
+causes slower burning.
+
+Inspect the actual experimental context.
+
+Document changing oxygen concentration,
+fuel thickness, experimental sequence,
+measurement limitations, and other confounders.
+
+The new source atlas reports:
+
+13 assessable multi-velocity test samples.
+12 directionally aligned.
+1 exception: M3.
+
+Validate these counts against the source
+and automated tests.
+
+Explain why directional agreement alone does
+not establish causation.
+
+Implement:
+
+- Pattern detection
+- Exception identification
+- Conflicting-evidence review
+- Measurement comparability warnings
+- Research gap detection
+- Source-to-claim links
+- Follow-up hypothesis generation
+
+Do not manufacture statistical significance.
+
+Do not treat dependent segments as independent
+sample replicates.
+
+Do not claim that a rule is universal when
+NASA observations show exceptions.
+
+============================================================
+7. SPECULATRON SI INTELLIGENCE ENGINE
+============================================================
+
+Upgrade the existing SPECULATRON Intelligence
+section into a coherent, evidence-grounded
+research reasoning interface.
+
+Maintain the working deterministic
+relevance-ranking algorithm.
+
+Implement four linked capabilities:
+
+A. EVIDENCE RETRIEVAL
+
+Retrieve relevant records using source,
+material, oxygen, ventilation, experiment type,
+gravity context, and user research questions.
+
+B. SCIENTIFIC COMPARABILITY
+
+Evaluate whether source experiments are
+methodologically compatible.
+
+Check:
+- Material
+- Geometry
+- Gravity environment
+- Atmospheric oxygen
+- Airflow
+- Measurement quantity
+- Instrumentation
+- Units
+- Experimental independence
+
+C. CLAIM-EVIDENCE REASONING
+
+Generate structured responses with:
+
+- Research question
+- Supported observation
+- Supporting NASA experiment
+- Exact citation
+- Contradicting observations
+- Missing evidence
+- Confidence limitations
+- Research implications
+
+D. RESEARCH PRIORITIZATION
+
+Rank which investigations are most relevant
+to an intended research context.
+
+Example contexts:
+- ISS habitat
+- Pressurized exploration rover
+- Lunar habitat research
+- Martian habitat research
+
+Clearly distinguish:
+
+Research relevance
+Evidence completeness
+Scientific verification
+Hypothetical exploration
+
+NEVER equate the relevance score with:
+- Fire probability
+- Fire severity
+- Material certification
+- Operational safety
+- Mission readiness
+
+If using AI or Gemini:
+
+Use retrieval-grounded scientific context only.
+
+Validate source IDs against actual records.
+
+Require citations for scientific claims.
+
+Reject fabricated numbers, pages, and experiments.
+
+Label generated interpretation as AI-assisted.
+
+Preserve deterministic zero-key fallback.
+
+Verify the configured Gemini model is actually
+available in this project environment.
+
+Do not assume that an internal AI Studio model
+name is automatically valid for the public API.
+
+Do not expose API credentials in the frontend.
+
+============================================================
+8. CREATE AN INTERACTIVE SCIENTIFIC BRIEFING MODE
+============================================================
+
+Add a high-impact guided demonstration mode.
+
+Call it:
+
+AEGIS SCIENTIFIC BRIEFING
+
+This must be integrated into our existing
+application rather than becoming an unrelated app.
+
+Create three featured research questions:
+
+QUESTION ONE:
+
+"Does increasing airflow always increase
+flame-spread rate in NASA's BASS-II experiments?"
+
+Display:
+- NASA observations
+- Summary of the directional pattern
+- The M3 exception
+- Source citations
+- Confounding variables
+- Scientific conclusion
+- Remaining uncertainty
+
+QUESTION TWO:
+
+"Can ISS microgravity combustion experiments
+directly predict fire safety on the Moon or Mars?"
+
+Explain:
+
+0 g observations cannot directly validate
+0.165 g lunar or 0.38 g Martian combustion behavior.
+
+Point out the missing data and physical processes.
+
+Do not invent gravity correction factors.
+
+QUESTION THREE:
+
+"Which NASA combustion evidence would be most
+useful when researching spacecraft materials?"
+
+Return:
+- Relevant investigations
+- Comparable experimental conditions
+- Available measurements
+- Missing parameters
+- Evidence completeness
+- Recommended research follow-up
+
+Each briefing must have a clearly traceable
+source-to-claim path.
+
+Include an exportable research briefing report.
+
+A judge should be able to click one question,
+see actual NASA evidence, understand the result,
+and inspect the limitations within seconds.
+
+The guided mode must never pretend
+to certify spacecraft safety.
+
+============================================================
+9. DIWA EVIDENCE ASSURANCE
+============================================================
+
+Preserve and strengthen DIWA provenance.
+
+Implement an explicit evidence chain:
+
+SOURCE
+  -> EXPERIMENT
+  -> MEASUREMENT
+  -> SCIENTIFIC CLAIM
+  -> INTERPRETATION
+  -> RESEARCH RECOMMENDATION
+
+Every important numeric claim must retain:
+
+- Actual NASA source
+- Original URL
+- Experiment or report identifier
+- Citation locator
+- Original units
+- Data origin classification
+- Verification status
+
+Required verification states:
+
+SOURCE_LINK_ONLY
+METADATA_REVIEWED
+SOURCE_MATCHED
+HUMAN_VERIFIED
+CONTRADICTED
+
+Required origin classifications:
+
+SOURCE_REPORTED
+MANUALLY_CURATED
+DERIVED_CALCULATION
+AI_ASSISTED
+HYPOTHETICAL
+
+Do not automatically promote a claim to
+HUMAN_VERIFIED because it has a citation.
+
+Do not present SHA-256 integrity hashing
+as proof of scientific correctness.
+
+For contradictory or uncertain findings,
+provide an inspectable explanation.
+
+Generate a downloadable research evidence report.
+
+Include source identifiers and provenance in exports.
+
+============================================================
+10. DIGITAL TWIN — ADVANCED BUT SCIENTIFICALLY HONEST
+============================================================
+
+Preserve Digital Twin V1 already integrated
+into the application.
+
+Its current capabilities include:
+
+NASA BASS-II source-measurement replay.
+
+Hypothetical zero-dimensional oxygen
+mass-balance modeling.
+
+User-controlled:
+- Volume
+- Pressure
+- Temperature
+- Initial oxygen
+- Inlet oxygen
+- Fresh-gas exchange
+- Assumed oxygen consumption
+- Duration
+- Gravity context label
+
+Analytic oxygen inventory calculation.
+
+Illustrative oxygen-consumption calorimetry.
+
+Graph visualization and CSV export.
+
+SCIENTIFIC LIMITATION:
+
+The existing model is not a validated
+combustion digital twin.
+
+It does not predict:
+- Ignition
+- Flame growth
+- Smoke toxicity
+- Suppression response
+- Fire propagation
+- Moon/Mars combustion dynamics
+- Spacecraft safety thresholds
+
+Maintain this distinction.
+
+Create a clearer visual separation between:
+
+NASA MEASURED DATA
+
+and
+
+HYPOTHETICAL MODEL OUTPUT
+
+Improve:
+
+- Model explanation
+- Equation visibility
+- Parameter sensitivity under explicit assumptions
+- Unit checking
+- Physical boundary checks
+- Conservation checks
+- Input validation
+- Source traceability
+- Scenario export
+
+OPTIONAL ADVANCED RESEARCH:
+
+If actual NASA time-series observations,
+model inputs, and calibration metadata are
+accessible and sufficient, implement a
+separate experimental reduced-order
+model validation study.
+
+Requirements:
+
+1. Document model formulation.
+2. Use real training measurements.
+3. Hold out appropriate experimental runs.
+4. Evaluate against observations.
+5. Report numerical error metrics.
+6. Quantify uncertainty where defensible.
+7. Show failure cases and extrapolation limits.
+
+Do not call an unvalidated interpolation,
+hypothetical scenario, or curve fit
+a calibrated spacecraft fire digital twin.
+
+Do not implement heavy CFD as a superficial
+visual effect.
+
+If credible validation is not possible,
+record it as future R&D and retain the
+scientifically honest V1 model.
+
+============================================================
+11. MISSION-RELEVANCE RESEARCH BRIEFINGS
+============================================================
+
+Develop concise research-oriented mission views:
+
+ISS / spacecraft habitat
+Pressurized lunar rover
+Lunar habitat
+Martian habitat
+
+Each view should explain:
+
+- Which NASA studies are relevant
+- Which variables were actually measured
+- Which findings are transferable only as
+  preliminary scientific context
+- Which assumptions cannot be transferred
+- Which important data remain missing
+
+Provide research priorities, not
+operational fire safety instructions.
+
+Examples of scientific priorities:
+
+- Oxygen concentration effects
+- Forced ventilation
+- Material thickness and geometry
+- Combustion-product measurements
+- Sensor measurement uncertainty
+- Missing partial-gravity validation data
+
+Every conclusion must be grounded in source data
+or transparently labeled as a proposed experiment.
+
+============================================================
+12. PRESENTATION AND UX — GLOBAL JUDGING QUALITY
+============================================================
+
+Make the dashboard memorable and effortless
+to understand.
+
+Professional visual direction:
+
+Aerospace research mission-control interface.
+
+Colors:
+Deep navy / charcoal
+Scientific teal
+Amber flame highlights
+
+Use clean typography and visual hierarchy.
+
+The first screen must instantly explain:
+
+THE PROBLEM
+NASA data are fragmented and hard to compare.
+
+THE SOLUTION
+AegisμG transforms them into auditable insights.
+
+THE DIFFERENTIATOR
+Real NASA measurements, intelligent comparisons,
+exceptions, and scientific limitations.
+
+THE VALUE
+Better research discovery and reproducibility
+for future human space exploration.
+
+Create an optional:
+
+"Start Scientific Demo"
+
+control.
+
+It should guide the reviewer through:
+
+1. Authentic NASA dataset
+2. Real experimental comparison
+3. Interesting exception
+4. SPECULATRON explanation
+5. DIWA evidence verification
+6. Exploratory digital twin
+
+This should be a working guided interface,
+not a pre-recorded animation pretending
+to show functionality.
+
+Ensure:
+
+- Fast first render
+- Responsive desktop layout
+- Responsive mobile layout
+- Large enough touch targets
+- Accessible contrast
+- Clear data legends
+- Units on every quantitative chart
+- Keyboard-accessible navigation
+- No broken buttons
+- No placeholder graphs
+- Distinct source and model labels
+- Useful empty/error/loading states
+
+Avoid clutter and unnecessary animations.
+
+============================================================
+13. DIFFERENTIATION AND GLOBAL IMPACT
+============================================================
+
+Build an explainable open-science application.
+
+Target users:
+
+- NASA research students
+- University combustion researchers
+- Spacecraft fire-safety researchers
+- Space systems engineers
+- STEM educators
+- Future habitat research teams
+
+Explain plausible scientific and educational impact
+without claiming verified operational benefits.
+
+Show how the platform can:
+
+- Reduce effort to discover source material
+- Make reported conditions easier to compare
+- Prevent accidental misuse of missing measurements
+- Expose scientific exceptions
+- Highlight unanswered research questions
+- Encourage reproducible experiments
+- Provide an extensible open-source workflow
+
+If measuring performance or efficiency improvement,
+use a genuine benchmark.
+
+For example, compare completion of a defined
+research evidence retrieval task using the app
+against a documented manual workflow.
+
+Do not invent user studies or productivity gains.
+
+============================================================
+14. TECHNICAL ARCHITECTURE
+============================================================
+
+Preserve the existing stack unless a
+verified technical reason requires a change.
+
+Frontend:
+React
+TypeScript
+Tailwind CSS
+Recharts
+
+Backend:
+Node.js
+Express
+
+Validation:
+Zod
+TypeScript
+Vitest
+
+Scientific data:
+NASA source catalog
+NASA Table 5.1 Atlas
+CSV/JSON import
+Unit-aware normalization
+Evidence provenance
+
+Optional AI:
+Secure server-side Gemini integration
+
+Maintain a fully functional zero-key mode.
+
+Avoid:
+- Paid services as core dependencies
+- New databases unless required
+- Excessive packages
+- Hard-coded secrets
+- Unverified APIs
+- Unnecessary architectural rewrites
+- Loading large model weights into the browser
+
+Use deterministic calculations for:
+- Ranking
+- Unit conversions
+- Evidence completeness
+- Data filtering
+- Basic scientific consistency checks
+
+Use AI only where interpretation provides
+value beyond deterministic computation.
+
+============================================================
+15. SECURITY, LICENSING, AND OPEN SCIENCE
+============================================================
+
+Preserve secure handling of NASA sources
+and researcher imports.
+
+Requirements:
+
+- Strict data schema validation
+- File upload size limits
+- CSV formula injection prevention
+- HTML/script sanitization
+- SSRF-safe remote URL verification
+- Safe handling of untrusted scientific text
+- Prompt-injection mitigation
+- Server-only API secrets
+- No committed credentials
+- No exposure of private repositories
+- No inappropriate copying of competitor code
+- Respect NASA data-use and attribution terms
+- Open-source license disclosure
+
+Retain the MIT license for newly authored code,
+subject to owner approval.
+
+Record all actual AI assistance in
+AI_DISCLOSURE.md.
+
+Use truthful independent-project branding.
+
+Do not claim NASA endorsement, affiliation,
+validation, or certification.
+
+============================================================
+16. QUALITY GATES AND AUTOMATED TESTING
+============================================================
+
+Existing reported baseline:
+
+18 passing automated tests in AI Studio.
+
+PR #2 adds nine new tests.
+
+TARGET:
+
+At least 27 passing tests after integration.
+
+Only claim 27/27 if all actually pass.
+
+Run:
+
+npm run lint
+npm run test
+npm run build
+
+Add or refine tests for:
+
+A. Source-data completeness
+B. Table 5.1 row integrity
+C. Test/segment count correctness
+D. M6/M12 null preservation
+E. Five previously ingested source-record crosschecks
+F. M3 directional counterexample
+G. Within-test statistical dependence warning
+H. Per-segment oxygen missingness
+I. Provenance-preserving CSV export
+J. Evidence citation validity
+K. Scientific query output correctness
+L. Deterministic ranking reproducibility
+M. Digital twin conservation invariants
+N. Digital twin numeric boundary handling
+O. Gravity-label non-prediction
+P. Malformed scientific uploads
+Q. API input validation
+R. Browser persistence
+S. Zero-key runtime behavior
+
+Execute a real production server smoke test.
+
+Check:
+
+GET /
+GET /api/health
+GET /api/catalog
+
+Test relevant API routes where implemented.
+
+Verify actual behavior, not just HTTP status.
+
+Check mobile and desktop appearance.
+
+If headless browser tests cannot run,
+perform and document manual preview tests.
+
+Never describe responsive CSS inspection
+as a completed browser screenshot test.
+
+============================================================
+17. GITHUB RELEASE ENGINEERING
+============================================================
+
+PUBLIC REPOSITORY:
+
+Supermatrix-AI/aegis-mug-spaceapps-2026
+
+MAIN:
+
+Current published application with Digital Twin V1.
+
+PR #2:
+
+feature/nasa-bass2-evidence-atlas
+
+ACTION PLAN:
+
+1. Back up the current AI Studio workspace.
+2. Inspect latest main and PR #2.
+3. Reconcile changes without overwriting newer work.
+4. Implement any missing feature dependencies.
+5. Execute lint, tests, and build.
+6. Fix all demonstrable errors.
+7. Update branch with any necessary corrections.
+8. Merge PR #2 only after validation.
+9. Verify that merged source is visible on main.
+10. Synchronize the corresponding AI Studio workspace.
+11. Record the release commit SHA.
+12. Keep the previous working release available as rollback.
+
+Do not create a duplicate public repository.
+
+Do not force-merge obsolete PR #1.
+
+GITHUB ACTIONS:
+
+The previously observed GitHub Actions workflow
+was failing without exposing completed runner steps.
+
+Investigate the actual workflow failure.
+
+Check:
+- Workflow syntax
+- GitHub Actions settings
+- Organization execution permissions
+- Runner availability
+- Available account-level diagnostics
+- Dependency installation
+- Node version compatibility
+- Test/build commands
+
+Do not assume the problem is billing,
+permissions, or code without actual evidence.
+
+If Actions remains unavailable, use separately
+executed local/AI Studio validation and
+document the limitation.
+
+Do not describe unexecuted CI as passing.
+
+============================================================
+18. PUBLIC DEPLOYMENT — MANDATORY RELEASE GATE
+============================================================
+
+THIS IS A CRITICAL REQUIREMENT.
+
+The final project must have a publicly accessible
+live application whenever hosting is available.
+
+Existing AI Studio preview URLs that require
+Google login must not be presented as public demos.
+
+First evaluate authorized, genuinely available
+free deployment options.
+
+Prefer a supported AI Studio publishing option
+if the account is eligible and deployment is free.
+
+Otherwise use a suitable free-tier Node hosting
+service when practical.
+
+Do not activate billable infrastructure
+without explicit user authorization.
+
+Build and deploy the actual application.
+
+Verify from an unauthenticated browser:
+
+- Home page loads
+- All final navigation screens load
+- Evidence Atlas functions
+- NASA citations open
+- Scientific questions return grounded results
+- Digital twin charts render
+- Data export works
+- No API key is required
+- No login is required
+- Mobile layout is usable
+
+Save the real publicly working URL.
+
+Do not invent a deployment address.
+
+If public hosting fails, preserve a working
+public source repository and clearly document
+the limitation rather than falsely reporting success.
+
+============================================================
+19. GLOBAL-JUDGING PRESENTATION PACKAGE
+============================================================
+
+Prepare the strongest truthful demonstration
+of our actual implemented features.
+
+Official required short demonstration format:
+- Video of no more than 30 seconds
+OR
+- Presentation of no more than seven slides
+
+Verify current guidance in the official portal.
+
+Recommended demonstration story:
+
+0–5 seconds:
+Show NASA's microgravity combustion research problem.
+
+5–11 seconds:
+Show authentic BASS-II experiment measurements.
+
+11–17 seconds:
+Show scientific comparison and the M3 exception.
+
+17–23 seconds:
+Show SPECULATRON interpretation and DIWA provenance.
+
+23–27 seconds:
+Show the exploratory digital twin with clear
+hypothetical labeling.
+
+27–30 seconds:
+Show the solution's scientific contribution,
+SPECULATRON AI identity and live link.
+
+Generate a concise narration that can actually
+be spoken clearly within 30 seconds.
+
+Do not include feature claims that the final
+public application cannot demonstrate.
+
+Create or update the seven-slide version:
+
+SLIDE 1:
+Problem, challenge and proposed solution.
+
+SLIDE 2:
+Why the NASA combustion evidence is difficult
+to discover and compare.
+
+SLIDE 3:
+Real NASA source data and documented values.
+
+SLIDE 4:
+Scientific intelligence, pattern and M3 exception.
+
+SLIDE 5:
+DIWA provenance and uncertainty safeguards.
+
+SLIDE 6:
+Digital Twin Sandbox and research implications.
+
+SLIDE 7:
+Impact, evidence, validation, live demo and
+public GitHub.
+
+Use actual screenshots and correct data.
+
+Keep all project branding consistent.
+
+Ensure both application and presentation are
+independently accessible without login.
+
+============================================================
+20. OFFICIAL NASA SPACE APPS SUBMISSION
+============================================================
+
+Prepare the entire official project submission.
+
+Required content should follow the actual
+2026 NASA Space Apps Project form.
+
+Include where requested:
+
+Project title:
+AegisμG — Microgravity Fire Safety Intelligence
+
+Team:
+SPECULATRON AI
+
+Challenge:
+Flame in Freefall:
+SI-Powered Fire Safety Insights from
+Microgravity Combustion Data
+
+Project summary.
+
+Problem definition.
+
+Scientific methodology.
+
+Technical architecture.
+
+NASA data sources.
+
+Key real-data findings.
+
+Scientific novelty.
+
+Research implications.
+
+Potential impact.
+
+Source code repository.
+
+Public application.
+
+Required demonstration link.
+
+Actual AI tools used.
+
+Limitations and future roadmap.
+
+Avoid overstated or unverified claims.
+
+Keep English-language documentation consistent.
+
+Submit through the Project tab of the
+registered team on the official platform.
+
+User authentication and final submission
+confirmation must be completed by the
+authorized participant.
+
+Do not claim NASA submission success until
+the portal confirms the submitted status.
+
+INTERNAL TARGET:
+Complete release and submission well before
+the official deadline to preserve recovery time.
+
+============================================================
+21. REQUIRED REPOSITORY DOCUMENTATION
+============================================================
+
+Create or update as applicable:
+
+README.md
+SOURCES.md
+METHODOLOGY.md
+DATA_DICTIONARY.md
+DIGITAL_TWIN_METHOD.md
+COMPETITIVE_STRATEGY.md
+ROADMAP.md
+AI_DISCLOSURE.md
+SUBMISSION.md
+LICENSE
+.env.example
+.gitignore
+
+Also provide:
+
+RELEASE_AUDIT.md
+
+Include:
+- Release commit SHA
+- Current deployed application URL
+- Actual implementation status
+- Scientific dataset count
+- Test execution results
+- Known issues
+- Scientific limitations
+- Security findings
+- AI-use disclosure
+- Remaining manual actions
+
+Provide:
+
+DEMO_GUIDE.md
+
+Include:
+- Exact live demonstration workflow
+- Screens to show
+- Research questions to click
+- Expected evidence-grounded responses
+- Citation links
+- Short pitch narrative
+- Fallback demonstration plan
+
+Provide:
+
+JUDGING_EVIDENCE_MATRIX.md
+
+Map the actual submission to:
+
+IMPACT:
+Real scientific research value and potential users.
+
+CREATIVITY:
+Novel integration of scientific evidence,
+exceptions, provenance and hypothesis exploration.
+
+VALIDITY:
+Actual NASA records, reproducible data extraction,
+scientific limitations and working tests.
+
+RELEVANCE:
+Direct implementation of the challenge's
+summarize/rank/interpret requirements.
+
+PRESENTATION:
+Clear, functional application and concise
+science-driven demonstration.
+
+For every claim, identify a directly
+inspectable piece of evidence.
+
+Do not generate fabricated grades or
+pretend to know how official judges will score us.
+
+============================================================
+22. STRICT EXECUTION PRIORITY
+============================================================
+
+P0 — MUST FINISH FOR SUBMISSION
+
+- Preserve the existing working project.
+- Confirm GitHub source integrity.
+- Validate final application build.
+- Publish an accessible live version.
+- Prepare the required short demonstration.
+- Complete official submission materials.
+- Confirm submission status.
+
+P1 — HIGH-VALUE COMPETITIVE UPGRADE
+
+- Integrate PR #2 BASS-II Evidence Atlas.
+- Verify all source rows.
+- Run the expanded test suite.
+- Demonstrate scientific pattern and M3 exception.
+- Ensure SI interpretation links to actual citations.
+- Merge and release the validated enhancement.
+
+P2 — STRONG DIFFERENTIATOR
+
+- Guided Scientific Briefing mode.
+- Source-to-claim audit enhancements.
+- Mission-context research questions.
+- Exportable research evidence report.
+- Detailed missingness and comparability analysis.
+
+P3 — ADVANCED RESEARCH IF FULLY FEASIBLE
+
+- Time-series NASA PSI data ingestion.
+- Calibrated model comparison.
+- Quantified model uncertainty.
+- Sensitivity analysis.
+- Validated reduced-order modeling.
+- Wider source coverage.
+
+Never let P2/P3 jeopardize P0.
+
+If the release deadline approaches and
+optional features remain unfinished,
+freeze scope and submit the working validated version.
+
+============================================================
+23. DEFINITION OF DONE
+============================================================
+
+The final submission-ready release must satisfy:
+
+[ ] Working existing application preserved
+[ ] Correct official challenge and team identity
+[ ] NASA source citations accessible
+[ ] BASS-II Atlas data checked
+[ ] 20 source test samples accounted for
+[ ] 39 numeric observations correctly represented
+[ ] Four untracked rates preserved as missing
+[ ] M3 exception accurately explained
+[ ] Experiment compatibility safeguards working
+[ ] SPECULATRON intelligence operational
+[ ] DIWA provenance operational
+[ ] Digital Twin clearly labeled hypothetical
+[ ] Source and model outputs never confused
+[ ] TypeScript validation passed
+[ ] Relevant tests executed and passed
+[ ] Production build passed
+[ ] Actual GitHub main release verified
+[ ] Public application URL verified without login
+[ ] Mobile and desktop workflows reviewed
+[ ] Seven-slide or 30-second demonstration ready
+[ ] AI-use disclosure accurate
+[ ] Official project description complete
+[ ] Official NASA Space Apps submission confirmed
+
+If any item remains incomplete, report it honestly.
+
+Do not invent completion evidence.
+
+============================================================
+24. FINAL OUTPUT AFTER EXECUTION
+============================================================
+
+After implementing the highest-priority work,
+produce a concise executive release report.
+
+Include:
+
+A. Scientific achievement
+- Actual source records
+- Actual test samples
+- Actual measurements
+- Key observations and exceptions
+- Scientific limitations
+
+B. Technical achievement
+- Functional dashboard sections
+- New features implemented
+- Build/test outputs
+- Remaining defects
+
+C. Public release
+- GitHub repository
+- Exact release commit
+- PR merge status
+- Public deployment URL
+- Accessibility verification
+
+D. Competition submission
+- Completed presentation/demo
+- Project summary
+- AI disclosure
+- Submission status
+- Required user actions
+
+E. Future research
+- Next NASA datasets
+- Proper model calibration
+- Uncertainty quantification
+- Scientifically validated digital twin roadmap
+
+F. Judging evidence
+- Impact
+- Creativity
+- Validity
+- Relevance
+- Presentation
+
+Provide verifiable evidence for every claimed result.
+
+============================================================
+25. EXECUTE NOW
+============================================================
+
+BEGIN THE AEGISμG GLOBAL WINNER CANDIDATE RELEASE.
+
+FIRST:
+Inspect the current application and GitHub branches.
+
+SECOND:
+Preserve the existing working release and its tests.
+
+THIRD:
+Integrate and validate the source-grounded PR #2 upgrade.
+
+FOURTH:
+Enhance the scientific interpretation and guided briefing.
+
+FIFTH:
+Complete actual build, security and scientific checks.
+
+SIXTH:
+Prepare and verify a public deployment.
+
+SEVENTH:
+Finalize the demonstration and NASA submission package.
+
+EIGHTH:
+Report exactly what has been completed,
+what remains, and any authentication-dependent actions.
+
+Remember:
+
+A scientifically credible and accessible submission
+is more valuable than an unfinished platform with
+dozens of speculative AI functions.
+
+Our strongest differentiator is the transformation of
+authentic NASA experiments into transparent, auditable,
+actionable research intelligence.
+
+DO NOT REBUILD FROM ZERO.
+DO NOT FABRICATE SCIENCE.
+DO NOT MISREPRESENT MODEL VALIDATION.
+DO NOT EXPOSE PRIVATE CODE.
+DO NOT MISS THE SUBMISSION DEADLINE.
+
+BUILD.
+VERIFY.
+PUBLISH.
+DEMONSTRATE.
+SUBMIT.
+
+PROJECT: AegisμG
+TEAM: SPECULATRON AI
+NASA SPACE APPS CHALLENGE 2026
+
+EXECUTE NOW.

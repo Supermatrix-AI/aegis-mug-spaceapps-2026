@@ -3,11 +3,13 @@ import {
   Activity,
   BookOpen,
   BrainCircuit,
+  ChevronRight,
   Database,
   FileUp,
   Flame,
   FlaskConical,
   GitCompare,
+  Layers3,
   Menu,
   ShieldCheck,
   X,
@@ -26,6 +28,7 @@ import type {
 } from './types/scientific.ts';
 import { MissionOverview, NavSection } from './components/MissionOverview.tsx';
 import { EvidenceExplorer } from './components/EvidenceExplorer.tsx';
+import { Bass2Atlas } from './components/Bass2Atlas.tsx';
 import { DataImport } from './components/DataImport.tsx';
 import { ExperimentComparator } from './components/ExperimentComparator.tsx';
 import { SpeculatronIntelligence } from './components/SpeculatronIntelligence.tsx';
@@ -83,12 +86,57 @@ function loadPersistedSession(): PersistedSession {
 const NAV_ITEMS: Array<{ id: NavSection; label: string; icon: React.ComponentType<{ className?: string }> }> = [
   { id: 'overview', label: 'Mission Overview', icon: Activity },
   { id: 'explorer', label: 'Evidence Explorer', icon: Database },
+  { id: 'evidence-atlas', label: 'BASS-II Data Atlas', icon: Layers3 },
   { id: 'import', label: 'Data Import', icon: FileUp },
   { id: 'comparator', label: 'Comparator', icon: GitCompare },
   { id: 'intelligence', label: 'SPECULATRON AI', icon: BrainCircuit },
   { id: 'digital-twin', label: 'Digital Twin Sandbox', icon: FlaskConical },
   { id: 'provenance', label: 'DIWA Provenance', icon: ShieldCheck },
   { id: 'about', label: 'About & Export', icon: BookOpen },
+];
+
+const GUIDED_DEMO_STEPS: Array<{
+  step: number;
+  section: NavSection;
+  title: string;
+  takeaway: string;
+}> = [
+  {
+    step: 1,
+    section: 'explorer',
+    title: 'Inspect Authentic NASA Catalog & Missing Data Discipline',
+    takeaway: 'Every record separates SOURCE_REPORTED measurements from METADATA_ONLY PSI placeholders—nulls stay null.',
+  },
+  {
+    step: 2,
+    section: 'comparator',
+    title: 'Cross-Experiment Comparator & Dimensional Integrity',
+    takeaway: 'Compare compatible BASS-II PMMA runs (M1 vs M5) while flagging geometry and chamber differences.',
+  },
+  {
+    step: 3,
+    section: 'evidence-atlas',
+    title: 'BASS-II Table 5.1 Atlas & M3 Counterexample',
+    takeaway: '20 tests / 43 velocity segments (39 numeric + 4 nulls in M6/M12) reveal 12/13 monotonic tests and M3 counterexample (0.029 vs 0.024 mm/s).',
+  },
+  {
+    step: 4,
+    section: 'intelligence',
+    title: 'SPECULATRON Intelligence & Aegis Scientific Briefing',
+    takeaway: 'Inspect deterministic Q1–Q3 briefings, Mission-Relevance profiles, and strict 0 g vs 0.165 g / 0.38 g boundaries.',
+  },
+  {
+    step: 5,
+    section: 'provenance',
+    title: 'DIWA 6-Stage Evidence Assurance Chain & SSRF Check',
+    takeaway: 'Follow SOURCE -> EXPERIMENT -> MEASUREMENT -> CLAIM -> INTERPRETATION -> RECOMMENDATION traceability.',
+  },
+  {
+    step: 6,
+    section: 'digital-twin',
+    title: 'Digital Twin Sandbox: Replay vs Hypothetical 0D Balance',
+    takeaway: 'NASA spread-rate replay stays isolated from the uncalibrated 0D oxygen mass balance and 0.5×/1×/2× sensitivity checks.',
+  },
 ];
 
 export default function App() {
@@ -102,6 +150,7 @@ export default function App() {
     'EXP-BASS2-M5',
   ]);
   const [geminiConfigured, setGeminiConfigured] = useState(false);
+  const [demoStepIndex, setDemoStepIndex] = useState<number | null>(null);
 
   // Sync with backend health & catalog on mount (non-blocking)
   useEffect(() => {
@@ -154,6 +203,24 @@ export default function App() {
   const handleNavigate = (section: NavSection) => {
     setActiveSection(section);
     setMobileMenuOpen(false);
+  };
+
+  const handleStartDemo = () => {
+    setDemoStepIndex(0);
+    setActiveSection(GUIDED_DEMO_STEPS[0].section);
+    setMobileMenuOpen(false);
+  };
+
+  const handleAdvanceDemo = (delta: number) => {
+    if (demoStepIndex === null) return;
+    const next = demoStepIndex + delta;
+    if (next < 0 || next >= GUIDED_DEMO_STEPS.length) {
+      setDemoStepIndex(null);
+      setActiveSection('overview');
+      return;
+    }
+    setDemoStepIndex(next);
+    setActiveSection(GUIDED_DEMO_STEPS[next].section);
   };
 
   const handleToggleCompare = (experimentId: string) => {
@@ -382,6 +449,51 @@ export default function App() {
       {/* Main Content Workspace */}
       <main className="flex-1 lg:pl-64 min-w-0">
         <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+          {demoStepIndex !== null && (
+            <div
+              role="region"
+              aria-label="Guided Scientific Demo"
+              className="mb-6 rounded-lg border border-amber-500/40 bg-[#0D1422] p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3"
+            >
+              <div className="space-y-1">
+                <div className="text-[11px] font-mono uppercase tracking-wider text-amber-400">
+                  Guided Scientific Demo · Step {GUIDED_DEMO_STEPS[demoStepIndex].step} of {GUIDED_DEMO_STEPS.length}
+                </div>
+                <div className="text-sm font-semibold text-slate-100">
+                  {GUIDED_DEMO_STEPS[demoStepIndex].title}
+                </div>
+                <p className="text-xs text-slate-300">
+                  {GUIDED_DEMO_STEPS[demoStepIndex].takeaway}
+                </p>
+              </div>
+              <div className="flex flex-wrap items-center gap-2 shrink-0">
+                <button
+                  type="button"
+                  disabled={demoStepIndex === 0}
+                  onClick={() => handleAdvanceDemo(-1)}
+                  className="rounded border border-slate-700 bg-slate-900 hover:bg-slate-800 disabled:opacity-40 px-3 py-2 min-h-[44px] text-xs text-slate-200 cursor-pointer"
+                >
+                  Previous
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleAdvanceDemo(1)}
+                  className="inline-flex items-center gap-1 rounded bg-amber-500 hover:bg-amber-400 px-3 py-2 min-h-[44px] text-xs font-medium text-slate-950 cursor-pointer"
+                >
+                  <span>{demoStepIndex === GUIDED_DEMO_STEPS.length - 1 ? 'Finish Demo' : 'Next Step'}</span>
+                  <ChevronRight className="w-3.5 h-3.5" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setDemoStepIndex(null)}
+                  className="rounded border border-slate-700 bg-slate-900 hover:bg-slate-800 px-3 py-2 min-h-[44px] text-xs text-slate-400 cursor-pointer"
+                >
+                  Exit
+                </button>
+              </div>
+            </div>
+          )}
+
           {activeSection === 'overview' && (
             <MissionOverview
               sources={sources}
@@ -389,6 +501,7 @@ export default function App() {
               provenanceEvents={session.events}
               importJobs={session.importJobs}
               onNavigate={handleNavigate}
+              onStartDemo={handleStartDemo}
             />
           )}
 
@@ -400,6 +513,8 @@ export default function App() {
               onUpdateVerification={handleUpdateVerification}
             />
           )}
+
+          {activeSection === 'evidence-atlas' && <Bass2Atlas />}
 
           {activeSection === 'import' && (
             <DataImport

@@ -1,5 +1,13 @@
-import React, { useState } from 'react';
-import { AlertTriangle, BrainCircuit, Loader2, Sparkles } from 'lucide-react';
+import React, { useMemo, useState } from 'react';
+import {
+  AlertTriangle,
+  BrainCircuit,
+  Compass,
+  Download,
+  ExternalLink,
+  Loader2,
+  Sparkles,
+} from 'lucide-react';
 import type { ApplicationContext, ExperimentRecord } from '../types/scientific.ts';
 import {
   CONTEXT_LABELS,
@@ -7,6 +15,14 @@ import {
   rankExperimentsForContext,
   RELEVANCE_FORMULA_DESCRIPTION,
 } from '../utils/scoring.ts';
+import {
+  BASS2_RESEARCH_INSIGHTS,
+  buildScientificBriefings,
+  computeBass2Summary,
+  exportScientificBriefingMarkdown,
+  MISSION_RESEARCH_BRIEFINGS,
+} from '../utils/bass2Insights.ts';
+import type { BriefingQuestionId } from '../utils/bass2Insights.ts';
 import { OriginTag, VerificationTag } from './ScientificLabels.tsx';
 
 interface SpeculatronIntelligenceProps {
@@ -27,6 +43,8 @@ export const SpeculatronIntelligence: React.FC<SpeculatronIntelligenceProps> = (
   geminiConfigured,
 }) => {
   const [context, setContext] = useState<ApplicationContext>('ISS_HABITAT');
+  const [selectedBriefingId, setSelectedBriefingId] =
+    useState<BriefingQuestionId>('Q1_AIRFLOW_TREND');
   const [customQuestion, setCustomQuestion] = useState('');
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analysisResult, setAnalysisResult] = useState<AnalysisResponse | null>(null);
@@ -34,6 +52,26 @@ export const SpeculatronIntelligence: React.FC<SpeculatronIntelligenceProps> = (
 
   const ranked = rankExperimentsForContext(records, context);
   const deterministic = generateDeterministicSynthesis(records, context);
+  const bass2Summary = useMemo(() => computeBass2Summary(), []);
+  const briefings = useMemo(() => buildScientificBriefings(records), [records]);
+  const activeBriefing =
+    briefings.find((b) => b.id === selectedBriefingId) ?? briefings[0];
+  const activeMissionProfile =
+    MISSION_RESEARCH_BRIEFINGS.find((m) => m.context === context) ??
+    MISSION_RESEARCH_BRIEFINGS[0];
+
+  const handleDownloadBriefing = () => {
+    const md = exportScientificBriefingMarkdown(briefings, records);
+    const blob = new Blob([md], { type: 'text/markdown;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `aegis-mug-scientific-briefing-${new Date().toISOString().slice(0, 10)}.md`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  };
 
   const runServerAnalysis = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -101,6 +139,234 @@ export const SpeculatronIntelligence: React.FC<SpeculatronIntelligenceProps> = (
           </select>
         </div>
       </header>
+
+      {/* AEGIS SCIENTIFIC BRIEFING — Interactive 3-Question Judging & Research Mode */}
+      <section
+        aria-label="AEGIS Scientific Briefing"
+        className="rounded-lg border border-teal-500/40 bg-[#0D1422] p-5 space-y-4"
+      >
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
+          <div>
+            <div className="text-xs font-mono text-teal-400">
+              AEGIS SCIENTIFIC BRIEFING · TRACEABLE SOURCE-TO-CLAIM PATHS
+            </div>
+            <h2 className="text-lg font-semibold text-slate-50 mt-0.5">
+              Featured Research Questions &amp; Discovery Evidence
+            </h2>
+            <p className="text-xs text-slate-400">
+              Click any core research question to inspect NASA observations, exceptions, missing evidence,
+              and source-to-recommendation lineage.
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={handleDownloadBriefing}
+            className="inline-flex items-center justify-center gap-2 rounded bg-teal-700 hover:bg-teal-600 px-4 py-2.5 min-h-[44px] text-xs font-medium text-white whitespace-nowrap shrink-0 cursor-pointer"
+          >
+            <Download className="w-3.5 h-3.5" />
+            <span>Export Briefing Report (.md)</span>
+          </button>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+          {briefings.map((b) => {
+            const active = b.id === activeBriefing.id;
+            return (
+              <button
+                key={b.id}
+                type="button"
+                onClick={() => setSelectedBriefingId(b.id)}
+                className={`text-left rounded border px-3.5 py-3 min-h-[44px] transition-colors cursor-pointer ${
+                  active
+                    ? 'border-teal-500 bg-teal-500/15 text-slate-50'
+                    : 'border-slate-800 bg-[#070B14] text-slate-300 hover:border-slate-700'
+                }`}
+              >
+                <div className="text-[11px] font-mono text-teal-400">{b.shortTitle}</div>
+                <div className="text-xs font-medium mt-1 leading-snug">{b.question}</div>
+              </button>
+            );
+          })}
+        </div>
+
+        <div className="rounded border border-slate-800 bg-[#070B14] p-4 space-y-4 text-xs">
+          <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+            <h3 className="text-sm font-semibold text-slate-100">{activeBriefing.question}</h3>
+            <span className="font-mono text-[11px] text-amber-300">
+              {activeBriefing.patternSummary}
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <div className="font-semibold text-teal-300 uppercase tracking-wider">
+                NASA Observations
+              </div>
+              <ul className="list-disc pl-4 space-y-1 text-slate-300 leading-relaxed">
+                {activeBriefing.observations.map((obs, idx) => (
+                  <li key={idx}>{obs}</li>
+                ))}
+              </ul>
+
+              <div className="font-semibold text-amber-300 uppercase tracking-wider pt-2">
+                Exceptions &amp; Contradictions
+              </div>
+              <ul className="list-disc pl-4 space-y-1 text-slate-300 leading-relaxed">
+                {activeBriefing.contradictionsOrExceptions.map((exc, idx) => (
+                  <li key={idx}>{exc}</li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="space-y-2">
+              <div className="font-semibold text-amber-300 uppercase tracking-wider">
+                Confounders &amp; Missing Evidence
+              </div>
+              <ul className="list-disc pl-4 space-y-1 text-slate-300 leading-relaxed">
+                {activeBriefing.confoundersAndMissingData.map((conf, idx) => (
+                  <li key={idx}>{conf}</li>
+                ))}
+              </ul>
+
+              <div className="pt-2 space-y-1.5">
+                <div>
+                  <span className="font-semibold text-slate-100">Scientific Conclusion: </span>
+                  <span className="text-slate-300">{activeBriefing.conclusion}</span>
+                </div>
+                <div>
+                  <span className="font-semibold text-slate-100">Remaining Uncertainty: </span>
+                  <span className="text-slate-300">{activeBriefing.remainingUncertainty}</span>
+                </div>
+                <div className="text-amber-300">
+                  <strong>Scope Boundary:</strong> {activeBriefing.safetyBoundary}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* 6-Stage Source-to-Claim Trace */}
+          <div className="pt-3 border-t border-slate-800 space-y-2">
+            <div className="font-mono text-[11px] uppercase tracking-wider text-slate-400">
+              Source-to-Claim Traceability Path
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+              {activeBriefing.evidenceChain.map((step) => (
+                <div
+                  key={step.stage}
+                  className="rounded border border-slate-800 bg-[#0D1422] p-2.5 space-y-1"
+                >
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="font-mono text-[11px] font-semibold text-teal-400">
+                      {step.stage}
+                    </span>
+                    <a
+                      href={step.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 font-mono text-[10px] text-amber-300 hover:text-amber-200"
+                    >
+                      <span>{step.locator}</span>
+                      <ExternalLink className="w-2.5 h-2.5" />
+                    </a>
+                  </div>
+                  <p className="text-[11px] text-slate-300 leading-snug">{step.detail}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Mission-Relevance Research Briefing for Selected Context */}
+      <section className="rounded-lg border border-slate-800 bg-[#0D1422] p-5 space-y-3 text-xs">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <div className="flex items-center gap-2">
+            <Compass className="w-4 h-4 text-amber-400 shrink-0" />
+            <h2 className="text-base font-semibold text-slate-100">
+              Mission-Relevance Research Briefing: {activeMissionProfile.title}
+            </h2>
+          </div>
+          <span className="font-mono text-[11px] text-teal-400">
+            {activeMissionProfile.gravityLabel}
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div className="rounded border border-slate-800 bg-[#070B14] p-3 space-y-1.5">
+            <div>
+              <strong className="text-slate-100">Relevant NASA Studies: </strong>
+              <span className="text-slate-300">{activeMissionProfile.relevantStudies}</span>
+            </div>
+            <div>
+              <strong className="text-slate-100">Actually Measured Variables: </strong>
+              <span className="text-slate-300">{activeMissionProfile.measuredVariables}</span>
+            </div>
+            <div>
+              <strong className="text-teal-300">Preliminary Research Context: </strong>
+              <span className="text-slate-300">{activeMissionProfile.preliminaryContext}</span>
+            </div>
+          </div>
+
+          <div className="rounded border border-slate-800 bg-[#070B14] p-3 space-y-1.5">
+            <div>
+              <strong className="text-amber-300">Non-Transferable Assumptions: </strong>
+              <span className="text-slate-300">
+                {activeMissionProfile.nonTransferableAssumptions}
+              </span>
+            </div>
+            <div>
+              <strong className="text-amber-300">Missing Validation Data: </strong>
+              <span className="text-slate-300">{activeMissionProfile.missingValidationData}</span>
+            </div>
+            <div>
+              <strong className="text-slate-100">Proposed Research Priorities:</strong>
+              <ul className="list-disc pl-4 mt-1 text-slate-300 space-y-0.5">
+                {activeMissionProfile.proposedResearchPriorities.map((p, i) => (
+                  <li key={i}>{p}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* NASA evidence-derived SI insights from BASS-II Table 5.1 Atlas */}
+      <section className="rounded-lg border border-slate-800 bg-[#0D1422] p-5 space-y-3">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <h2 className="text-base font-semibold text-slate-100">
+            Evidence Intelligence: NASA BASS-II Table 5.1 Atlas
+          </h2>
+          <a
+            href="https://ntrs.nasa.gov/citations/20210011385"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs font-mono underline text-teal-400 inline-flex items-center gap-1"
+          >
+            <span>Primary NASA BASS-II report</span>
+            <ExternalLink className="w-3 h-3" />
+          </a>
+        </div>
+        <p className="text-xs text-slate-400">
+          The BASS-II Data Atlas transcribes {bass2Summary.sampleTests} NASA PMMA test samples,{' '}
+          {bass2Summary.reportedVelocityConditions} reported airflow conditions, and{' '}
+          {bass2Summary.numericSpreadObservations} numeric flame-spread observations (preserving{' '}
+          {bass2Summary.noTrackedRateSegments} missing rates as null). These are NOT 39 independent
+          experimental fires. Our descriptive alignment check finds {bass2Summary.alignedWithinTest} of{' '}
+          {bass2Summary.assessableMultiConditionTests} assessable multi-velocity tests align
+          directionally; M3 is a counterexample. Causation is NOT established because oxygen and
+          other conditions changed within tests.
+        </p>
+        <div className="grid gap-3 md:grid-cols-3">
+          {BASS2_RESEARCH_INSIGHTS.map((insight) => (
+            <article key={insight.id} className="rounded border border-slate-800 bg-[#070B14] p-3 space-y-2">
+              <h3 className="text-sm font-semibold text-teal-300">{insight.title}</h3>
+              <p className="text-xs text-slate-300">{insight.statement}</p>
+              <p className="text-xs text-amber-300">{insight.limitation}</p>
+              <p className="text-[11px] font-mono text-slate-400">{insight.citation}</p>
+            </article>
+          ))}
+        </div>
+      </section>
 
       {/* Non-Certification & Formula Transparency Banner */}
       <section className="rounded-lg border border-slate-800 bg-[#0D1422] p-5 space-y-3">

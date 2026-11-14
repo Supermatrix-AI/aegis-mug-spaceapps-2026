@@ -41,9 +41,9 @@ The UI allows 0 g, 0.165 g (Moon), 0.38 g (Mars), and 1 g context labels, but **
 
 No diffusion flames, pyrolysis, reaction kinetics, buoyancy, heat transfer, smoke transport, radiative exchange, pressure dynamics, oxygen sensor response, toxic exposure, suppression or flame-front dynamics. No spacecraft airflow geometries are solved. No NASA affiliation or certification.
 
-## 4. Software verification
+## 4. Software verification & local diagnostics
 
-Seven added unit tests (`src/tests/digitalTwin.test.ts`, complementing 11 baseline scientific validation tests in `src/tests/scientific.test.ts` for 18 total tests) exercise mathematical invariants: zero sink mass conservation, zero-flow depletion direction, ventilation convergence, input range checks, oxygen floor behavior, fixed-rate calorimetry conversion, gravity label invariance, and straight-line replay arithmetic.
+Seven Digital Twin invariant tests (`src/tests/digitalTwin.test.ts`), complemented by `11` baseline scientific tests (`src/tests/scientific.test.ts`), `9` Table 5.1 atlas tests (`src/tests/bass2Atlas.test.ts`), and `7` release/briefing/diagnostics validation tests (`src/tests/releaseValidation.test.ts`, **34 total tests**), exercise mathematical invariants: zero sink mass conservation, zero-flow depletion direction, ventilation convergence, input range checks, oxygen floor behavior, fixed-rate calorimetry conversion, gravity label invariance, straight-line replay arithmetic, and ideal-gas molar diagnostics + `0.5× / 1.0× / 2.0×` prescribed-sink sensitivity monotonicity (`computeScenarioDiagnostics`).
 
 Passing tests confirms software arithmetic and basic invariants only. It does **not** validate physical applicability or uncertainty. There is no calibrated model of combustion at 0 g, 0.165 g, or 0.38 g.
 
