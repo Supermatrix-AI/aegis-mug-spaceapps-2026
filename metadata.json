@@ -1,0 +1,8 @@
+{
+  "name": "AegisμG — Microgravity Fire Safety Intelligence",
+  "description": "Independent evidence-traceable NASA microgravity combustion research dashboard by SPECULATRON AI for NASA Space Apps Challenge 2026.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
