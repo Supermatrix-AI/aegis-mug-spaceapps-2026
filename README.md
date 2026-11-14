@@ -10,14 +10,15 @@
 
 AegisμG turns authentic NASA microgravity combustion citations and user-ingested experimental datasets into a searchable, comparable, evidence-traceable research dashboard without inventing or interpolating missing scientific measurements.
 
-### Core Modules
+### Core Modules (8 Screens)
 1. **Mission Overview:** Dynamic KPIs, family coverage chart, parameter availability indicators, and recent provenance activity computed strictly from active records.
-2. **NASA Evidence Explorer:** Full-text search and 8-facet filtering across experiment family, investigation, fuel/material, gravity context, oxygen availability, airflow availability, measurement type, and verification status, with expandable provenance details.
+2. **NASA Evidence Explorer:** Full-text search and 9-facet filtering across experiment family, investigation, fuel/material, gravity context, oxygen availability, airflow availability, measurement type, verification status, and evidence level, with expandable provenance details.
 3. **Data Import & Validation:** Client-side CSV (PapaParse) and JSON ingestion with column mapping, Zod schema enforcement, duplicate detection, SHA-256 byte-integrity hashing, unit-aware conversions, and strict `SOURCE_LINK_ONLY` flagging on import.
 4. **Experiment Comparator:** Side-by-side comparison of 2–4 records with explicit gravity/fuel/geometry mismatch warnings and unit-checked Recharts visualizations (or `"No comparable numeric data available."` when numeric overlap does not exist).
 5. **SPECULATRON Intelligence:** Transparent deterministic relevance scoring across ISS, pressurized rover, lunar (`0.165 g`), and Martian (`0.38 g`) contexts, plus optional server-side Gemini (`gemini-4-hydrogen`) grounded synthesis with automatic zero-key deterministic fallback.
 6. **DIWA Provenance & Audit:** Inspectable data lineage, extraction methods, SHA-256 hash consistency notes, SSRF-protected NASA domain URL verification, and immutable activity logs.
-7. **About, Documentation & Export:** Full methodology, verified bibliography, and provenance-preserving CSV, JSON, and Markdown Evidence Report exports.
+7. **Digital Twin Sandbox:** Separate NASA Table 5.1 straight-line evidence replay and hypothetical 0D compartment oxygen-balance calculator, with explicit `NOT VALIDATED` disclaimers, `NOT-NASA-DATA` CSV export headers/filenames, and zero unsupported gravity scaling.
+8. **About, Documentation & Export:** Full methodology, verified bibliography, and provenance-preserving CSV, JSON, and Markdown Evidence Report exports.
 
 ## Setup & Installation
 
@@ -71,6 +72,16 @@ npm run test
 
 AegisμG builds to a standard Node.js + Vite SPA (`dist/`) served by `server.ts` on `process.env.PORT || 3000`. It can be deployed cleanly to Cloud Run, Render, Railway, or Fly.io with no external database required. Never expose `GEMINI_API_KEY` in client-side `VITE_*` variables.
 
-## Public GitHub Target
+## Digital Twin Model Boundary
 
-Prepared for public synchronization to `Supermatrix-AI/aegis-mug-spaceapps-2026` (MIT License for newly authored code). Contains zero private source code or secrets from private repositories.
+The added **Digital Twin Sandbox** keeps NASA evidence and hypothetical modeling strictly separated:
+
+1. **Evidence replay:** Uses authentic NASA BASS-II Table 5.1 (`NASA/TM-20210011385`) flame-spread rates (`M1`–`M20`) to illustrate a straight-line distance-versus-time computation (`d = v × t`). It is not an observed spatial trajectory or flame prediction.
+2. **Hypothetical 0D oxygen inventory:** User-specified enclosure volume, fresh-gas flow, constant oxygen uptake, initial gas composition, and ideal-gas mass balance (`AEGIS_0D_OXYGEN_BALANCE_V1`). The output is **NOT NASA experimental data**, CFD, fire spread, certification, or a validated model of lunar (`0.165 g`) or Martian (`0.38 g`) gravity.
+
+See `DIGITAL_TWIN_METHOD.md` for formulas, assumptions, safeguards, tests, and `ROADMAP.md` for calibration requirements.
+
+## Public GitHub Repository
+
+- **Repository:** `https://github.com/Supermatrix-AI/aegis-mug-spaceapps-2026` (MIT License for newly authored code; zero private source code or secrets from private SPECULATRON AI or DIWA repositories).
+- **Verified State:** Workspace has reconciled `main` with PR #1 (`feature/aegis-digital-twin-v1`), passing `npm run lint`, `npm run test` (18/18 tests), and `npm run build`, ready to push/merge into `main` on GitHub.

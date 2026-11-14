@@ -6,6 +6,7 @@ import {
   Database,
   FileUp,
   Flame,
+  FlaskConical,
   GitCompare,
   Menu,
   ShieldCheck,
@@ -29,6 +30,7 @@ import { DataImport } from './components/DataImport.tsx';
 import { ExperimentComparator } from './components/ExperimentComparator.tsx';
 import { SpeculatronIntelligence } from './components/SpeculatronIntelligence.tsx';
 import { DiwaProvenance } from './components/DiwaProvenance.tsx';
+import { DigitalTwin } from './components/DigitalTwin.tsx';
 import { AboutAndExport } from './components/AboutAndExport.tsx';
 
 const STORAGE_KEY = 'aegis_mug_session_v1';
@@ -84,6 +86,7 @@ const NAV_ITEMS: Array<{ id: NavSection; label: string; icon: React.ComponentTyp
   { id: 'import', label: 'Data Import', icon: FileUp },
   { id: 'comparator', label: 'Comparator', icon: GitCompare },
   { id: 'intelligence', label: 'SPECULATRON AI', icon: BrainCircuit },
+  { id: 'digital-twin', label: 'Digital Twin Sandbox', icon: FlaskConical },
   { id: 'provenance', label: 'DIWA Provenance', icon: ShieldCheck },
   { id: 'about', label: 'About & Export', icon: BookOpen },
 ];
@@ -421,6 +424,10 @@ export default function App() {
               records={allRecords}
               geminiConfigured={geminiConfigured}
             />
+          )}
+
+          {activeSection === 'digital-twin' && (
+            <DigitalTwin records={allRecords} />
           )}
 
           {activeSection === 'provenance' && (

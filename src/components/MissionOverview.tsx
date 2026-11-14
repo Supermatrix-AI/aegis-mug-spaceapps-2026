@@ -14,6 +14,7 @@ import {
   FileUp,
   GitCompare,
   BrainCircuit,
+  FlaskConical,
   ShieldCheck,
   ExternalLink,
 } from 'lucide-react';
@@ -32,6 +33,7 @@ export type NavSection =
   | 'import'
   | 'comparator'
   | 'intelligence'
+  | 'digital-twin'
   | 'provenance'
   | 'about';
 
@@ -384,6 +386,14 @@ export const MissionOverview: React.FC<MissionOverviewProps> = ({
             >
               <GitCompare className="w-3.5 h-3.5 text-amber-400" />
               <span>Compare Records</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => onNavigate('digital-twin')}
+              className="inline-flex items-center gap-1.5 rounded border border-slate-700 bg-slate-900 hover:bg-slate-800 px-3 py-1.5 text-xs font-medium text-slate-200 whitespace-nowrap shrink-0 cursor-pointer"
+            >
+              <FlaskConical className="w-3.5 h-3.5 text-amber-400" />
+              <span>Digital Twin Sandbox</span>
             </button>
             <button
               type="button"

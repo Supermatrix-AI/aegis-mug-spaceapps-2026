@@ -31,3 +31,7 @@ Two to four records may be compared side by side. AegisμG enforces:
 - Bundled catalog entries without parsed PDF tables preserve `null` for unextracted numbers rather than estimating values.
 - `0 g` microgravity eliminates buoyancy-driven natural convection; partial-gravity (`0.165 g` lunar, `0.38 g` Martian) reintroduces weak buoyant flow and cannot be validated solely from ISS tests.
 - Small-scale MSG duct results (BASS-II) differ from large-scale spacecraft duct tests (Saffire-I) in boundary-layer development, wall heat loss, and oxygen depletion dynamics.
+
+## 4. Digital Twin Sandbox (Exploratory, Unvalidated)
+
+The Digital Twin Sandbox contains an evidence replay (`d = v_reported × t` illustration from Table 5.1) and a separate zero-dimensional oxygen inventory calculation (`AEGIS_0D_OXYGEN_BALANCE_V1`). Gravity labels do not change calculations. No CFD, radiative transfer, ignition model, flame spread prediction, safety threshold, or validated spacecraft hazard model is implemented. Full formulation and limits: `DIGITAL_TWIN_METHOD.md`.

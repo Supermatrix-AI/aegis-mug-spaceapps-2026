@@ -201,6 +201,11 @@ export const AboutAndExport: React.FC<AboutAndExportProps> = ({
               comparison, deterministic ranking, provenance logging, and exports run without a
               Gemini API key.
             </li>
+            <li>
+              <strong>Exploratory Digital Twin Boundary:</strong> The Digital Twin Sandbox replays
+              NASA Table 5.1 rates linearly and computes a hypothetical 0D oxygen inventory; outputs
+              are strictly non-NASA calculations and never safety or partial-gravity predictions.
+            </li>
           </ul>
         </section>
       </div>
@@ -245,9 +250,10 @@ export const AboutAndExport: React.FC<AboutAndExportProps> = ({
             active record IDs, and never required for core operations.
           </p>
           <p>
-            <strong>Roadmap:</strong> Direct NASA NTRS PDF table parser integration (opt-in local
-            extraction), multi-parameter Saffire-I to VI telemetry aligner, and collaborative human
-            peer-review signoff workflows.
+            <strong>Roadmap:</strong> NASA PSI raw time-series ingestion, held-out calibration of
+            reduced-order models against primary telemetry, and collaborative peer-review signoff
+            workflows (see <span className="font-mono">ROADMAP.md</span> and{' '}
+            <span className="font-mono">DIGITAL_TWIN_METHOD.md</span>).
           </p>
         </section>
       </div>

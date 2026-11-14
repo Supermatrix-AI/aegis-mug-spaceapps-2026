@@ -23,8 +23,9 @@
   - Global Equivalence Ratio (`DERIVED_CALCULATION`): `Φ_global = 1.3` (fuel rich, under-ventilated) across `19` usable returned postflight samples out of `34` returned (`Sec. 1.5, pp. 10–11, Eq. 1.2–1.4`).
   - Gas Products (`SOURCE_REPORTED` / `DERIVED_CALCULATION`): PMMA O2 depletion vs CO2 matched 6:5 stoichiometry (`Eq. 1.1`); concurrent rods averaged `550 ppm CO / 1% CO2`, opposed thick slabs averaged `370 ppm CO / 1% CO2`, with CO/CO2 ratios above efficient flue gas (`< 0.004`).
 - **Individual Single-Condition Test Runs Extracted:**
-  - Table 5.1 (`p. 57`, opposed-flow flat PMMA): `M1`, `M5`, `M9`, `M15`, `M20` (preserving `uncertainty: null` since Table 5.1 does not tabulate error bounds).
+  - Table 5.1 (`p. 57`, opposed-flow flat PMMA): `M1`, `M5`, `M9`, `M15`, `M20` (preserving `uncertainty: null` since Table 5.1 does not tabulate error bounds). These five `SOURCE_MATCHED` runs also supply the reported spread-rate inputs to Section 1 of the Digital Twin Sandbox (`NASA BASS-II evidence replay`).
   - Table 7.1 (`p. 96`, concurrent-flow flat SIBAL fabric): `GMT178-T11` (sustained burn at `4 cm/s`, `17.1 vol% O2`) and `GMT175-T9` (non-ignition at `10 cm/s`, `16.4 vol% O2`), preserving `reportedValue: null` where spread rates are plotted only in Fig. 7.4 or undefined.
+  - Note: All outputs from Section 2 of the Digital Twin Sandbox (`AEGIS_0D_OXYGEN_BALANCE_V1`) are strictly hypothetical user-parameterized calculations marked `NOT-NASA-DATA` and are excluded from NASA source citations.
 
 ## Documented Source Discrepancies & Caveats (Preserved Verbatim, Not Altered)
 
