@@ -30,6 +30,7 @@ import { VerificationTag } from './ScientificLabels.tsx';
 export type NavSection =
   | 'overview'
   | 'explorer'
+  | 'evidence-atlas'
   | 'import'
   | 'comparator'
   | 'intelligence'
