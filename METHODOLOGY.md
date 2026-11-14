@@ -35,3 +35,10 @@ Two to four records may be compared side by side. AegisμG enforces:
 ## 4. Digital Twin Sandbox (Exploratory, Unvalidated)
 
 The Digital Twin Sandbox contains an evidence replay (`d = v_reported × t` illustration from Table 5.1) and a separate zero-dimensional oxygen inventory calculation (`AEGIS_0D_OXYGEN_BALANCE_V1`). Gravity labels do not change calculations. No CFD, radiative transfer, ignition model, flame spread prediction, safety threshold, or validated spacecraft hazard model is implemented. Full formulation and limits: `DIGITAL_TWIN_METHOD.md`.
+
+
+## 5. NASA BASS-II Table 5.1 Atlas and SI Reasoning
+
+Manual source-matched transcription covers tests M1–M20 on printed page 57 of NASA/TM-20210011385: 20 unique test runs, 43 individual reported airflow settings, 39 numeric flame-spread measurements, and four missing (“Not tracked”) rates from M6 and M12. Those 39 points are repeated conditions within 20 samples, not 39 independent replications. The table contains only initial and final oxygen by test; per-segment oxygen cannot be inferred as a measured value. No uncertainty estimates are invented. The app distinguishes run count, measured segments, and source-missing values.
+
+The within-test *directional alignment* check ranks available velocity/rate pairs by velocity and labels a test ALIGNED only when spread rate is nondecreasing for every pair at distinct velocities. Thirteen multi-velocity tests have two or more tracked rates; 12 align and M3 does not. This is a **descriptive comparison**, not an estimate of a causal flow effect. Oxygen typically changes during each test; fixed sample material does not establish fixed environment. The app explicitly displays M3 and prompts review of time-series oxygen and experimental context. NASA itself reports that its contemporaneous FDS modeling predicted higher spread rates than some observations (Section 5.5–5.7); AegisμG does not invent model-error statistics. See the source report and `src/utils/bass2Insights.ts`.
