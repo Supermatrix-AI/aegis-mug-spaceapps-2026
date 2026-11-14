@@ -7,6 +7,7 @@ import {
   FileUp,
   Flame,
   FlaskConical,
+  Layers3,
   GitCompare,
   Menu,
   ShieldCheck,
@@ -31,6 +32,7 @@ import { ExperimentComparator } from './components/ExperimentComparator.tsx';
 import { SpeculatronIntelligence } from './components/SpeculatronIntelligence.tsx';
 import { DiwaProvenance } from './components/DiwaProvenance.tsx';
 import { DigitalTwin } from './components/DigitalTwin.tsx';
+import { Bass2Atlas } from './components/Bass2Atlas.tsx';
 import { AboutAndExport } from './components/AboutAndExport.tsx';
 
 const STORAGE_KEY = 'aegis_mug_session_v1';
@@ -83,6 +85,7 @@ function loadPersistedSession(): PersistedSession {
 const NAV_ITEMS: Array<{ id: NavSection; label: string; icon: React.ComponentType<{ className?: string }> }> = [
   { id: 'overview', label: 'Mission Overview', icon: Activity },
   { id: 'explorer', label: 'Evidence Explorer', icon: Database },
+  { id: 'evidence-atlas', label: 'BASS-II Data Atlas', icon: Layers3 },
   { id: 'import', label: 'Data Import', icon: FileUp },
   { id: 'comparator', label: 'Comparator', icon: GitCompare },
   { id: 'intelligence', label: 'SPECULATRON AI', icon: BrainCircuit },
@@ -400,6 +403,8 @@ export default function App() {
               onUpdateVerification={handleUpdateVerification}
             />
           )}
+
+          {activeSection === 'evidence-atlas' && <Bass2Atlas />}
 
           {activeSection === 'import' && (
             <DataImport
