@@ -18,3 +18,8 @@ AegisμG supports **optional** server-side Gemini integration (`@google/genai`, 
 - **Evidence Grounding:** When `GEMINI_API_KEY` is configured on the server, the model receives only sanitized metadata and numeric fields from the active workspace records and is instructed to cite exact `experimentId` and `sourceId` identifiers for every claim.
 - **Prompt-Injection Defense:** Untrusted document text is sanitized (`sanitizeForLlmContext`) and framed strictly as JSON data rather than instructions.
 - **Explicit Labeling:** Any runtime Gemini output is explicitly labeled **`AI-Assisted Interpretation (Gemini) — Verify Against Primary NASA Sources`**. When Gemini is unavailable, the endpoint automatically falls back to **`Deterministic Non-AI Evidence Summary`**.
+
+
+## 3. Digital Twin Additions
+
+The exploratory 0D oxygen-balance module and React UI were authored with OpenAI ChatGPT AI assistance on November 14, 2026, under developer supervision and integrated through a review branch. Its input parameters and calculated time series are hypothetical, not NASA-supplied measurements. Verification of any resulting physical claims remains the responsibility of a qualified researcher. See `DIGITAL_TWIN_METHOD.md`.

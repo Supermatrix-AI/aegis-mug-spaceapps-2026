@@ -32,6 +32,7 @@ export type NavSection =
   | 'import'
   | 'comparator'
   | 'intelligence'
+  | 'digital-twin'
   | 'provenance'
   | 'about';
 
