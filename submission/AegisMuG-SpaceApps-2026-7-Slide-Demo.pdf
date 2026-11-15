@@ -1,0 +1,248 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [5 0 R 7 0 R 9 0 R 11 0 R 13 0 R 15 0 R 17 0 R] /Count 7 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+5 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 960 540] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 6 0 R >>
+endobj
+6 0 obj
+<< /Length 1704 >>
+stream
+q 0.028 0.043 0.080 rg 0 0 960 540 re f
+0.055 0.090 0.155 rg 32 70 896 410 re f
+0.17 0.83 0.74 rg 32 482 896 4 re f
+0.18 0.84 0.75 rg BT /F2 12 Tf 1 0 0 1 50 503 Tm (SPECULATRON AI  /  NASA SPACE APPS CHALLENGE 2026) Tj ET
+0.38 0.76 0.96 rg BT /F2 13 Tf 1 0 0 1 50 454 Tm (FLAME IN FREEFALL   |   01 / THE CHALLENGE) Tj ET
+0.92 0.95 0.98 rg BT /F2 31 Tf 1 0 0 1 50 411 Tm (MICROGRAVITY FIRE EVIDENCE) Tj ET
+0.78 0.85 0.92 rg BT /F1 16 Tf 1 0 0 1 50 379 Tm (From scattered reports to traceable scientific insight) Tj ET
+0.17 0.83 0.74 rg 54 335 7 7 re f
+0.86 0.90 0.95 rg BT /F1 14 Tf 1 0 0 1 76 337 Tm (NASA combustion studies span technical reports, PSI repositories, fuels, geometries and experimental) Tj ET
+0.86 0.90 0.95 rg BT /F1 14 Tf 1 0 0 1 76 319 Tm (conditions.) Tj ET
+0.17 0.83 0.74 rg 54 291 7 7 re f
+0.86 0.90 0.95 rg BT /F1 14 Tf 1 0 0 1 76 293 Tm (Comparing unlike airflow, gravity, oxygen or fuel conditions can produce misleading conclusions.) Tj ET
+0.17 0.83 0.74 rg 54 253 7 7 re f
+0.86 0.90 0.95 rg BT /F1 14 Tf 1 0 0 1 76 255 Tm (Unknown measurements must stay unknown; zeros and AI-estimated curves are not substitutes for data.) Tj ET
+0.17 0.83 0.74 rg 54 215 7 7 re f
+0.86 0.90 0.95 rg BT /F1 14 Tf 1 0 0 1 76 217 Tm (AegisMuG is an independent research prototype, not NASA-endorsed or flight-qualified.) Tj ET
+0.08 0.19 0.25 rg 50 84 860 43 re f
+0.35 0.91 0.81 rg BT /F2 14 Tf 1 0 0 1 65 102 Tm (OUR RESPONSE A transparent, source-linked fire research dashboard.) Tj ET
+0.65 0.71 0.79 rg BT /F1 10 Tf 1 0 0 1 50 39 Tm (Independent open-source research prototype   |   Not NASA endorsed   |   15 NOV 2026) Tj ET
+0.63 0.75 0.83 rg BT /F2 11 Tf 1 0 0 1 853 39 Tm (01 / 07) Tj ET
+Q
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 960 540] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 8 0 R >>
+endobj
+8 0 obj
+<< /Length 1682 >>
+stream
+q 0.028 0.043 0.080 rg 0 0 960 540 re f
+0.055 0.090 0.155 rg 32 70 896 410 re f
+0.17 0.83 0.74 rg 32 482 896 4 re f
+0.18 0.84 0.75 rg BT /F2 12 Tf 1 0 0 1 50 503 Tm (SPECULATRON AI  /  NASA SPACE APPS CHALLENGE 2026) Tj ET
+0.38 0.76 0.96 rg BT /F2 13 Tf 1 0 0 1 50 454 Tm (FLAME IN FREEFALL   |   02 / PRIMARY NASA DATA) Tj ET
+0.92 0.95 0.98 rg BT /F2 31 Tf 1 0 0 1 50 411 Tm (BASS-II: AUDITABLE BY DESIGN) Tj ET
+0.78 0.85 0.92 rg BT /F1 16 Tf 1 0 0 1 50 379 Tm (NASA/TM-20210011385, Table 5.1 \(printed page 57\)) Tj ET
+0.17 0.83 0.74 rg 54 335 7 7 re f
+0.86 0.90 0.95 rg BT /F1 14 Tf 1 0 0 1 76 337 Tm (20 flat PMMA tests: M1 to M20, with 43 sequential airflow condition segments.) Tj ET
+0.17 0.83 0.74 rg 54 297 7 7 re f
+0.86 0.90 0.95 rg BT /F1 14 Tf 1 0 0 1 76 299 Tm (39 numeric reported flame-spread rates; 4 explicitly 'Not tracked' remain missing.) Tj ET
+0.17 0.83 0.74 rg 54 259 7 7 re f
+0.86 0.90 0.95 rg BT /F1 14 Tf 1 0 0 1 76 261 Tm (Per-segment oxygen measurements and unreported uncertainties stay null.) Tj ET
+0.17 0.83 0.74 rg 54 221 7 7 re f
+0.86 0.90 0.95 rg BT /F1 14 Tf 1 0 0 1 76 223 Tm (Independent-burn and within-burn segment counts are kept separate.) Tj ET
+0.17 0.83 0.74 rg 54 183 7 7 re f
+0.86 0.90 0.95 rg BT /F1 14 Tf 1 0 0 1 76 185 Tm (Official source: https://ntrs.nasa.gov/citations/20210011385) Tj ET
+0.08 0.19 0.25 rg 50 84 860 43 re f
+0.35 0.91 0.81 rg BT /F2 14 Tf 1 0 0 1 65 102 Tm (20 TESTS | 43 SEGMENTS | 39 RATES | 4 NULLS) Tj ET
+0.65 0.71 0.79 rg BT /F1 10 Tf 1 0 0 1 50 39 Tm (Independent open-source research prototype   |   Not NASA endorsed   |   15 NOV 2026) Tj ET
+0.63 0.75 0.83 rg BT /F2 11 Tf 1 0 0 1 853 39 Tm (02 / 07) Tj ET
+Q
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 960 540] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 10 0 R >>
+endobj
+10 0 obj
+<< /Length 1726 >>
+stream
+q 0.028 0.043 0.080 rg 0 0 960 540 re f
+0.055 0.090 0.155 rg 32 70 896 410 re f
+0.17 0.83 0.74 rg 32 482 896 4 re f
+0.18 0.84 0.75 rg BT /F2 12 Tf 1 0 0 1 50 503 Tm (SPECULATRON AI  /  NASA SPACE APPS CHALLENGE 2026) Tj ET
+0.38 0.76 0.96 rg BT /F2 13 Tf 1 0 0 1 50 454 Tm (FLAME IN FREEFALL   |   03 / THE WORKFLOW) Tj ET
+0.92 0.95 0.98 rg BT /F2 31 Tf 1 0 0 1 50 411 Tm (RESEARCH FROM SOURCE TO INSIGHT) Tj ET
+0.78 0.85 0.92 rg BT /F1 16 Tf 1 0 0 1 50 379 Tm (Nine documented research views in the AegisMuG codebase) Tj ET
+0.17 0.83 0.74 rg 54 335 7 7 re f
+0.86 0.90 0.95 rg BT /F1 14 Tf 1 0 0 1 76 337 Tm (Mission Overview and NASA Evidence Explorer: search, filter and inspect provenance.) Tj ET
+0.17 0.83 0.74 rg 54 297 7 7 re f
+0.86 0.90 0.95 rg BT /F1 14 Tf 1 0 0 1 76 299 Tm (BASS-II Data Atlas: compare conditions and export the transcribed measurements.) Tj ET
+0.17 0.83 0.74 rg 54 259 7 7 re f
+0.86 0.90 0.95 rg BT /F1 14 Tf 1 0 0 1 76 261 Tm (CSV / JSON ingestion with schema checks; dimension-aware experiment comparator.) Tj ET
+0.17 0.83 0.74 rg 54 221 7 7 re f
+0.86 0.90 0.95 rg BT /F1 14 Tf 1 0 0 1 76 223 Tm (SPECULATRON research briefings, evidence-gap map and relevance ranking.) Tj ET
+0.17 0.83 0.74 rg 54 183 7 7 re f
+0.86 0.90 0.95 rg BT /F1 14 Tf 1 0 0 1 76 185 Tm (DIWA six-stage audit chain, documentation, data export and digital-twin sandbox.) Tj ET
+0.08 0.19 0.25 rg 50 84 860 43 re f
+0.35 0.91 0.81 rg BT /F2 14 Tf 1 0 0 1 65 102 Tm (EXPLORE > VALIDATE > COMPARE > INTERPRET > AUDIT) Tj ET
+0.65 0.71 0.79 rg BT /F1 10 Tf 1 0 0 1 50 39 Tm (Independent open-source research prototype   |   Not NASA endorsed   |   15 NOV 2026) Tj ET
+0.63 0.75 0.83 rg BT /F2 11 Tf 1 0 0 1 853 39 Tm (03 / 07) Tj ET
+Q
+endstream
+endobj
+11 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 960 540] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 12 0 R >>
+endobj
+12 0 obj
+<< /Length 1660 >>
+stream
+q 0.028 0.043 0.080 rg 0 0 960 540 re f
+0.055 0.090 0.155 rg 32 70 896 410 re f
+0.17 0.83 0.74 rg 32 482 896 4 re f
+0.18 0.84 0.75 rg BT /F2 12 Tf 1 0 0 1 50 503 Tm (SPECULATRON AI  /  NASA SPACE APPS CHALLENGE 2026) Tj ET
+0.38 0.76 0.96 rg BT /F2 13 Tf 1 0 0 1 50 454 Tm (FLAME IN FREEFALL   |   04 / THE SCIENTIFIC EXCEPTION) Tj ET
+0.92 0.95 0.98 rg BT /F2 31 Tf 1 0 0 1 50 411 Tm (DO NOT HIDE THE M3 RESULT) Tj ET
+0.78 0.85 0.92 rg BT /F1 16 Tf 1 0 0 1 50 379 Tm (A counterexample prevents an oversimplified airflow conclusion) Tj ET
+0.17 0.83 0.74 rg 54 335 7 7 re f
+0.86 0.90 0.95 rg BT /F1 14 Tf 1 0 0 1 76 337 Tm (NASA Table 5.1 test M3: 0.029 mm/s at 10 cm/s airflow.) Tj ET
+0.17 0.83 0.74 rg 54 297 7 7 re f
+0.86 0.90 0.95 rg BT /F1 14 Tf 1 0 0 1 76 299 Tm (M3: 0.024 mm/s at 20 cm/s airflow within the same test.) Tj ET
+0.17 0.83 0.74 rg 54 259 7 7 re f
+0.86 0.90 0.95 rg BT /F1 14 Tf 1 0 0 1 76 261 Tm (Test-level oxygen changed from 20.8% to 19.7% over the burn.) Tj ET
+0.17 0.83 0.74 rg 54 221 7 7 re f
+0.86 0.90 0.95 rg BT /F1 14 Tf 1 0 0 1 76 223 Tm (This is a recorded association, not proof of an isolated causal relation.) Tj ET
+0.17 0.83 0.74 rg 54 183 7 7 re f
+0.86 0.90 0.95 rg BT /F1 14 Tf 1 0 0 1 76 185 Tm (AegisMuG surfaces source locators, confounding and missing parameters.) Tj ET
+0.08 0.19 0.25 rg 50 84 860 43 re f
+0.35 0.91 0.81 rg BT /F2 14 Tf 1 0 0 1 65 102 Tm (0.029 -> 0.024 mm/s | OBSERVATION, NOT PREDICTION) Tj ET
+0.65 0.71 0.79 rg BT /F1 10 Tf 1 0 0 1 50 39 Tm (Independent open-source research prototype   |   Not NASA endorsed   |   15 NOV 2026) Tj ET
+0.63 0.75 0.83 rg BT /F2 11 Tf 1 0 0 1 853 39 Tm (04 / 07) Tj ET
+Q
+endstream
+endobj
+13 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 960 540] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 14 0 R >>
+endobj
+14 0 obj
+<< /Length 1728 >>
+stream
+q 0.028 0.043 0.080 rg 0 0 960 540 re f
+0.055 0.090 0.155 rg 32 70 896 410 re f
+0.17 0.83 0.74 rg 32 482 896 4 re f
+0.18 0.84 0.75 rg BT /F2 12 Tf 1 0 0 1 50 503 Tm (SPECULATRON AI  /  NASA SPACE APPS CHALLENGE 2026) Tj ET
+0.38 0.76 0.96 rg BT /F2 13 Tf 1 0 0 1 50 454 Tm (FLAME IN FREEFALL   |   05 / SUPER INTELLIGENCE) Tj ET
+0.92 0.95 0.98 rg BT /F2 31 Tf 1 0 0 1 50 411 Tm (EXPLAINABLE RESEARCH TRIAGE) Tj ET
+0.78 0.85 0.92 rg BT /F1 16 Tf 1 0 0 1 50 379 Tm (Source-grounded synthesis with explicit limits) Tj ET
+0.17 0.83 0.74 rg 54 335 7 7 re f
+0.86 0.90 0.95 rg BT /F1 14 Tf 1 0 0 1 76 337 Tm (Offline deterministic BM25 Question Explorer and evidence-based briefing workflow.) Tj ET
+0.17 0.83 0.74 rg 54 297 7 7 re f
+0.86 0.90 0.95 rg BT /F1 14 Tf 1 0 0 1 76 299 Tm (Transparent research relevance scoring, not hazard probability or safety certification.) Tj ET
+0.17 0.83 0.74 rg 54 259 7 7 re f
+0.86 0.90 0.95 rg BT /F1 14 Tf 1 0 0 1 76 261 Tm (Abstains when evidence cannot support lunar, Martian or certification claims.) Tj ET
+0.17 0.83 0.74 rg 54 221 7 7 re f
+0.86 0.90 0.95 rg BT /F1 14 Tf 1 0 0 1 76 223 Tm (Optional server-side Gemini interpretation is labeled AI-assisted and requires checking.) Tj ET
+0.17 0.83 0.74 rg 54 183 7 7 re f
+0.86 0.90 0.95 rg BT /F1 14 Tf 1 0 0 1 76 185 Tm (The core evidence tools do not require an external Gemini API key.) Tj ET
+0.08 0.19 0.25 rg 50 84 860 43 re f
+0.35 0.91 0.81 rg BT /F2 14 Tf 1 0 0 1 65 102 Tm (WHEN EVIDENCE IS MISSING, THE SYSTEM MUST SAY SO.) Tj ET
+0.65 0.71 0.79 rg BT /F1 10 Tf 1 0 0 1 50 39 Tm (Independent open-source research prototype   |   Not NASA endorsed   |   15 NOV 2026) Tj ET
+0.63 0.75 0.83 rg BT /F2 11 Tf 1 0 0 1 853 39 Tm (05 / 07) Tj ET
+Q
+endstream
+endobj
+15 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 960 540] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 16 0 R >>
+endobj
+16 0 obj
+<< /Length 1747 >>
+stream
+q 0.028 0.043 0.080 rg 0 0 960 540 re f
+0.055 0.090 0.155 rg 32 70 896 410 re f
+0.17 0.83 0.74 rg 32 482 896 4 re f
+0.18 0.84 0.75 rg BT /F2 12 Tf 1 0 0 1 50 503 Tm (SPECULATRON AI  /  NASA SPACE APPS CHALLENGE 2026) Tj ET
+0.38 0.76 0.96 rg BT /F2 13 Tf 1 0 0 1 50 454 Tm (FLAME IN FREEFALL   |   06 / DIGITAL TWIN BOUNDARY) Tj ET
+0.92 0.95 0.98 rg BT /F2 31 Tf 1 0 0 1 50 411 Tm (NASA DATA IS NOT A MODEL) Tj ET
+0.78 0.85 0.92 rg BT /F1 16 Tf 1 0 0 1 50 379 Tm (Evidence replay is separate from hypothetical oxygen balance) Tj ET
+0.17 0.83 0.74 rg 54 335 7 7 re f
+0.86 0.90 0.95 rg BT /F1 14 Tf 1 0 0 1 76 337 Tm (Part A: straight-line illustration using NASA-reported spread rates \(distance = rate x time\).) Tj ET
+0.17 0.83 0.74 rg 54 297 7 7 re f
+0.86 0.90 0.95 rg BT /F1 14 Tf 1 0 0 1 76 299 Tm (Part B: user-defined 0D oxygen-inventory calculation with ideal-gas assumptions.) Tj ET
+0.17 0.83 0.74 rg 54 259 7 7 re f
+0.86 0.90 0.95 rg BT /F1 14 Tf 1 0 0 1 76 261 Tm (Sensitivity checks change prescribed oxygen uptake, not empirical gravity behavior.) Tj ET
+0.17 0.83 0.74 rg 54 221 7 7 re f
+0.86 0.90 0.95 rg BT /F1 14 Tf 1 0 0 1 76 223 Tm (Hypothetical curves are NOT NASA DATA and NOT a fire-spread prediction.) Tj ET
+0.17 0.83 0.74 rg 54 183 7 7 re f
+0.86 0.90 0.95 rg BT /F1 14 Tf 1 0 0 1 76 185 Tm (Neither model certifies spacecraft materials or validates Moon or Mars fire risk.) Tj ET
+0.08 0.19 0.25 rg 50 84 860 43 re f
+0.35 0.91 0.81 rg BT /F2 14 Tf 1 0 0 1 65 102 Tm (HYPOTHETICAL | NOT VALIDATED | NOT CERTIFIED) Tj ET
+0.65 0.71 0.79 rg BT /F1 10 Tf 1 0 0 1 50 39 Tm (Independent open-source research prototype   |   Not NASA endorsed   |   15 NOV 2026) Tj ET
+0.63 0.75 0.83 rg BT /F2 11 Tf 1 0 0 1 853 39 Tm (06 / 07) Tj ET
+Q
+endstream
+endobj
+17 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 960 540] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 18 0 R >>
+endobj
+18 0 obj
+<< /Length 1728 >>
+stream
+q 0.028 0.043 0.080 rg 0 0 960 540 re f
+0.055 0.090 0.155 rg 32 70 896 410 re f
+0.17 0.83 0.74 rg 32 482 896 4 re f
+0.18 0.84 0.75 rg BT /F2 12 Tf 1 0 0 1 50 503 Tm (SPECULATRON AI  /  NASA SPACE APPS CHALLENGE 2026) Tj ET
+0.38 0.76 0.96 rg BT /F2 13 Tf 1 0 0 1 50 454 Tm (FLAME IN FREEFALL   |   07 / IMPACT & OPEN SCIENCE) Tj ET
+0.92 0.95 0.98 rg BT /F2 31 Tf 1 0 0 1 50 411 Tm (TRACEABLE, REPRODUCIBLE, HONEST) Tj ET
+0.78 0.85 0.92 rg BT /F1 16 Tf 1 0 0 1 50 379 Tm (AegisMuG by SPECULATRON AI - Space Apps Challenge 2026) Tj ET
+0.17 0.83 0.74 rg 54 335 7 7 re f
+0.86 0.90 0.95 rg BT /F1 14 Tf 1 0 0 1 76 337 Tm (The repository documents automated tests, NASA artifact checks and method limits.) Tj ET
+0.17 0.83 0.74 rg 54 297 7 7 re f
+0.86 0.90 0.95 rg BT /F1 14 Tf 1 0 0 1 76 299 Tm (Designed for researchers and students to triage literature and identify data gaps.) Tj ET
+0.17 0.83 0.74 rg 54 259 7 7 re f
+0.86 0.90 0.95 rg BT /F1 14 Tf 1 0 0 1 76 261 Tm (Source code, methodology, AI disclosure and NASA provenance are public.) Tj ET
+0.17 0.83 0.74 rg 54 221 7 7 re f
+0.86 0.90 0.95 rg BT /F1 14 Tf 1 0 0 1 76 223 Tm (Current public app deployment is not established by this PDF.) Tj ET
+0.17 0.83 0.74 rg 54 183 7 7 re f
+0.86 0.90 0.95 rg BT /F1 14 Tf 1 0 0 1 76 185 Tm (Independent prototype: no NASA endorsement and no operational safety claims.) Tj ET
+0.08 0.19 0.25 rg 50 84 860 43 re f
+0.35 0.91 0.81 rg BT /F2 14 Tf 1 0 0 1 65 102 Tm (SOURCE CODE: github.com/Supermatrix-AI/aegis-mug-spaceapps-2026) Tj ET
+0.65 0.71 0.79 rg BT /F1 10 Tf 1 0 0 1 50 39 Tm (Independent open-source research prototype   |   Not NASA endorsed   |   15 NOV 2026) Tj ET
+0.63 0.75 0.83 rg BT /F2 11 Tf 1 0 0 1 853 39 Tm (07 / 07) Tj ET
+Q
+endstream
+endobj
+xref
+0 19
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000155 00000 n 
+0000000252 00000 n 
+0000000354 00000 n 
+0000000490 00000 n 
+0000002245 00000 n 
+0000002381 00000 n 
+0000004114 00000 n 
+0000004251 00000 n 
+0000006029 00000 n 
+0000006167 00000 n 
+0000007879 00000 n 
+0000008017 00000 n 
+0000009797 00000 n 
+0000009935 00000 n 
+0000011734 00000 n 
+0000011872 00000 n 
+trailer
+<< /Size 19 /Root 1 0 R >>
+startxref
+13652
+%%EOF
