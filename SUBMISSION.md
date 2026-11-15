@@ -2,10 +2,10 @@
 
 - **Project Title:** AegisμG — Microgravity Fire Safety Intelligence
 - **Team / Creator:** SPECULATRON AI
-- **Challenge Title:** Flame in Freefall: AI-Powered Fire Safety Insights from Microgravity Combustion Data
+- **Challenge Title:** Flame in Freefall: SI-Powered Fire Safety Insights from Microgravity Combustion Data
 - **Challenge Link:** https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/
-- **Live Application URL:** `[PENDING_PUBLIC_DEPLOYMENT — Shared Cloud Run URL ais-pre-... currently returns HTTP 404; Dev URL requires Google auth; verify unauthenticated URL after publishing]`
-- **Public GitHub Repository URL:** `https://github.com/Supermatrix-AI/aegis-mug-spaceapps-2026` `[main live at 5f024bea6d; PR #2 feature/nasa-bass2-evidence-atlas & Phase 5 enhancements reconciled locally — pending user push/merge to main]`
+- **Live Application URL:** `[PENDING OWNER ACTION — Verify an unauthenticated public deployment URL in incognito before portal submission]`
+- **Public GitHub Repository URL:** `https://github.com/Supermatrix-AI/aegis-mug-spaceapps-2026` `[main at cde52ac7cf; workspace enhancements & submission/presentation.html staged locally — PENDING OWNER ACTION to push]`
 
 ## Problem Definition
 
@@ -13,14 +13,15 @@ NASA's microgravity combustion research (BASS, BASS-II, Saffire-I, FLEX, FLEX-2,
 
 ## Proposed Solution
 
-AegisμG is an independent, evidence-traceable research dashboard that organizes official NASA combustion citations, validates user-imported PSI/NTRS CSV & JSON datasets with strict Zod schemas, prevents incompatible unit or geometry comparisons, computes transparent deterministic relevance rankings, and maintains a DIWA-inspired provenance and audit log.
+AegisμG is an independent, evidence-traceable research dashboard that organizes official NASA combustion citations, validates user-imported PSI/NTRS CSV & JSON datasets with strict Zod schemas, prevents incompatible unit or geometry comparisons, provides an offline BM25 Question Explorer with strict abstention, maps empirical gaps, and maintains a DIWA-inspired provenance and reliability scorecard.
 
 ## Technical Innovation
 
-- **Strict Anti-Hallucination Architecture:** Missing values remain `null` (`"Not reported / Not verified"`)—never coerced to zero or fabricated for charts.
+- **Strict Anti-Hallucination & Provenance Inspector:** Missing values remain `null` (`"Not reported / Not verified"`), every record carries an explicit classification (`NASA_OBSERVED` / `NASA_REPORTED` / `DERIVED` / `INTERPRETATION` / `HYPOTHETICAL` / `UNVERIFIED`) with `NEEDS_SOURCE_CHECK` validation, and numeric claims never auto-promote.
+- **Evidence Gap & Applicability Map:** Classifies coverage (`OBSERVED`, `SOURCE_METADATA_ONLY`, `NO_MEASUREMENT`, `HYPOTHETICAL_MODEL`) across Material, Geometry, Airflow, Oxygen, and Gravity (`0 g`, `0.165 g`, `0.38 g`) with CSV/JSON exports.
 - **Unit-Aware Dimension Gate:** Explicitly converts compatible units (`m/s` ↔ `cm/s`, `°C` ↔ `K`, `atm` ↔ `kPa`) while refusing incompatible physical dimensions.
-- **Zero-Key Deterministic Engine + Optional Grounded Gemini:** Works 100% offline/no-key via deterministic completeness-gated ranking, with optional server-side `gemini-4-hydrogen` synthesis strictly citing `experimentId`/`sourceId`.
-- **DIWA Provenance & SSRF Protection:** Computes SHA-256 digests over uploaded file bytes (explicitly distinguishing file consistency from scientific correctness) and enforces HTTPS NASA domain allowlisting.
+- **Offline BM25 Question Explorer + Optional Grounded Gemini:** Works 100% without API keys via deterministic BM25 retrieval (with strict `"Insufficient verified NASA evidence for this conclusion."` abstention on lunar/Martian quantitative predictions or safety certifications) and completeness-gated relevance ranking, plus optional server-side `gemini-4-hydrogen` synthesis.
+- **DIWA Provenance, Reliability Scorecard & Reproducible Verification:** Computes SHA-256 digests over uploaded bytes and verified NASA NTRS/DataCite artifacts (`npm run verify:nasa`), displays explicit scorecard counts (`MODEL VALIDATION: NOT VALIDATED`), and enforces HTTPS NASA domain allowlisting.
 
 ## Scientific Methodology
 
@@ -32,7 +33,7 @@ Helps combustion researchers, mission safety analysts, and student teams rapidly
 
 ## NASA Data Usage
 
-Catalogs `8` official NASA references (`NASA/TM-20210011385` BASS-II Summary Report, `PSI-25`, `PSI-98` Saffire-I, `OCHMO-TB-008`, NASA PSI Combustion Index, and NTRS Portal) with clickable citations and retrieval timestamps. Includes `16` core catalog records (O2-consumption calorimetry `13.1 kJ/g O2`, `< 100 W` typical HRR, `Φ_global = 1.3`, and Table 5.1/7.1 runs) plus the complete **`20`-test / `43`-segment BASS-II Table 5.1 Atlas** (`M1`–`M20`, `39` numeric spread observations, `4` explicit `"Not tracked"` nulls in `M6`/`M12`, and the `M3` counterexample).
+Catalogs `8` official NASA/DataCite/SpaceApps references (`NASA/TM-20210011385` BASS-II Summary Report, `PSI-25`, `PSI-69` FLEX DataCite DOI `10.60555/mbq8-0451`, `PSI-98` Saffire-I DataCite DOI `10.60555/0t15-1z43`, `OCHMO-TB-008`, NASA PSI Combustion Index, and NTRS Portal) with verified SHA-256 digests in `NASA_DATA_MANIFEST.md`. Includes core catalog records (O2-consumption calorimetry `13.1 kJ/g O2`, `< 100 W` typical HRR, `Φ_global = 1.3`, and Table 5.1/7.1 runs) plus the complete **`20`-test / `43`-segment BASS-II Table 5.1 Atlas** (`M1`–`M20`, `39` numeric spread observations, `4` explicit `"Not tracked"` nulls in `M6`/`M12`, and the `M3` counterexample).
 
 ## Exploratory Digital Twin Sandbox
 
@@ -40,31 +41,32 @@ AegisμG includes the **Digital Twin Sandbox** featuring a verified NASA Table 5
 
 ## Limitations
 
-- While `NASA/TM-20210011385` report findings and representative single-condition runs are ingested, full NASA PSI raw video/radiometry telemetry archives (`PSI-25`, `PSI-98`) require interactive portal download and researcher CSV/JSON import because NASA PSI does not expose an unrestricted public API.
-- Per-run error bars not tabulated in `NASA/TM-20210011385` Table 5.1/7.1 remain `null` (`"Not reported / Not verified"`).
+- While `NASA/TM-20210011385` report findings and Table 5.1/7.1 runs are ingested, full NASA PSI raw video/radiometry telemetry archives (`PSI-25`, `PSI-69`, `PSI-98`) require interactive portal download and researcher CSV/JSON import because NASA PSI renders an Angular SPA without direct bulk public CSV URLs.
+- Per-run error bars and per-segment O2 not tabulated in `NASA/TM-20210011385` Table 5.1 remain `null` (`"Not reported / Not verified"`).
 - Unofficial independent prototype; does not certify spacecraft materials or predict Lunar/Martian fire risk from `0 g` data.
 
 ## Official NASA Space Apps Short Demo (≤ 30 Seconds / ≤ 7 Slides)
 
-### Option A — 30-Second Video Narration Script (~70 words)
+### Option A — 30-Second Video Narration Script (~72 words)
 
-> **[0:00–0:08]** "In microgravity, fires burn slower, cooler, and under-ventilated—nothing like 1 g. Meet **AegisμG** by **SPECULATRON AI**."  
-> **[0:08–0:18]** "We ingest authentic NASA BASS-II findings and test runs with exact citations, flag missing values instead of inventing data, and block invalid unit or gravity comparisons."  
-> **[0:18–0:30]** "With deterministic relevance scoring, DIWA provenance audits, and zero-key operation, AegisμG turns NASA combustion records into traceable spacecraft fire-safety intelligence."
+> **[0:00–0:08]** "In microgravity, fires burn slower and under-ventilated—and `0 g` never certifies Moon or Mars habitats. Meet **AegisμG** by **SPECULATRON AI**."  
+> **[0:08–0:19]** "We organize all 20 NASA BASS-II PMMA tests, preserve 4 missing rates and unmeasured segment oxygen as null, surface the `M3` airflow exception, and run an offline Question Explorer that refuses unverified claims."  
+> **[0:19–0:30]** "With our Evidence Gap Map, 6-stage DIWA provenance scorecard, and clearly separated hypothetical Digital Twin, AegisμG delivers accountable NASA fire-safety intelligence."
 
-### Option B — 7-Slide Pitch Deck Outline
+### Option B — 7-Slide Pitch Deck (`submission/presentation.html`)
 
-1. **Slide 1 — Title & Challenge:** AegisμG by SPECULATRON AI · NASA Space Apps 2026 (*Flame in Freefall*) · Independent unofficial research prototype.
-2. **Slide 2 — The Problem:** NASA combustion data spans NTRS PDFs and PSI archives with mixed units, missing error bars, and risk of invalid `0 g` -> Lunar/Martian extrapolation.
-3. **Slide 3 — Authentic NASA Evidence Base:** `NASA/TM-20210011385` (BASS-II calorimetry `13.1 kJ/g O2`, `Φ_global = 1.3`, Table 5.1/7.1 runs), `PSI-25`, `PSI-98` (Saffire-I), and `OCHMO-TB-008`.
-4. **Slide 4 — Scientific Guardrails & Import:** Null preservation (`"Not reported / Not verified"`), Zod validation, duplicate checks, and dimension-checked unit conversions.
-5. **Slide 5 — Comparator & SPECULATRON Ranking:** Side-by-side compatibility warnings and completeness-gated deterministic ranking (research triage, never fire-risk certification).
-6. **Slide 6 — DIWA Provenance & Zero-Key AI:** Source-to-claim audit matrix, SHA-256 consistency hashing, SSRF-safe NASA URL checks, and optional grounded Gemini with deterministic fallback.
-7. **Slide 7 — Impact, Tests & Open Release:** 34/34 automated validation tests passing across 4 suites, 9 dashboard screens (including BASS-II Table 5.1 Atlas & 6-step Guided Scientific Demo), MIT-licensed public repository (`Supermatrix-AI/aegis-mug-spaceapps-2026`), and full CSV/JSON/Markdown exports.
+1. **Slide 1 — Title & Problem:** AegisμG by SPECULATRON AI · NASA Space Apps 2026 (*Flame in Freefall: SI-Powered Fire Safety Insights*) · Independent unofficial research prototype addressing fragmented NASA data and invalid `0 g` -> partial-g extrapolation.
+2. **Slide 2 — Verified NASA Evidence Base:** `NASA/TM-20210011385` (`20` tests, `43` segments, `39` spread observations, `4` nulls, Table 7.1 SIBAL), `PSI-25`, `PSI-69`/`PSI-98` DataCite DOIs, `OCHMO-TB-008`, and `npm run verify:nasa` SHA-256 verification.
+3. **Slide 3 — Integrity & Missing-Data Guardrails:** `NASA_OBSERVED` .. `UNVERIFIED` taxonomy, `NEEDS_SOURCE_CHECK` validation, `null` preservation (`"Not reported / Not verified"`), and dimension-checked unit gates.
+4. **Slide 4 — BASS-II Table 5.1 Atlas & M3 Counterexample:** Interactive multi-axis explorer with empirical Table 5.1 plot highlighting `12/13` upward directional alignment and `M3` decreasing (`0.029 -> 0.024 mm/s`) alongside O2 depletion.
+5. **Slide 5 — Offline BM25 Question Explorer & Evidence Gap Map:** Zero-key grounded Q&A (`Q1–Q8`) with automatic abstention on lunar/Martian predictions or safety certifications, plus `OBSERVED` vs `NO_MEASUREMENT` gap matrix.
+6. **Slide 6 — Digital Twin Boundaries (`NOT NASA DATA`):** Strict separation between NASA Table 5.1 linear replay and the unvalidated 0D compartment oxygen balance (`AEGIS_0D_OXYGEN_BALANCE_V1`).
+7. **Slide 7 — Reliability Scorecard, Verification & Impact:** 6-stage DIWA provenance scorecard (`MODEL VALIDATION: NOT VALIDATED`), `39/39` passing automated tests across 5 suites, and MIT-licensed open-source release.
 
-### Public Release Verification Note
+### Public Release Verification & Disclosure Note
 
-As verified on November 14, 2026:
-- GitHub `main` (`5f024bea6d`) and PR #2 (`feature/nasa-bass2-evidence-atlas`, `759a6fc9fd`) plus Phase 5 Scientific Briefings, Guided Demo, and Digital Twin diagnostics have been reconciled locally in the workspace (passing `npm run lint`, `npm run test` with `34/34` tests, and `npm run build`) pending user push/merge to `main` on GitHub.
-- Verify an unauthenticated public deployment URL in an incognito browser before finalizing the NASA Space Apps portal submission.
+As of November 15, 2026:
+- All local workspace code, tests (`39/39` across 5 suites), NASA artifact verification (`npm run verify:nasa`), and `submission/presentation.html` are verified locally (see `RELEASE_VERIFICATION_2026-11-15.md` and `JUDGING_READINESS_CHECKLIST.md`).
+- **Pre-09:00 UAE Commit Disclosure:** Three early commits (`55bb69b341`, `49386b23d1`, `5f024bea6d`) occurred between `08:06` and `08:44 UTC+4` on Nov 14 prior to `09:00 UTC+4` local start; transparently disclosed in `HACKATHON_DEVELOPMENT_DISCLOSURE.md` (**Ruling Pending — contact Local Lead / GO Team**).
+- Verify git push, an unauthenticated public deployment URL in incognito, and export/host the 7-slide PDF or <=30s video before clicking **Submit for Judging**.
 

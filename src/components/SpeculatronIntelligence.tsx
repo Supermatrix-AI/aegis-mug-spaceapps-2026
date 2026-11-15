@@ -23,6 +23,14 @@ import {
   MISSION_RESEARCH_BRIEFINGS,
 } from '../utils/bass2Insights.ts';
 import type { BriefingQuestionId } from '../utils/bass2Insights.ts';
+import {
+  answerResearchQuestion,
+  buildEvidenceGapMap,
+  exportGapMapCsv,
+  exportGapMapJson,
+  SUGGESTED_EXPLORER_QUESTIONS,
+} from '../utils/evidenceEngine.ts';
+import type { EvidenceGapCell, GapCoverageStatus } from '../utils/evidenceEngine.ts';
 import { OriginTag, VerificationTag } from './ScientificLabels.tsx';
 
 interface SpeculatronIntelligenceProps {
@@ -42,9 +50,15 @@ export const SpeculatronIntelligence: React.FC<SpeculatronIntelligenceProps> = (
   records,
   geminiConfigured,
 }) => {
+  const [activeSubTab, setActiveSubTab] = useState<'explorer' | 'gaps' | 'ranking'>('explorer');
   const [context, setContext] = useState<ApplicationContext>('ISS_HABITAT');
   const [selectedBriefingId, setSelectedBriefingId] =
     useState<BriefingQuestionId>('Q1_AIRFLOW_TREND');
+  const [explorerQuery, setExplorerQuery] = useState<string>(
+    SUGGESTED_EXPLORER_QUESTIONS[0].question
+  );
+  const [gapCategoryFilter, setGapCategoryFilter] = useState<'ALL' | EvidenceGapCell['category']>('ALL');
+  const [activeProposalCellId, setActiveProposalCellId] = useState<string | null>('GAP-GRAV-LUNAR');
   const [customQuestion, setCustomQuestion] = useState('');
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analysisResult, setAnalysisResult] = useState<AnalysisResponse | null>(null);
@@ -54,11 +68,35 @@ export const SpeculatronIntelligence: React.FC<SpeculatronIntelligenceProps> = (
   const deterministic = generateDeterministicSynthesis(records, context);
   const bass2Summary = useMemo(() => computeBass2Summary(), []);
   const briefings = useMemo(() => buildScientificBriefings(records), [records]);
+  const gapCells = useMemo(() => buildEvidenceGapMap(records), [records]);
+  const filteredGapCells = useMemo(
+    () =>
+      gapCategoryFilter === 'ALL'
+        ? gapCells
+        : gapCells.filter((c) => c.category === gapCategoryFilter),
+    [gapCells, gapCategoryFilter]
+  );
+  const questionAnswer = useMemo(
+    () => answerResearchQuestion(explorerQuery, records),
+    [explorerQuery, records]
+  );
   const activeBriefing =
     briefings.find((b) => b.id === selectedBriefingId) ?? briefings[0];
   const activeMissionProfile =
     MISSION_RESEARCH_BRIEFINGS.find((m) => m.context === context) ??
     MISSION_RESEARCH_BRIEFINGS[0];
+
+  const triggerDownload = (content: string, filename: string, mime: string) => {
+    const blob = new Blob([content], { type: mime });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  };
 
   const handleDownloadBriefing = () => {
     const md = exportScientificBriefingMarkdown(briefings, records);
@@ -140,7 +178,310 @@ export const SpeculatronIntelligence: React.FC<SpeculatronIntelligenceProps> = (
         </div>
       </header>
 
+      {/* Focused Sub-Navigation Inside SPECULATRON Intelligence */}
+      <nav
+        aria-label="Intelligence Subsections"
+        className="flex flex-wrap gap-2 border-b border-slate-800 pb-3"
+      >
+        {[
+          { id: 'explorer' as const, label: 'Question Explorer & Scientific Briefings' },
+          { id: 'gaps' as const, label: 'Evidence Gap & Applicability Map' },
+          { id: 'ranking' as const, label: 'Relevance Ranking & Synthesis' },
+        ].map((tab) => {
+          const active = activeSubTab === tab.id;
+          return (
+            <button
+              key={tab.id}
+              type="button"
+              onClick={() => setActiveSubTab(tab.id)}
+              className={`rounded-md border px-3.5 py-2 min-h-[44px] text-xs font-medium whitespace-nowrap shrink-0 cursor-pointer transition-colors ${
+                active
+                  ? 'border-teal-500 bg-teal-500/15 text-teal-200'
+                  : 'border-slate-800 bg-[#0D1422] text-slate-300 hover:border-slate-700'
+              }`}
+            >
+              {tab.label}
+            </button>
+          );
+        })}
+      </nav>
+
+      {/* SPECULATRON Offline Deterministic Question Explorer (Phase 5) */}
+      {activeSubTab === 'explorer' && (
+        <section
+          aria-label="SPECULATRON Question Explorer"
+          className="rounded-lg border border-slate-800 bg-[#0D1422] p-5 space-y-4"
+        >
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+            <div>
+              <div className="text-[11px] font-mono text-teal-400">
+                SPECULATRON QUESTION EXPLORER · OFFLINE DETERMINISTIC BM25 RETRIEVAL (NO API KEY NEEDED)
+              </div>
+              <h2 className="text-lg font-semibold text-slate-50 mt-0.5">
+                Ask Verified Questions Against NASA Evidence
+              </h2>
+            </div>
+            <span className="font-mono text-[11px] text-slate-400">
+              Abstains automatically when evidence is missing
+            </span>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-2">
+            <input
+              type="search"
+              value={explorerQuery}
+              onChange={(e) => setExplorerQuery(e.target.value)}
+              aria-label="Ask a research question across verified NASA records"
+              placeholder="Ask about BASS-II M3, missing rates, Moon/Mars applicability, materials, FLEX/Saffire gaps..."
+              className="flex-1 rounded-md border border-slate-700 bg-[#070B14] px-3 py-2.5 min-h-[44px] text-xs text-slate-100 placeholder:text-slate-500 focus:outline-none focus:border-teal-500"
+            />
+            <button
+              type="button"
+              onClick={() => setExplorerQuery('What is the exact flame spread rate on the Moon at 0.165 g?')}
+              className="rounded-md border border-amber-500/40 bg-amber-950/20 hover:bg-amber-950/40 px-3 py-2 min-h-[44px] text-xs font-mono text-amber-200 whitespace-nowrap shrink-0 cursor-pointer"
+            >
+              Test Abstention (0.165 g)
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
+            {SUGGESTED_EXPLORER_QUESTIONS.map((q) => {
+              const selected = explorerQuery.trim() === q.question;
+              return (
+                <button
+                  key={q.id}
+                  type="button"
+                  onClick={() => setExplorerQuery(q.question)}
+                  className={`text-left rounded border p-2.5 min-h-[44px] text-xs transition-colors cursor-pointer ${
+                    selected
+                      ? 'border-teal-500 bg-teal-500/15 text-slate-50'
+                      : 'border-slate-800 bg-[#070B14] text-slate-300 hover:border-slate-700'
+                  }`}
+                >
+                  <span className="font-mono text-[10px] text-teal-400 block">{q.id}</span>
+                  <span className="leading-snug">{q.question}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Grounded / Abstained Answer Card */}
+          <div
+            className={`rounded-lg border p-4 space-y-3 text-xs ${
+              questionAnswer.status === 'GROUNDED'
+                ? 'border-teal-500/40 bg-[#070B14]'
+                : 'border-amber-500/50 bg-amber-950/20'
+            }`}
+          >
+            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-2">
+              <span
+                className={`font-mono font-semibold ${
+                  questionAnswer.status === 'GROUNDED' ? 'text-teal-300' : 'text-amber-300'
+                }`}
+              >
+                {questionAnswer.status === 'GROUNDED'
+                  ? 'GROUNDED NASA EVIDENCE RESPONSE'
+                  : 'ABSTAINED — INSUFFICIENT VERIFIED NASA EVIDENCE'}
+              </span>
+              {questionAnswer.citationUrl && (
+                <a
+                  href={questionAnswer.citationUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 font-mono text-teal-400 hover:text-teal-300 underline"
+                >
+                  <span>Open NASA Source</span>
+                  <ExternalLink className="w-3 h-3" />
+                </a>
+              )}
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div className="space-y-2">
+                <div>
+                  <span className="font-mono text-[11px] uppercase text-slate-400 block">
+                    Verified Observation
+                  </span>
+                  <p className="text-slate-200 leading-relaxed mt-0.5">
+                    {questionAnswer.verifiedObservation}
+                  </p>
+                </div>
+                <div>
+                  <span className="font-mono text-[11px] uppercase text-teal-400 block">
+                    Scientific Interpretation
+                  </span>
+                  <p className="text-slate-100 font-medium leading-relaxed mt-0.5">
+                    {questionAnswer.scientificInterpretation}
+                  </p>
+                </div>
+              </div>
+              <div className="space-y-2">
+                <div>
+                  <span className="font-mono text-[11px] uppercase text-amber-300 block">
+                    Important Limitations
+                  </span>
+                  <p className="text-amber-200/90 leading-relaxed mt-0.5">
+                    {questionAnswer.importantLimitations}
+                  </p>
+                </div>
+                <div className="font-mono text-[11px] text-slate-400 space-y-0.5 pt-1 border-t border-slate-800">
+                  <div>Evidence Ref: {questionAnswer.evidenceRef}</div>
+                  {questionAnswer.experimentId && (
+                    <div>Experiment ID: {questionAnswer.experimentId}</div>
+                  )}
+                  <div>Citation: {questionAnswer.nasaCitation}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Evidence Gap & Applicability Map (Phase 4) */}
+      {activeSubTab === 'gaps' && (
+        <section
+          aria-label="Evidence Gap and Applicability Map"
+          className="rounded-lg border border-slate-800 bg-[#0D1422] p-5 space-y-4"
+        >
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
+            <div>
+              <div className="text-[11px] font-mono text-teal-400">
+                APPLICABILITY &amp; COVERAGE MATRIX · ZERO INVENTED NUMBERS
+              </div>
+              <h2 className="text-lg font-semibold text-slate-50 mt-0.5">
+                Evidence Gap &amp; Applicability Map
+              </h2>
+              <p className="text-xs text-slate-400 mt-0.5">
+                Explicitly marks empirical NASA observations vs metadata-only PSI records, missing
+                Moon (0.165 g) / Mars (0.38 g) regimes, and unvalidated models.
+              </p>
+            </div>
+            <div className="flex flex-wrap items-center gap-2">
+              <button
+                type="button"
+                onClick={() =>
+                  triggerDownload(
+                    exportGapMapCsv(filteredGapCells),
+                    'aegis-mug-evidence-gap-map.csv',
+                    'text/csv;charset=utf-8'
+                  )
+                }
+                className="inline-flex items-center gap-1.5 rounded border border-slate-700 bg-slate-900 hover:bg-slate-800 px-3 py-2 min-h-[44px] text-xs text-slate-200 cursor-pointer"
+              >
+                <Download className="w-3.5 h-3.5 text-teal-400" />
+                <span>Export Gaps CSV</span>
+              </button>
+              <button
+                type="button"
+                onClick={() =>
+                  triggerDownload(
+                    exportGapMapJson(filteredGapCells),
+                    'aegis-mug-evidence-gap-map.json',
+                    'application/json;charset=utf-8'
+                  )
+                }
+                className="inline-flex items-center gap-1.5 rounded border border-slate-700 bg-slate-900 hover:bg-slate-800 px-3 py-2 min-h-[44px] text-xs text-slate-200 cursor-pointer"
+              >
+                <Download className="w-3.5 h-3.5 text-amber-400" />
+                <span>Export Gaps JSON</span>
+              </button>
+            </div>
+          </div>
+
+          <div className="flex flex-wrap gap-2">
+            {(
+              [
+                'ALL',
+                'Material / Fuel',
+                'Geometry',
+                'Airflow Regime',
+                'Oxygen Regime',
+                'Gravity Regime',
+              ] as const
+            ).map((cat) => (
+              <button
+                key={cat}
+                type="button"
+                onClick={() => setGapCategoryFilter(cat)}
+                className={`rounded border px-3 py-1.5 text-xs font-mono cursor-pointer ${
+                  gapCategoryFilter === cat
+                    ? 'border-teal-500 bg-teal-500/15 text-teal-200'
+                    : 'border-slate-800 bg-[#070B14] text-slate-400 hover:text-slate-200'
+                }`}
+              >
+                {cat === 'ALL' ? `All Dimensions (${gapCells.length})` : cat}
+              </button>
+            ))}
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 text-xs">
+            {filteredGapCells.map((cell) => {
+              const badgeStyles: Record<GapCoverageStatus, string> = {
+                OBSERVED: 'border-teal-500/40 bg-teal-950/30 text-teal-300',
+                SOURCE_METADATA_ONLY: 'border-sky-500/40 bg-sky-950/30 text-sky-300',
+                NO_MEASUREMENT: 'border-slate-600 bg-slate-900 text-slate-300',
+                HYPOTHETICAL_MODEL: 'border-rose-500/40 bg-rose-950/30 text-rose-300',
+              };
+              const cardBorder =
+                cell.status === 'NO_MEASUREMENT'
+                  ? 'border-slate-700 bg-[#080C15] opacity-95'
+                  : 'border-slate-800 bg-[#070B14]';
+              const showProposal = activeProposalCellId === cell.id;
+
+              return (
+                <article
+                  key={cell.id}
+                  className={`rounded-lg border p-4 space-y-2.5 flex flex-col justify-between ${cardBorder}`}
+                >
+                  <div className="space-y-2">
+                    <div className="flex items-start justify-between gap-2">
+                      <span className="font-mono text-[10px] uppercase text-slate-400">
+                        {cell.category}
+                      </span>
+                      <span
+                        className={`rounded border px-2 py-0.5 font-mono text-[10px] font-semibold whitespace-nowrap shrink-0 ${badgeStyles[cell.status]}`}
+                      >
+                        {cell.status}
+                      </span>
+                    </div>
+                    <h3 className="text-sm font-semibold text-slate-100">{cell.label}</h3>
+                    <div className="font-mono text-[11px] text-teal-300 tabular-nums">
+                      Tests: {cell.testCount} · Numeric observations: {cell.observationCount}
+                    </div>
+                    <p className="text-slate-300 leading-relaxed">
+                      <strong className="text-slate-200">Measured:</strong> {cell.measuredVariables}
+                    </p>
+                    <p className="text-amber-300/90 leading-relaxed">
+                      <strong>Missing:</strong> {cell.missingVariables}
+                    </p>
+                    <p className="text-slate-400 leading-relaxed">{cell.caveat}</p>
+                  </div>
+
+                  <div className="pt-2 border-t border-slate-800">
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setActiveProposalCellId(showProposal ? null : cell.id)
+                      }
+                      className="font-mono text-[11px] text-teal-400 hover:text-teal-300 underline cursor-pointer"
+                    >
+                      {showProposal ? 'Hide Next Research Action' : 'View Next Research Action'}
+                    </button>
+                    {showProposal && (
+                      <p className="mt-1.5 rounded border border-slate-800 bg-[#0D1422] p-2 text-slate-200">
+                        {cell.proposalPrompt}
+                      </p>
+                    )}
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </section>
+      )}
+
       {/* AEGIS SCIENTIFIC BRIEFING — Interactive 3-Question Judging & Research Mode */}
+      {activeSubTab === 'explorer' && (
       <section
         aria-label="AEGIS Scientific Briefing"
         className="rounded-lg border border-teal-500/40 bg-[#0D1422] p-5 space-y-4"
@@ -276,8 +617,10 @@ export const SpeculatronIntelligence: React.FC<SpeculatronIntelligenceProps> = (
           </div>
         </div>
       </section>
+      )}
 
       {/* Mission-Relevance Research Briefing for Selected Context */}
+      {activeSubTab === 'explorer' && (
       <section className="rounded-lg border border-slate-800 bg-[#0D1422] p-5 space-y-3 text-xs">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <div className="flex items-center gap-2">
@@ -329,8 +672,11 @@ export const SpeculatronIntelligence: React.FC<SpeculatronIntelligenceProps> = (
           </div>
         </div>
       </section>
+      )}
 
       {/* NASA evidence-derived SI insights from BASS-II Table 5.1 Atlas */}
+      {activeSubTab === 'ranking' && (
+      <>
       <section className="rounded-lg border border-slate-800 bg-[#0D1422] p-5 space-y-3">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <h2 className="text-base font-semibold text-slate-100">
@@ -666,6 +1012,8 @@ export const SpeculatronIntelligence: React.FC<SpeculatronIntelligenceProps> = (
             ))}
         </div>
       </section>
+      </>
+      )}
     </div>
   );
 };

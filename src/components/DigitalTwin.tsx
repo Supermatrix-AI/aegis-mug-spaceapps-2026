@@ -98,10 +98,15 @@ export const DigitalTwin: React.FC<Props> = ({ records }) => {
 
       <section className="rounded-lg border border-amber-500/40 bg-amber-950/20 p-4 flex gap-3 text-xs text-amber-100">
         <AlertTriangle className="w-5 h-5 shrink-0 text-amber-300" />
-        <div>
-          <strong>EXPLORATORY / UNVALIDATED MODEL — NOT NASA DATA OR SAFETY ADVICE.</strong>
-          <p className="mt-1 leading-relaxed">
-            This is a zero-dimensional, constant-temperature, constant-pressure, perfectly mixed
+        <div className="space-y-1.5">
+          <div className="flex flex-wrap gap-1.5 font-mono text-[11px]">
+            <span className="rounded border border-rose-500/50 bg-rose-950/40 px-2 py-0.5 text-rose-200">NOT NASA DATA</span>
+            <span className="rounded border border-rose-500/50 bg-rose-950/40 px-2 py-0.5 text-rose-200">NOT VALIDATED</span>
+            <span className="rounded border border-rose-500/50 bg-rose-950/40 px-2 py-0.5 text-rose-200">NOT CERTIFIED</span>
+            <span className="rounded border border-rose-500/50 bg-rose-950/40 px-2 py-0.5 text-rose-200">NOT A FIRE-SPREAD PREDICTION</span>
+          </div>
+          <p className="leading-relaxed">
+            Section B is a zero-dimensional, constant-temperature, constant-pressure, perfectly mixed
             oxygen inventory calculation. No ignition, buoyancy, flame transport, radiation,
             heat-transfer, CFD, smoke toxicity, human safety or suppression dynamics are modeled.
             Gravity selection changes the context label only. Do not use output to establish a fire
@@ -204,9 +209,17 @@ export const DigitalTwin: React.FC<Props> = ({ records }) => {
 
       <section className="rounded-lg border border-slate-800 bg-[#0D1422] p-5 space-y-4">
         <div className="flex flex-wrap gap-3 justify-between items-start">
-          <div className="space-y-1">
-            <div className="text-[11px] font-mono uppercase tracking-wider text-amber-400">
-              HYPOTHETICAL MODEL OUTPUT · NOT-NASA-DATA
+          <div className="space-y-1.5">
+            <div className="flex flex-wrap items-center gap-1.5 text-[10px] font-mono uppercase tracking-wider text-rose-300">
+              <span>HYPOTHETICAL MODEL OUTPUT</span>
+              <span aria-hidden="true">·</span>
+              <span>NOT NASA DATA</span>
+              <span aria-hidden="true">·</span>
+              <span>NOT VALIDATED</span>
+              <span aria-hidden="true">·</span>
+              <span>NOT CERTIFIED</span>
+              <span aria-hidden="true">·</span>
+              <span>NOT A FIRE-SPREAD PREDICTION</span>
             </div>
             <div className="flex flex-wrap items-center gap-2">
               <h2 className="text-lg font-semibold text-slate-100">2. Hypothetical 0D oxygen-balance model</h2>

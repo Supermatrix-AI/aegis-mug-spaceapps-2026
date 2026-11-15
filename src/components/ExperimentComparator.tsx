@@ -311,8 +311,8 @@ export const ExperimentComparator: React.FC<ExperimentComparatorProps> = ({
                       <span className="font-mono text-teal-400">{dim.targetUnit ?? ''}</span>
                     </div>
 
-                    <div className="h-56 w-full">
-                      <ResponsiveContainer width="100%" height="100%">
+                    <div className="h-56 w-full min-w-0">
+                      <ResponsiveContainer width="100%" height="100%" minWidth={0}>
                         <BarChart
                           data={dim.values}
                           margin={{ top: 8, right: 12, left: 0, bottom: 16 }}

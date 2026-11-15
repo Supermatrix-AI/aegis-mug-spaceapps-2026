@@ -160,7 +160,7 @@ export const AboutAndExport: React.FC<AboutAndExportProps> = ({
           </h2>
           <p>
             <strong>AegisμG</strong> is built by <strong>SPECULATRON AI</strong> for the{' '}
-            <strong>NASA Space Apps Challenge 2026</strong> (&ldquo;Flame in Freefall: AI-Powered
+            <strong>NASA Space Apps Challenge 2026</strong> (&ldquo;Flame in Freefall: SI-Powered
             Fire Safety Insights from Microgravity Combustion Data&rdquo;).
           </p>
           <p>

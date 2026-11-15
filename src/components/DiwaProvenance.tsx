@@ -7,6 +7,7 @@ import type {
   SourceDocument,
 } from '../types/scientific.ts';
 import { VerificationTag } from './ScientificLabels.tsx';
+import { computeReliabilityScorecard } from '../utils/evidenceEngine.ts';
 
 interface DiwaProvenanceProps {
   sources: SourceDocument[];
@@ -34,6 +35,11 @@ export const DiwaProvenance: React.FC<DiwaProvenanceProps> = ({
     reason: string;
     networkNote?: string;
   } | null>(null);
+
+  const scorecard = useMemo(
+    () => computeReliabilityScorecard(records, sources.length),
+    [records, sources.length]
+  );
 
   const filteredEvents = useMemo(() => {
     const ordered = [...events].reverse();
@@ -140,6 +146,117 @@ export const DiwaProvenance: React.FC<DiwaProvenanceProps> = ({
               <div className="text-[11px] text-slate-400 leading-snug">{node.detail}</div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Scientific Reliability Scorecard (Phase 6) */}
+      <section aria-label="Scientific Reliability Scorecard" className="rounded-lg border border-slate-800 bg-[#0D1422] p-5 space-y-4">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <div>
+            <h2 className="text-base font-semibold text-slate-100">
+              Scientific Reliability Scorecard
+            </h2>
+            <p className="text-xs text-slate-400">
+              Transparent counts, numerators, denominators, and methods. Research relevance,
+              completeness, reliability, coverage, and validation stay strictly separate.
+            </p>
+          </div>
+          <span className="rounded border border-rose-500/40 bg-rose-950/30 px-2.5 py-1 font-mono text-[11px] font-semibold text-rose-300">
+            MODEL VALIDATION: {scorecard.methodologyNotes.modelValidationStatus}
+          </span>
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-7 gap-3">
+          {[
+            {
+              label: 'Source Docs',
+              value: `${scorecard.verifiedSourceDocsCount}/${scorecard.sourceDocumentsCount}`,
+              sub: 'NASA/SpaceApps URLs verified',
+              tone: 'text-teal-300',
+            },
+            {
+              label: 'Measured Obs.',
+              value: String(scorecard.measuredObservationsCount),
+              sub: scorecard.measuredBreakdown,
+              tone: 'text-teal-300',
+            },
+            {
+              label: 'Metadata-Only',
+              value: String(scorecard.metadataOnlyCount),
+              sub: 'No run-level CSV ingested',
+              tone: 'text-sky-300',
+            },
+            {
+              label: 'Missing Values',
+              value: String(scorecard.missingValuesCount),
+              sub: scorecard.missingBreakdown,
+              tone: 'text-amber-300',
+            },
+            {
+              label: 'Derived Calcs',
+              value: String(scorecard.derivedCalculationsCount),
+              sub: 'Separate from Digital Twin 0D',
+              tone: 'text-indigo-300',
+            },
+            {
+              label: 'Unverified Items',
+              value: String(scorecard.unverifiedStatementsCount),
+              sub: 'Link-only / Hypothetical / AI',
+              tone: 'text-amber-300',
+            },
+            {
+              label: 'Citation Coverage',
+              value: `${scorecard.citationCoveragePct}%`,
+              sub: `${scorecard.citationBackedCount}/${scorecard.totalClaimsAndMetrics} claims & metrics`,
+              tone: 'text-emerald-300',
+            },
+          ].map((tile) => (
+            <div
+              key={tile.label}
+              className="rounded border border-slate-800 bg-[#070B14] p-3 space-y-1"
+            >
+              <div className={`font-mono text-xl font-semibold tabular-nums ${tile.tone}`}>
+                {tile.value}
+              </div>
+              <div className="text-xs font-medium text-slate-200">{tile.label}</div>
+              <div className="text-[11px] text-slate-400 leading-snug">{tile.sub}</div>
+            </div>
+          ))}
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+          <div className="rounded border border-slate-800 bg-[#070B14] p-3 space-y-1">
+            <div className="font-mono text-[11px] font-semibold text-teal-400">
+              1. RESEARCH RELEVANCE
+            </div>
+            <p className="text-slate-300 leading-relaxed">
+              {scorecard.methodologyNotes.researchRelevance}
+            </p>
+          </div>
+          <div className="rounded border border-slate-800 bg-[#070B14] p-3 space-y-1">
+            <div className="font-mono text-[11px] font-semibold text-sky-400">
+              2. EVIDENCE COMPLETENESS
+            </div>
+            <p className="text-slate-300 leading-relaxed">
+              {scorecard.methodologyNotes.evidenceCompleteness}
+            </p>
+          </div>
+          <div className="rounded border border-slate-800 bg-[#070B14] p-3 space-y-1">
+            <div className="font-mono text-[11px] font-semibold text-emerald-400">
+              3. SOURCE RELIABILITY
+            </div>
+            <p className="text-slate-300 leading-relaxed">
+              {scorecard.methodologyNotes.sourceReliability}
+            </p>
+          </div>
+          <div className="rounded border border-slate-800 bg-[#070B14] p-3 space-y-1">
+            <div className="font-mono text-[11px] font-semibold text-amber-400">
+              4. EXPERIMENTAL COVERAGE
+            </div>
+            <p className="text-slate-300 leading-relaxed">
+              {scorecard.methodologyNotes.experimentalCoverage}
+            </p>
+          </div>
         </div>
       </section>
 

@@ -1,16 +1,16 @@
 # Official NASA & Challenge Sources Inventory
 
-**Retrieval Date:** 2026-11-13  
-**Policy:** Every URL listed below is an authentic NASA or NASA Space Apps Challenge reference. Where full-text PDF tables or NASA PSI CSV bundles are not retrieved, numeric measurements remain `null` (`"Not reported / Not verified"`). Where full text was retrieved via official NTRS API (`NASA/TM-20210011385`), extracted values carry exact section, equation, page, and table locators.
+**Retrieval & Verification Date:** 2026-11-15 (Catalog initialized `2026-11-13`, SHA-256 verified via `npm run verify:nasa` on `2026-11-15`)  
+**Policy:** Every URL listed below is an authentic NASA, DataCite, or NASA Space Apps Challenge reference. Where full-text PDF tables or NASA PSI CSV bundles are not retrieved, numeric measurements remain `null` (`"Not reported / Not verified"`). Where full text was retrieved via official NTRS API (`NASA/TM-20210011385`), extracted values carry exact section, equation, page, and table locators. Full artifact SHA-256 checksums and HTTP verification logs are recorded in `NASA_DATA_MANIFEST.md`.
 
 | Source ID | Title | Program / Report ID | Ingestion State | URL |
 | :--- | :--- | :--- | :--- | :--- |
-| `SRC-NTRS-20210011385` | Burning and Suppression of Solids–II (BASS–II) Summary Report | NASA/TM-20210011385 (E-19939) · Oct 2021 | `METADATA_INGESTED` + Full-text NTRS `.pdf.txt` extracted (Sec. 1.1–1.6, Table 5.1, Table 7.1) | https://ntrs.nasa.gov/citations/20210011385 |
-| `SRC-NASA-SPACEAPPS-2026` | Flame in Freefall: AI-Powered Fire Safety Insights from Microgravity Combustion Data | NASA Space Apps Challenge 2026 | `METADATA_INGESTED` | https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/ |
-| `SRC-PSI-25` | NASA PSI Investigation PSI-25: Burning and Suppression of Solids - II (BASS-II) | NASA PSI `PSI-25` | `METADATA_INGESTED` (raw CSV archive requires portal download) | https://psi.nasa.gov/physci/repo/data/investigations/PSI-25 |
-| `SRC-PSI-98` | NASA PSI Investigation PSI-98: Spacecraft Fire Experiment-I (Saffire-I) | NASA PSI `PSI-98` | `METADATA_INGESTED` (raw CSV archive requires portal download) | https://psi.nasa.gov/physci/repo/data/investigations/PSI-98 |
-| `SRC-NASA-OCHMO-TB-008` | NASA Technical Brief OCHMO-TB-008: Fire Protection | `OCHMO-TB-008` (Dec 2023) | `METADATA_INGESTED` | https://www.nasa.gov/wp-content/uploads/2023/12/ochmo-tb-008-fire-protection.pdf |
-| `SRC-NASA-PSI-SEARCH` | NASA Physical Sciences Informatics (PSI) Investigation Repository | PSI Portal | `REFERENCE_INDEXED` | https://psi.nasa.gov/physci/repo/search?data_source=psi&data_type=investigation |
+| `SRC-NTRS-20210011385` | Burning and Suppression of Solids–II (BASS–II) Summary Report | NASA/TM-20210011385 (E-19939) · Oct 2021 | `METADATA_INGESTED` + Full-text NTRS `.pdf.txt` SHA-256 verified (`56ee5bd...42ea3f`; Sec. 1.1–1.6, Table 5.1, Table 7.1) | https://ntrs.nasa.gov/citations/20210011385 |
+| `SRC-NASA-SPACEAPPS-2026` | Flame in Freefall: SI-Powered Fire Safety Insights from Microgravity Combustion Data | NASA Space Apps Challenge 2026 | `METADATA_INGESTED` (HTTP `000` timeout from sandbox; Resources tab `UNVERIFIED`) | https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/ |
+| `SRC-PSI-25` | NASA PSI Investigation PSI-25: Burning and Suppression of Solids - II (BASS-II) | NASA PSI `PSI-25` | `METADATA_INGESTED` (Angular SPA `HTTP 200`; raw CSV archive requires portal download) | https://psi.nasa.gov/physci/repo/data/investigations/PSI-25 |
+| `SRC-PSI-98` | NASA PSI Investigation PSI-98: Spacecraft Fire Experiment-I (Saffire-I) | NASA PSI `PSI-98` · DataCite DOI `10.60555/0t15-1z43` (v4, CC0-1.0) | `METADATA_INGESTED` (DataCite SHA-256 verified `c70a9e7...daa236c`; raw CSV requires portal download) | https://psi.nasa.gov/physci/repo/data/investigations/PSI-98 |
+| `SRC-NASA-OCHMO-TB-008` | NASA Technical Brief OCHMO-TB-008: Fire Protection | `OCHMO-TB-008` (Dec 2023) | `METADATA_INGESTED` (`HTTP 200` verified; note `...-microgravity-combustion.pdf` returned `HTTP 404`) | https://www.nasa.gov/wp-content/uploads/2023/12/ochmo-tb-008-fire-protection.pdf |
+| `SRC-NASA-PSI-SEARCH` | NASA Physical Sciences Informatics (PSI) Investigation Repository | PSI Portal (`PSI-69` DataCite DOI `10.60555/mbq8-0451` v5 verified) | `REFERENCE_INDEXED` | https://psi.nasa.gov/physci/repo/search?data_source=psi&data_type=investigation |
 | `SRC-NASA-PSI-RESEARCH-AREA` | NASA PSI Combustion Investigations by Research Area (BASS, FLEX, FLEX-2, SAME, ACME) | PSI Index | `REFERENCE_INDEXED` | https://www.nasa.gov/physical-sciences-informatics-psi/psi-investigations-by-research-area/ |
 | `SRC-NASA-NTRS-PORTAL` | NASA Technical Reports Server (NTRS) | NASA STI | `REFERENCE_INDEXED` | https://ntrs.nasa.gov/ |
 

@@ -1,0 +1,42 @@
+# NASA Space Apps Challenge 2026 — Judging Readiness Checklist
+
+**Project:** AegisμG — Microgravity Fire Safety Intelligence  
+**Team:** SPECULATRON AI  
+**Challenge:** *Flame in Freefall: SI-Powered Fire Safety Insights from Microgravity Combustion Data*  
+**Deadline:** Sunday, November 15, 2026, 11:59 PM (Registered Event Local Time)  
+
+---
+
+## 1. NASA Space Apps Evaluation Pillars & Mapped Evidence
+
+| Evaluation Pillar | How AegisμG Demonstrates Readiness | Verified Code / Doc Anchor | Status |
+|---|---|---|---|
+| **Impact** | Helps researchers, mission analysts, and safety teams triage fragmented microgravity fire literature, expose `0 g` vs `0.165 g` / `0.38 g` data gaps, and export audit-ready dossiers without false flight certification. | `MissionOverview.tsx`, `SpeculatronIntelligence.tsx` (`Evidence Gap & Applicability Map`), `AboutAndExport.tsx` | **IMPLEMENTED** |
+| **Creativity** | Combines an authentic 20-test / 43-segment Table 5.1 Atlas, an offline zero-key BM25 Question Explorer with strict anti-fabrication abstention, a 6-stage DIWA provenance scorecard, and an explicitly quarantined hypothetical 0D digital twin. | `Bass2Atlas.tsx`, `evidenceEngine.ts`, `EvidenceInspectorCard.tsx`, `DigitalTwin.tsx` | **IMPLEMENTED** |
+| **Validity** | Preserves `4` untracked spread rates (`M6`/`M12`) and `43/43` unmeasured segment O2 values as `null`; highlights the `M3` counterexample (`0.029 -> 0.024 mm/s`); marks hypothetical twin curves `NOT NASA DATA · NOT VALIDATED`. | `bass2Table51.ts`, `scripts/verify-nasa-sources.mjs`, `evidencePlatform.test.ts` | **VERIFIED & TESTED** |
+| **Relevance** | Directly addresses *Flame in Freefall* using `NASA/TM-20210011385` (BASS-II), `PSI-25`, `PSI-69` (FLEX DOI `10.60555/mbq8-0451`), `PSI-98` (Saffire-I DOI `10.60555/0t15-1z43`), and `OCHMO-TB-008`. | `SOURCES.md`, `NASA_DATA_MANIFEST.md`, `nasaCatalog.ts` | **VERIFIED** |
+| **Presentation** | 6-step in-app **Guided Scientific Demo**, dark-telemetry standalone 7-slide HTML pitch deck (`submission/presentation.html`), and ≤30-second spoken demo script (`submission/README.md`). | `App.tsx`, `submission/presentation.html`, `submission/README.md` | **IMPLEMENTED** (PDF/video upload **PENDING OWNER ACTION**) |
+
+---
+
+## 2. Scientific & Technical Robustness Checklist
+
+- [x] **No Fabricated NASA Telemetry:** Missing values preserved strictly as `null` (`"Not reported / Not verified"`), never coerced to `0`.
+- [x] **Official Artifacts SHA-256 Verified:** `npm run verify:nasa` confirms exact SHA-256 digests for `TM-20210011385.pdf.txt`, `ntrs_20210011385.json`, `datacite_psi69.json`, and `datacite_psi98.json` and validates `20/20` Table 5.1 rows (`M1`–`M20`).
+- [x] **Provenance Classification & Traceability Gate:** Every inspected record classifies as `NASA_OBSERVED`, `NASA_REPORTED`, `DERIVED`, `INTERPRETATION`, `HYPOTHETICAL`, or `UNVERIFIED`, flagging `NEEDS_SOURCE_CHECK` if domain/locator/units are missing.
+- [x] **Abstention on Out-of-Scope Queries:** Offline BM25 Question Explorer refuses quantitative lunar/Martian predictions, safety certifications, and non-existent missions with `"Insufficient verified NASA evidence for this conclusion."`.
+- [x] **Unit & Gravity Guardrails:** Incompatible unit dimensions refused in `ExperimentComparator.tsx`; `0 g` data never scaled to `0.165 g` Lunar or `0.38 g` Martian risk.
+- [x] **Digital Twin Boundary:** Section B (`AEGIS_0D_OXYGEN_BALANCE_V1`) carries explicit `NOT NASA DATA`, `NOT VALIDATED`, `NOT CERTIFIED`, `NOT A FIRE-SPREAD PREDICTION` labels and CSV markers.
+- [x] **Zero-Key Operation:** Full UI, search, comparator, BM25 Q&A, Gap Map, DIWA Scorecard, and deterministic API fallback run without `GEMINI_API_KEY`.
+- [x] **Secret & Security Hygiene:** SSRF allowlist on `/api/sources/verify-url`, formula-injection escaping (`'=+-@`) on CSV exports, zero secrets committed.
+
+---
+
+## 3. Official Demo & Competition Eligibility Checklist (Owner Actions Required)
+
+- [ ] **GitHub Sync (`PENDING OWNER ACTION`):** Push final verified workspace files (including `data/raw/nasa/`, `scripts/verify-nasa-sources.mjs`, `submission/`, and docs) to `https://github.com/Supermatrix-AI/aegis-mug-spaceapps-2026` (`main`), and confirm GitHub Actions `CI` workflow passes on an active runner (resolving earlier pre-runner infrastructure block `43669448020`).
+- [ ] **Pre-09:00 UAE Commit Disclosure (`PENDING OWNER ACTION`):** Send the draft clarification in `HACKATHON_DEVELOPMENT_DISCLOSURE.md` to your Local Lead / Global Organizing Team regarding commits `55bb69b341`, `49386b23d1`, and `5f024bea6d` (`08:06–08:44 UTC+4` on Nov 14).
+- [ ] **Challenge Resources Tab Check (`PENDING OWNER ACTION`):** Log into `spaceappschallenge.org` and inspect the *Resources* tab on *Flame in Freefall* (unreadable from offline sandbox).
+- [ ] **Incognito Live URL Verification (`PENDING OWNER ACTION`):** Open deployed production URL in an incognito browser without Google login and verify zero errors.
+- [ ] **Export & Upload 7-Slide PDF or ≤30s Video (`PENDING OWNER ACTION`):** Print `submission/presentation.html` to PDF (`submission/AegisMuG-SpaceApps-2026-Deck.pdf`) OR record a ≤30-second video using `submission/README.md`, then verify public link visibility in incognito.
+- [ ] **Portal Finalization (`PENDING OWNER ACTION`):** Fill project summary, GitHub link, public demo/PDF link, AI disclosure, and NASA sources on the Space Apps Project page, and click **Submit for Judging** before **Nov 15, 2026 11:59 PM** local time.

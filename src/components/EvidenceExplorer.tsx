@@ -11,7 +11,9 @@ import {
 import type { ExperimentRecord, VerificationStatus } from '../types/scientific.ts';
 import { computeEvidenceCompleteness, getMissingScientificFields } from '../utils/scoring.ts';
 import { formatNumericWithUnit } from '../utils/units.ts';
+import { inspectExperimentRecord } from '../utils/evidenceEngine.ts';
 import { OriginTag, VerificationTag } from './ScientificLabels.tsx';
+import { EvidenceInspectorCard } from './EvidenceInspectorCard.tsx';
 
 interface EvidenceExplorerProps {
   records: ExperimentRecord[];
@@ -528,6 +530,7 @@ export const EvidenceExplorer: React.FC<EvidenceExplorerProps> = ({
                 {/* Expandable Record Detail Drawer */}
                 {isExpanded && (
                   <div className="border-t border-slate-800 bg-[#080D18] p-5 space-y-5">
+                    <EvidenceInspectorCard inspection={inspectExperimentRecord(record)} />
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-5 text-xs">
                       <div className="space-y-2">
                         <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-300">

@@ -31,6 +31,8 @@ import {
   trendForTest,
 } from '../utils/bass2Insights.ts';
 import { OriginTag, VerificationTag } from './ScientificLabels.tsx';
+import { inspectBass2Segment } from '../utils/evidenceEngine.ts';
+import { EvidenceInspectorCard } from './EvidenceInspectorCard.tsx';
 
 type SidesFilter = 'ALL' | 'ONE' | 'TWO';
 type VelocityRangeFilter = 'ALL' | 'LOW' | 'MID' | 'HIGH';
@@ -81,8 +83,16 @@ export const Bass2Atlas: React.FC = () => {
   const [oxygenFilter, setOxygenFilter] = useState<OxygenRangeFilter>('ALL');
   const [spreadAvailability, setSpreadAvailability] =
     useState<SpreadAvailabilityFilter>('ALL');
+  const [inspectedSegmentId, setInspectedSegmentId] = useState<string | null>('M3-S1');
 
   const summary = useMemo(() => computeBass2Summary(), []);
+  const inspectedSegment = useMemo(
+    () =>
+      inspectedSegmentId
+        ? BASS2_SEGMENTS.find((s) => s.id === inspectedSegmentId) ?? null
+        : null,
+    [inspectedSegmentId]
+  );
 
   const filtered = useMemo(
     () =>
@@ -538,15 +548,23 @@ export const Bass2Atlas: React.FC = () => {
       </section>
 
       {/* Auditable Source Table */}
-      <section className="bg-[#0D1422] border border-slate-800 rounded-lg p-5 space-y-3">
+      <section className="bg-[#0D1422] border border-slate-800 rounded-lg p-5 space-y-4">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <h2 className="text-lg font-semibold text-slate-100">Auditable Source Table</h2>
           <span className="text-xs font-mono text-slate-400 tabular-nums">
             {filtered.length} / {BASS2_SEGMENTS.length} rows
           </span>
         </div>
+
+        {inspectedSegment && (
+          <EvidenceInspectorCard
+            inspection={inspectBass2Segment(inspectedSegment)}
+            onClose={() => setInspectedSegmentId(null)}
+          />
+        )}
+
         <div className="overflow-x-auto rounded border border-slate-800">
-          <table className="w-full text-left text-xs min-w-[780px]">
+          <table className="w-full text-left text-xs min-w-[840px]">
             <thead className="bg-[#080D18] text-slate-400">
               <tr>
                 <th className="p-3">Test / segment</th>
@@ -558,30 +576,50 @@ export const Bass2Atlas: React.FC = () => {
                 <th className="p-3">Burn time</th>
                 <th className="p-3">Test O2 start → end</th>
                 <th className="p-3">O2 at segment</th>
+                <th className="p-3 text-right">Evidence</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-800">
-              {filtered.map((x) => (
-                <tr key={x.id} className="hover:bg-slate-800/40">
-                  <td className="p-3 font-mono text-teal-300 whitespace-nowrap">{x.id}</td>
-                  <td className="p-3 font-mono tabular-nums">{x.thicknessMm} mm</td>
-                  <td className="p-3 font-mono tabular-nums">{x.widthCm} cm</td>
-                  <td className="p-3 font-mono tabular-nums">{x.burningSides}</td>
-                  <td className="p-3 font-mono tabular-nums">{x.velocityCmPerSecond} cm/s</td>
-                  <td className="p-3 font-mono tabular-nums">
-                    {x.spreadRateMmPerSecond === null ? (
-                      <span className="text-amber-300">Not tracked (null)</span>
-                    ) : (
-                      `${x.spreadRateMmPerSecond} mm/s`
-                    )}
-                  </td>
-                  <td className="p-3 font-mono tabular-nums">{x.burnMinutes} min</td>
-                  <td className="p-3 font-mono tabular-nums">
-                    {x.initialOxygenVolPercent}% → {x.finalOxygenVolPercent}%
-                  </td>
-                  <td className="p-3 text-amber-300">Not reported</td>
-                </tr>
-              ))}
+              {filtered.map((x) => {
+                const isInspected = inspectedSegment?.id === x.id;
+                return (
+                  <tr
+                    key={x.id}
+                    className={isInspected ? 'bg-teal-950/20' : 'hover:bg-slate-800/40'}
+                  >
+                    <td className="p-3 font-mono text-teal-300 whitespace-nowrap">{x.id}</td>
+                    <td className="p-3 font-mono tabular-nums">{x.thicknessMm} mm</td>
+                    <td className="p-3 font-mono tabular-nums">{x.widthCm} cm</td>
+                    <td className="p-3 font-mono tabular-nums">{x.burningSides}</td>
+                    <td className="p-3 font-mono tabular-nums">{x.velocityCmPerSecond} cm/s</td>
+                    <td className="p-3 font-mono tabular-nums">
+                      {x.spreadRateMmPerSecond === null ? (
+                        <span className="text-amber-300">Not tracked (null)</span>
+                      ) : (
+                        `${x.spreadRateMmPerSecond} mm/s`
+                      )}
+                    </td>
+                    <td className="p-3 font-mono tabular-nums">{x.burnMinutes} min</td>
+                    <td className="p-3 font-mono tabular-nums">
+                      {x.initialOxygenVolPercent}% → {x.finalOxygenVolPercent}%
+                    </td>
+                    <td className="p-3 text-amber-300">Not reported</td>
+                    <td className="p-3 text-right">
+                      <button
+                        type="button"
+                        onClick={() => setInspectedSegmentId(isInspected ? null : x.id)}
+                        className={`rounded border px-2.5 py-1 font-mono text-[11px] whitespace-nowrap cursor-pointer ${
+                          isInspected
+                            ? 'border-teal-500 bg-teal-500/20 text-teal-200'
+                            : 'border-slate-700 bg-slate-900 hover:bg-slate-800 text-slate-200'
+                        }`}
+                      >
+                        {isInspected ? 'Inspecting' : 'Inspect'}
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
