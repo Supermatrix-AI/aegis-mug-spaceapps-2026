@@ -86,8 +86,8 @@ Google AI Studio/Gemini and ChatGPT were used as development and research assist
 
 - [ ] Review `HACKATHON_DEVELOPMENT_DISCLOSURE.md` and submit the pre-`09:00 UAE` commit timeline clarification to the Abu Dhabi Local Lead / GO Team; confirm the Space Apps *Resources* tab manually while logged in (`ELIGIBILITY RULING PENDING`).
 - [ ] Confirm selected local event and attendance eligibility and verify all team members appear under the official team Members tab.
-- [ ] Push final local workspace updates (`src/App.tsx` journey bar, `submission/FINAL_NASA_PORTAL_COPY_PASTE.md`, `submission/OWNER_FINAL_FIVE_ACTIONS.md`, and updated Phase 11 docs) to `main` on `Supermatrix-AI/aegis-mug-spaceapps-2026`.
-- [ ] Run Google AI Studio **Publish** (or Render `render.yaml`) and test the public live app URL + demo PDF in an incognito browser (`39/39` tests across 5 suites verified locally; see `RELEASE_VERIFICATION_2026-11-15.md`).
+- [ ] Push final local workspace updates (Demo 1–6 audit fixes, `43/43` Vitest suite, `submission/FINAL_NASA_PORTAL_COPY_PASTE.md`, `submission/OWNER_FINAL_FIVE_ACTIONS.md`, and updated verification docs) to `main` on `Supermatrix-AI/aegis-mug-spaceapps-2026` (`c3f1e66bac`).
+- [ ] Run Google AI Studio **Publish** (or Render `render.yaml`) and test the public live app URL + demo PDF in an incognito browser (`43/43` tests across 5 suites verified locally; see `RELEASE_VERIFICATION_2026-11-15.md`).
 - [ ] Paste fields 1–8 from `submission/FINAL_NASA_PORTAL_COPY_PASTE.md` into the official Space Apps Project tab.
 - [ ] Save, agree to applicable verification terms after personal review, choose **Submit for Judging**, and verify the platform displays a submitted status **before Sunday 15 November 2026, 23:59 UAE time**.
 

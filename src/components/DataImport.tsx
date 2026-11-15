@@ -169,7 +169,9 @@ export const DataImport: React.FC<DataImportProps> = ({
     const a = document.createElement('a');
     a.href = url;
     a.download = downloadName;
+    document.body.appendChild(a);
     a.click();
+    a.remove();
     URL.revokeObjectURL(url);
   };
 
@@ -298,10 +300,11 @@ export const DataImport: React.FC<DataImportProps> = ({
             than silently coerced. Original reported values remain preserved on import.
           </p>
 
-          <div className="grid grid-cols-3 gap-2 text-xs">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
             <div>
-              <label className="block text-slate-400 mb-1">Value</label>
+              <label htmlFor="conv-value" className="block text-slate-400 mb-1">Value</label>
               <input
+                id="conv-value"
                 type="number"
                 step="any"
                 value={convValue}
@@ -310,8 +313,9 @@ export const DataImport: React.FC<DataImportProps> = ({
               />
             </div>
             <div>
-              <label className="block text-slate-400 mb-1">From Unit</label>
+              <label htmlFor="conv-from" className="block text-slate-400 mb-1">From Unit</label>
               <select
+                id="conv-from"
                 value={convFrom}
                 onChange={(e) => setConvFrom(e.target.value)}
                 className="w-full rounded border border-slate-700 bg-[#070B14] px-2 py-1.5 font-mono text-slate-100"
@@ -329,8 +333,9 @@ export const DataImport: React.FC<DataImportProps> = ({
               </select>
             </div>
             <div>
-              <label className="block text-slate-400 mb-1">To Unit</label>
+              <label htmlFor="conv-to" className="block text-slate-400 mb-1">To Unit</label>
               <select
+                id="conv-to"
                 value={convTo}
                 onChange={(e) => setConvTo(e.target.value)}
                 className="w-full rounded border border-slate-700 bg-[#070B14] px-2 py-1.5 font-mono text-slate-100"
@@ -395,10 +400,11 @@ export const DataImport: React.FC<DataImportProps> = ({
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
               {CANONICAL_IMPORT_FIELDS.slice(0, 16).map((field) => (
                 <div key={field}>
-                  <label className="block font-mono text-[11px] text-slate-400 mb-1">
+                  <label htmlFor={`map-col-${field}`} className="block font-mono text-[11px] text-slate-400 mb-1">
                     {field}
                   </label>
                   <select
+                    id={`map-col-${field}`}
                     value={mapping[field] ?? ''}
                     onChange={(e) => handleMappingChange(field, e.target.value)}
                     className="w-full rounded border border-slate-700 bg-[#070B14] px-2 py-1 text-xs text-slate-100"

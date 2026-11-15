@@ -168,6 +168,7 @@ export default function App() {
   ]);
   const [geminiConfigured, setGeminiConfigured] = useState(false);
   const [demoStepIndex, setDemoStepIndex] = useState<number | null>(null);
+  const [demoCompletedSummary, setDemoCompletedSummary] = useState(false);
 
   // Sync with backend health & catalog on mount (non-blocking)
   useEffect(() => {
@@ -223,6 +224,7 @@ export default function App() {
   };
 
   const handleStartDemo = () => {
+    setDemoCompletedSummary(false);
     setDemoStepIndex(0);
     setActiveSection(GUIDED_DEMO_STEPS[0].section);
     setMobileMenuOpen(false);
@@ -231,8 +233,14 @@ export default function App() {
   const handleAdvanceDemo = (delta: number) => {
     if (demoStepIndex === null) return;
     const next = demoStepIndex + delta;
-    if (next < 0 || next >= GUIDED_DEMO_STEPS.length) {
+    if (next < 0) {
       setDemoStepIndex(null);
+      setActiveSection('overview');
+      return;
+    }
+    if (next >= GUIDED_DEMO_STEPS.length) {
+      setDemoStepIndex(null);
+      setDemoCompletedSummary(true);
       setActiveSection('overview');
       return;
     }
@@ -323,7 +331,7 @@ export default function App() {
       importJobs: [],
       events: [...prev.events, resetEvent],
     }));
-    setSelectedCompareIds(['EXP-BASS-II-NTRS-2021', 'EXP-PSI-98-SAFFIRE-I']);
+    setSelectedCompareIds(['EXP-BASS2-M1', 'EXP-BASS2-M5']);
   };
 
   const handleLogUrlCheck = (url: string, details: string) => {
@@ -535,6 +543,74 @@ export default function App() {
                 })}
               </div>
             </div>
+          )}
+
+          {demoCompletedSummary && activeSection === 'overview' && (
+            <section
+              role="region"
+              aria-label="Guided Scientific Demo Summary"
+              className="mb-6 rounded-lg border border-teal-500/50 bg-[#0D1422] p-5 space-y-4"
+            >
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-slate-800 pb-3">
+                <div>
+                  <div className="text-[11px] font-mono uppercase tracking-wider text-teal-400">
+                    Guided Scientific Demo Completed (Steps 1–6)
+                  </div>
+                  <h2 className="text-base font-semibold text-slate-100 mt-0.5">
+                    AegisμG Verification Summary, Limitations &amp; Next Research
+                  </h2>
+                </div>
+                <div className="flex flex-wrap gap-2 shrink-0">
+                  <button
+                    type="button"
+                    onClick={handleStartDemo}
+                    className="rounded border border-amber-500/50 bg-amber-950/30 hover:bg-amber-950/50 px-3 py-2 min-h-[44px] text-xs font-medium text-amber-200 cursor-pointer"
+                  >
+                    Replay Guided Demo
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setDemoCompletedSummary(false)}
+                    className="rounded border border-slate-700 bg-slate-900 hover:bg-slate-800 px-3 py-2 min-h-[44px] text-xs text-slate-300 cursor-pointer"
+                  >
+                    Dismiss
+                  </button>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                <div className="rounded border border-slate-800 bg-[#070B14] p-3.5 space-y-1.5">
+                  <div className="font-mono font-semibold text-teal-300">
+                    1. Verified Achievements
+                  </div>
+                  <ul className="list-disc pl-4 space-y-1 text-slate-300 leading-relaxed">
+                    <li>Complete BASS-II Table 5.1 Atlas (20 PMMA runs, 43 segments, 39 numeric rates, 4 nulls).</li>
+                    <li>Surfaced M3 airflow counterexample (0.029 → 0.024 mm/s) alongside O₂ depletion.</li>
+                    <li>Enforced 6-stage DIWA traceability, SHA-256 verification, and offline BM25 abstention.</li>
+                  </ul>
+                </div>
+                <div className="rounded border border-slate-800 bg-[#070B14] p-3.5 space-y-1.5">
+                  <div className="font-mono font-semibold text-amber-300">
+                    2. Key Scientific Limitations
+                  </div>
+                  <ul className="list-disc pl-4 space-y-1 text-slate-300 leading-relaxed">
+                    <li>Per-segment O₂ and per-run uncertainty intervals omitted in Table 5.1 remain null.</li>
+                    <li>0 g orbital data cannot validate 0.165 g Lunar or 0.38 g Martian fire behavior.</li>
+                    <li>Digital Twin V1 is NOT VALIDATED and produces non-NASA illustrative curves only.</li>
+                  </ul>
+                </div>
+                <div className="rounded border border-slate-800 bg-[#070B14] p-3.5 space-y-1.5">
+                  <div className="font-mono font-semibold text-sky-300">
+                    3. Future Research Roadmap
+                  </div>
+                  <ul className="list-disc pl-4 space-y-1 text-slate-300 leading-relaxed">
+                    <li>Ingest time-resolved PSI-25 camera trajectories and gas-analyzer O₂/CO/CO₂ CSVs.</li>
+                    <li>Cross-link large-scale PSI-98 Saffire-I duct and SAME smoke-aerosol streams.</li>
+                    <li>Acquire partial-gravity (0.165 g / 0.38 g) exploration-atmosphere calibration tests.</li>
+                  </ul>
+                </div>
+              </div>
+            </section>
           )}
 
           {activeSection === 'overview' && (

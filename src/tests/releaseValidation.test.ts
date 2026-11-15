@@ -35,6 +35,20 @@ describe('AegisμG Phase 5 Release & Scientific Briefing Validation', () => {
       'RECOMMENDATION',
     ]);
 
+    for (const briefing of briefings) {
+      for (const step of briefing.evidenceChain) {
+        if (step.stage === 'CLAIM' || step.stage === 'INTERPRETATION') {
+          expect(step.origin).toBe('AEGIS_COMPUTED');
+          expect(step.url).toBeNull();
+        } else if (step.stage === 'RECOMMENDATION') {
+          expect(step.origin).toBe('RESEARCH_FOLLOWUP');
+        } else {
+          expect(step.origin).toBe('NASA_SOURCE');
+          expect(step.url).toBeTruthy();
+        }
+      }
+    }
+
     const q2 = briefings.find((b) => b.id === 'Q2_PARTIAL_GRAVITY')!;
     expect(q2.conclusion).toContain('0.165 g');
     expect(q2.conclusion).toContain('0.38 g');
@@ -58,12 +72,13 @@ describe('AegisμG Phase 5 Release & Scientific Briefing Validation', () => {
     }
   });
 
-  it('3. Exports auditable Scientific Briefing Markdown with source links and disclaimers', () => {
+  it('3. Exports auditable Scientific Briefing Markdown with source links, computed-claim labels, and disclaimers', () => {
     const briefings = buildScientificBriefings(INITIAL_EXPERIMENT_RECORDS);
     const md = exportScientificBriefingMarkdown(briefings, INITIAL_EXPERIMENT_RECORDS);
     expect(md).toContain('# AegisμG — Interactive Scientific Briefing Report');
     expect(md).toContain('NASA/TM-20210011385');
     expect(md).toContain('M3: 10 cm/s -> 0.029 mm/s; 20 cm/s -> 0.024 mm/s');
+    expect(md).toContain('AegisμG computed (not authored by NASA)');
     expect(md).toContain('unofficial research prototype');
   });
 

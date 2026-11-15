@@ -204,9 +204,10 @@ export interface ScientificBriefingResponse {
   remainingUncertainty: string;
   evidenceChain: Array<{
     stage: 'SOURCE' | 'EXPERIMENT' | 'MEASUREMENT' | 'CLAIM' | 'INTERPRETATION' | 'RECOMMENDATION';
+    origin: 'NASA_SOURCE' | 'AEGIS_COMPUTED' | 'RESEARCH_FOLLOWUP';
     detail: string;
     locator: string;
-    url: string;
+    url: string | null;
   }>;
   safetyBoundary: string;
 }
@@ -254,36 +255,42 @@ export function buildScientificBriefings(
       evidenceChain: [
         {
           stage: 'SOURCE',
+          origin: 'NASA_SOURCE',
           detail: 'NASA/TM-20210011385 (BASS-II Summary Report, Oct 2021)',
           locator: 'SRC-NTRS-20210011385',
           url: BASS2_TABLE51_URL,
         },
         {
           stage: 'EXPERIMENT',
+          origin: 'NASA_SOURCE',
           detail: '20 PMMA runs M1–M20 in 7.6×7.6×17 cm MSG duct (focus: M3, 5 mm, 1-sided)',
           locator: 'Sec. 1.1 & Table 5.1, pp. 3, 57',
           url: BASS2_TABLE51_URL,
         },
         {
           stage: 'MEASUREMENT',
+          origin: 'NASA_SOURCE',
           detail: 'M3: 10 cm/s -> 0.029 mm/s; 20 cm/s -> 0.024 mm/s (O2 20.8% -> 19.7%)',
           locator: 'Table 5.1 (M3), printed p. 57',
           url: BASS2_TABLE51_URL,
         },
         {
           stage: 'CLAIM',
+          origin: 'AEGIS_COMPUTED',
           detail: '12/13 multi-velocity tests align monotonically upward; 1 exception (M3).',
-          locator: 'bass2Insights.ts (computed deterministically)',
-          url: BASS2_TABLE51_URL,
+          locator: 'AegisμG bass2Insights.ts (computed deterministically)',
+          url: null,
         },
         {
           stage: 'INTERPRETATION',
-          detail: 'Directional alignment cannot isolate flow causation while O2 and preheating vary.',
-          locator: 'Sec. 5.4 & 5.6, pp. 60–62',
-          url: BASS2_TABLE51_URL,
+          origin: 'AEGIS_COMPUTED',
+          detail: 'Directional alignment cannot isolate flow causation while O2 and preheating vary (contextualized by Sec. 5.4 & 5.6).',
+          locator: 'AegisμG Scientific Interpretation (grounded to Sec. 5.4 & 5.6)',
+          url: null,
         },
         {
           stage: 'RECOMMENDATION',
+          origin: 'RESEARCH_FOLLOWUP',
           detail: 'Ingest time-resolved PSI-25 O2 & flame-front video before calibrating reduced-order velocity curves.',
           locator: 'PSI-25 Investigation Portal',
           url: 'https://psi.nasa.gov/physci/repo/data/investigations/PSI-25',
@@ -318,38 +325,44 @@ export function buildScientificBriefings(
       evidenceChain: [
         {
           stage: 'SOURCE',
+          origin: 'NASA_SOURCE',
           detail: 'NASA/TM-20210011385 & OCHMO-TB-008 Fire Protection Technical Brief',
           locator: 'SRC-NTRS-20210011385 / SRC-NASA-OCHMO-TB-008',
           url: 'https://www.nasa.gov/wp-content/uploads/2023/12/ochmo-tb-008-fire-protection.pdf',
         },
         {
           stage: 'EXPERIMENT',
+          origin: 'NASA_SOURCE',
           detail: 'ISS MSG 0 g duct (BASS-II) and Cygnus 0 g large duct (Saffire-I)',
           locator: 'INV-BASS-II & INV-SAFFIRE-I',
           url: 'https://psi.nasa.gov/physci/repo/data/investigations/PSI-98',
         },
         {
           stage: 'MEASUREMENT',
+          origin: 'NASA_SOURCE',
           detail: 'BASS-II Φ_global = 1.3; 0 partial-gravity numeric runs in catalog',
           locator: 'Sec. 1.5, pp. 10–11',
           url: BASS2_TABLE51_URL,
         },
         {
           stage: 'CLAIM',
+          origin: 'AEGIS_COMPUTED',
           detail: 'Partial-gravity buoyant transition is unmeasured in bundled 0 g records.',
-          locator: 'METHODOLOGY.md Sec. 3',
-          url: 'https://www.nasa.gov/wp-content/uploads/2023/12/ochmo-tb-008-fire-protection.pdf',
+          locator: 'AegisμG METHODOLOGY.md Sec. 3 (app audit)',
+          url: null,
         },
         {
           stage: 'INTERPRETATION',
+          origin: 'AEGIS_COMPUTED',
           detail: 'AegisμG explicitly bars fabricated gravity multipliers; relevance scores penalize 0 g -> Moon/Mars alignment.',
-          locator: 'scoring.ts (S_env = 0.55 for 0 g on Moon/Mars)',
-          url: BASS2_TABLE51_URL,
+          locator: 'AegisμG scoring.ts (S_env = 0.55 for 0 g on Moon/Mars)',
+          url: null,
         },
         {
           stage: 'RECOMMENDATION',
+          origin: 'RESEARCH_FOLLOWUP',
           detail: 'Design partial-gravity (0.165 g / 0.38 g) benchmark tests at target exploration cabin pressure/O2 before habitat material qualification.',
-          locator: 'ROADMAP.md',
+          locator: 'Space Apps Flame in Freefall Scope',
           url: 'https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/',
         },
       ],
@@ -383,38 +396,44 @@ export function buildScientificBriefings(
       evidenceChain: [
         {
           stage: 'SOURCE',
+          origin: 'NASA_SOURCE',
           detail: 'NTRS 20210011385 + NASA PSI-25 + NASA PSI-98 + OCHMO-TB-008',
-          locator: 'SOURCES.md (8 verified URLs)',
+          locator: '8 verified NASA/SpaceApps citations',
           url: 'https://psi.nasa.gov/physci/repo/data/investigations/PSI-25',
         },
         {
           stage: 'EXPERIMENT',
+          origin: 'NASA_SOURCE',
           detail: 'BASS-II PMMA & SIBAL runs + Saffire-I Cygnus duct + OCHMO guidance',
           locator: '16 catalog records + 20 Table 5.1 tests',
           url: BASS2_TABLE51_URL,
         },
         {
           stage: 'MEASUREMENT',
+          origin: 'NASA_SOURCE',
           detail: 'PMMA spread 0.012–0.144 mm/s; HRR <100 W typical; CO 370–550 ppm/% CO2',
           locator: 'Sec. 1.4–1.5 & Table 5.1, pp. 7–11, 57',
           url: BASS2_TABLE51_URL,
         },
         {
           stage: 'CLAIM',
+          origin: 'AEGIS_COMPUTED',
           detail: 'Completeness-gated ranking prioritizes BASS-II records solely due to verified parameter density, not higher material risk.',
-          locator: 'scoring.ts (R formula)',
-          url: BASS2_TABLE51_URL,
+          locator: 'AegisμG scoring.ts (R formula)',
+          url: null,
         },
         {
           stage: 'INTERPRETATION',
+          origin: 'AEGIS_COMPUTED',
           detail: 'Scale (MSG vs Cygnus) and missing PSI telemetry prevent direct cross-facility equivalence.',
-          locator: 'comparator.ts compatibility warnings',
-          url: 'https://psi.nasa.gov/physci/repo/data/investigations/PSI-98',
+          locator: 'AegisμG comparator.ts (compatibility checks)',
+          url: null,
         },
         {
           stage: 'RECOMMENDATION',
+          origin: 'RESEARCH_FOLLOWUP',
           detail: 'Download PSI-25 and PSI-98 CSV packages into Section C (Data Import) to promote unextracted catalog entries.',
-          locator: 'Data Import & Validation Module',
+          locator: 'NASA PSI Data Repository',
           url: 'https://psi.nasa.gov/physci/repo/',
         },
       ],
@@ -532,7 +551,8 @@ export function exportScientificBriefingMarkdown(
     lines.push('');
     lines.push('### Traceable Evidence Chain (SOURCE → RECOMMENDATION)');
     for (const step of b.evidenceChain) {
-      lines.push(`- **${step.stage}:** ${step.detail} (\`${step.locator}\`) — ${step.url}`);
+      const originSuffix = step.url ? ` — ${step.url}` : ' — AegisμG computed (not authored by NASA)';
+      lines.push(`- **${step.stage} [${step.origin}]:** ${step.detail} (\`${step.locator}\`)${originSuffix}`);
     }
     lines.push('');
   }

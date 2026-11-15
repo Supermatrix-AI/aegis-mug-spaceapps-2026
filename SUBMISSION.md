@@ -6,7 +6,7 @@
 - **Challenge Link:** https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/
 - **Live Application URL:** `[NOT DEPLOYED — Shared Cloud Run URL https://ais-pre-vle43tr4bszlmmgual4rke-566753127465.asia-east1.run.app/ returned HTTP 404 on 2026-11-15; publish via AI Studio UI or Render blueprint (render.yaml) and verify unauthenticated access in incognito]`
 - **Public 7-Slide Demo PDF:** https://github.com/Supermatrix-AI/aegis-mug-spaceapps-2026/blob/main/submission/AegisMuG-SpaceApps-2026-7-Slide-Demo.pdf (`HTTP 200`, `7` slides)
-- **Public GitHub Repository URL:** `https://github.com/Supermatrix-AI/aegis-mug-spaceapps-2026` `[main at d2118bd377f06bd85fa67eb22eae8c4c51d5ec50; final Phase 8/11 enhancements in AI Studio workspace pending owner push to main]`
+- **Public GitHub Repository URL:** `https://github.com/Supermatrix-AI/aegis-mug-spaceapps-2026` `[remote main verified at c3f1e66baceb01a0dddbc494c878f268ae5e5789; final Demo 1–6 audit upgrades in AI Studio workspace pending owner push to main]`
 
 ## Problem Definition
 
@@ -64,13 +64,13 @@ Published on GitHub `main` (`d2118bd377`): <https://github.com/Supermatrix-AI/ae
 4. **Slide `04 / 07` — BASS-II Table 5.1 Counterexample (`M3`):** `12/13` upward directional segments align with airflow vs spread; `M3` (`0.029 -> 0.024 mm/s`) decreases alongside concurrent chamber O2 depletion (`20.8% -> 19.7%`).
 5. **Slide `05 / 07` — Offline BM25 Grounded Q&A & Abstention:** Zero-API-key research retrieval (`GEMINI_API_KEY` blank returns `DETERMINISTIC_FALLBACK`) with automated abstention on out-of-scope partial-g/safety queries.
 6. **Slide `06 / 07` — Digital Twin Strict Isolation (`NOT NASA DATA`):** Clear boundary between NASA Table 5.1 replay and hypothetical `AEGIS_0D_OXYGEN_BALANCE_V1` (`HYPOTHETICAL | NOT VALIDATED | NOT CERTIFIED`).
-7. **Slide `07 / 07` — Open Science, Reproducibility & Honest Status:** `39/39` tests (`5` suites), `npm run verify:nasa` SHA-256 verification, MIT license, and explicit disclosure that public cloud deployment must be verified independently.
+7. **Slide `07 / 07` — Open Science, Reproducibility & Honest Status:** `43/43` tests verified (`5` suites), `npm run verify:nasa` SHA-256 verification, MIT license, and explicit disclosure that public cloud deployment must be verified independently.
 
 ### Public Release Verification & Disclosure Note
 
-As of November 15, 2026 (`17:39 UAE` / `13:39 UTC`):
-- GitHub `main` (`d2118bd377f06bd85fa67eb22eae8c4c51d5ec50`) includes `render.yaml` and the verified public 7-slide PDF (`submission/AegisMuG-SpaceApps-2026-7-Slide-Demo.pdf`). Final workspace updates (`src/App.tsx` journey bar, `submission/FINAL_NASA_PORTAL_COPY_PASTE.md`, `submission/OWNER_FINAL_FIVE_ACTIONS.md`, and updated Phase 11 docs) are verified locally (`RELEASE_VERIFICATION_2026-11-15.md` & `JUDGING_READINESS_CHECKLIST.md`) and await push to `main`.
-- GitHub Actions Run `43713957382` (`d2118bd377`) failed in 3 seconds before runner provisioning (`runner_id: 0`, `steps: []`), matching an infrastructure/quota block rather than a test failure.
+As of November 15, 2026 (`19:35 UAE` / `15:35 UTC`):
+- Remote GitHub `main` (`c3f1e66baceb01a0dddbc494c878f268ae5e5789`) includes `render.yaml` and the verified public 7-slide PDF (`submission/AegisMuG-SpaceApps-2026-7-Slide-Demo.pdf`). Final workspace Demo 1–6 audit upgrades (`Comparator` non-equivalence check, `DigitalTwin` mass-balance residual & burn-duration warning, computed-claim attribution, Guided Demo Summary, and `43/43` Vitest suite) are verified locally (`RELEASE_VERIFICATION_2026-11-15.md` & `JUDGING_READINESS_CHECKLIST.md`) and await owner push to `main`.
+- GitHub Actions Run `43713957382` failed in 3 seconds before runner provisioning (`runner_id: 0`, `steps: []`), matching an infrastructure/quota block rather than a test failure.
 - **Pre-09:00 UAE Commit Disclosure:** Three early commits (`55bb69b341`, `49386b23d1`, `5f024bea6d`) occurred between `08:06` and `08:44 UTC+4` on Nov 14 prior to `09:00 UTC+4` local start; transparently disclosed in `HACKATHON_DEVELOPMENT_DISCLOSURE.md` (**ELIGIBILITY RULING PENDING — contact Abu Dhabi Local Lead / GO Team**).
 - Publish via AI Studio UI or Render (`render.yaml`), verify an unauthenticated public deployment URL in incognito, paste fields from `submission/FINAL_NASA_PORTAL_COPY_PASTE.md`, and click **Submit for Judging** before **23:59 UAE**.
 

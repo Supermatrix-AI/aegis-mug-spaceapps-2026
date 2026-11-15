@@ -62,7 +62,7 @@ export function validateOxygenScenario(s: OxygenScenario): string[] {
   if (!validNumber(s.inletOxygenPercent, 0, 100)) errors.push('Inlet oxygen must be 0–100%.');
   if (!validNumber(s.ventilationLpm, 0, 10000)) errors.push('Ventilation must be 0–10000 L/min.');
   if (!validNumber(s.oxygenConsumptionMgPerSecond, 0, 10000)) errors.push('Prescribed oxygen uptake must be 0–10000 mg/s.');
-  if (!validNumber(s.durationMinutes, 1, 180)) errors.push('Duration must be 1–180 min.');
+  if (!validNumber(s.durationMinutes, 0, 180)) errors.push('Duration must be 0–180 min.');
   if (!validNumber(s.stepSeconds, 1, 60)) errors.push('Output step must be 1–60 s.');
   if (!['MICROGRAVITY_0G', 'LUNAR_0_165G', 'MARTIAN_0_38G', 'EARTH_1G'].includes(s.gravity)) errors.push('Unknown gravity label.');
   return errors;
@@ -144,6 +144,10 @@ export function replayConstantRate(reportedSpreadMmPerSec: number, minutes = 5) 
 export interface ScenarioDiagnostics {
   nGasMol: number;
   initialOxygenMol: number;
+  finalOxygenMol: number;
+  consumedOxygenMol: number;
+  netVentilationOxygenMol: number;
+  massBalanceResidualMol: number | null;
   steadyStateOxygenPercent: number | null;
   residenceTimeMinutes: number | null;
   sensitivity: Array<{
@@ -159,15 +163,39 @@ export function computeScenarioDiagnostics(s: OxygenScenario): ScenarioDiagnosti
   const pressurePa = s.pressureKPa * 1000;
   const temperatureK = s.temperatureC + 273.15;
   const nGasMol = (pressurePa * s.volumeM3) / (R * temperatureK);
-  const initialOxygenMol = nGasMol * (s.initialOxygenPercent / 100);
+  const initialFraction = s.initialOxygenPercent / 100;
+  const inletFraction = s.inletOxygenPercent / 100;
+  const initialOxygenMol = nGasMol * initialFraction;
   const flowM3PerSecond = s.ventilationLpm / 60000;
   const lambda = flowM3PerSecond / s.volumeM3;
   const oxygenSinkMolPerSecond = (s.oxygenConsumptionMgPerSecond * 1e-6) / O2_KG_PER_MOL;
   const sinkFractionPerSecond = oxygenSinkMolPerSecond / nGasMol;
+  const durationSeconds = s.durationMinutes * 60;
+
+  const baseSim = simulateOxygenScenario(s);
+  const finalFraction = baseSim.finalOxygenPercent / 100;
+  const finalOxygenMol = nGasMol * finalFraction;
+  const consumedOxygenMol = oxygenSinkMolPerSecond * durationSeconds;
+
+  let netVentilationOxygenMol = 0;
+  let massBalanceResidualMol: number | null = null;
+  if (!baseSim.depleted) {
+    if (lambda > 0) {
+      const equilibrium = inletFraction - sinkFractionPerSecond / lambda;
+      const integralX =
+        equilibrium * durationSeconds +
+        ((initialFraction - equilibrium) * (1 - Math.exp(-lambda * durationSeconds))) / lambda;
+      netVentilationOxygenMol =
+        lambda * nGasMol * (inletFraction * durationSeconds - integralX);
+    }
+    const deltaChamber = finalOxygenMol - initialOxygenMol;
+    const expectedDelta = netVentilationOxygenMol - consumedOxygenMol;
+    massBalanceResidualMol = Number(Math.abs(deltaChamber - expectedDelta).toExponential(3));
+  }
 
   const steadyStateOxygenPercent =
     lambda > 0
-      ? Number((Math.max(0, s.inletOxygenPercent / 100 - sinkFractionPerSecond / lambda) * 100).toFixed(4))
+      ? Number((Math.max(0, inletFraction - sinkFractionPerSecond / lambda) * 100).toFixed(4))
       : null;
 
   const residenceTimeMinutes =
@@ -197,9 +225,34 @@ export function computeScenarioDiagnostics(s: OxygenScenario): ScenarioDiagnosti
   return {
     nGasMol: Number(nGasMol.toFixed(4)),
     initialOxygenMol: Number(initialOxygenMol.toFixed(4)),
+    finalOxygenMol: Number(finalOxygenMol.toFixed(4)),
+    consumedOxygenMol: Number(consumedOxygenMol.toFixed(4)),
+    netVentilationOxygenMol: Number(netVentilationOxygenMol.toFixed(4)),
+    massBalanceResidualMol,
     steadyStateOxygenPercent,
     residenceTimeMinutes,
     sensitivity,
   };
+}
+
+export function exportOxygenScenarioCsv(
+  scenario: OxygenScenario,
+  simulation: OxygenSimulation,
+  diagnostics: ScenarioDiagnostics | null
+): string {
+  const metadataLines = [
+    `# model_id=${simulation.modelId}`,
+    `# data_origin_NOT_NASA_DATA=NOT-NASA-DATA-HYPOTHETICAL`,
+    `# validation_status=NOT_VALIDATED_NOT_CERTIFIED_NOT_A_FIRE_SPREAD_PREDICTION`,
+    `# assumptions=well-mixed_0D_control_volume;constant_P_and_T;equal_inlet_outlet_volumetric_flow;uncalibrated_prescribed_O2_sink;gravity_label_is_descriptive_only`,
+    `# params_units=volume_m3:${scenario.volumeM3};pressure_kPa:${scenario.pressureKPa};temperature_C:${scenario.temperatureC};initial_O2_vol_pct:${scenario.initialOxygenPercent};inlet_O2_vol_pct:${scenario.inletOxygenPercent};ventilation_L_per_min:${scenario.ventilationLpm};assumed_O2_sink_mg_per_s:${scenario.oxygenConsumptionMgPerSecond};duration_min:${scenario.durationMinutes};step_s:${scenario.stepSeconds};gravity_label_only:${scenario.gravity}`,
+    `# diagnostics=n_gas_mol:${diagnostics?.nGasMol ?? 'NA'};assumed_HRR_W:${simulation.assumedHeatReleaseW};steady_state_O2_pct:${diagnostics?.steadyStateOxygenPercent ?? 'SEALED_NO_FLOW'};residence_time_min:${diagnostics?.residenceTimeMinutes ?? 'SEALED_NO_FLOW'};mass_balance_residual_mol:${diagnostics?.massBalanceResidualMol ?? 'DEPLETED_CLAMPED_AT_ZERO'}`,
+    'time_minutes,calculated_oxygen_vol_percent,data_origin_NOT_NASA_DATA,model_id',
+  ];
+  const dataLines = simulation.points.map(
+    (p) =>
+      `${p.timeMinutes},${p.oxygenPercent},NOT-NASA-DATA-HYPOTHETICAL,${simulation.modelId}`
+  );
+  return [...metadataLines, ...dataLines].join('\n');
 }
 

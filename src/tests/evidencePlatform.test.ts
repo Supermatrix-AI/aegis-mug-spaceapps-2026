@@ -38,6 +38,14 @@ describe('AegisμG Evidence Integrity, Gap Map, Question Explorer & Scorecard', 
     expect(inspectBass2Segment(m3Seg).classification).toBe('NASA_OBSERVED');
     expect(inspectBass2Segment(m6Seg).classification).toBe('UNVERIFIED');
 
+    // inspectBass2Segment uses segment.segmentNumber directly even if velocities repeat
+    const repeatedSeg = {
+      ...m3Seg,
+      segmentNumber: 2,
+      velocityCmPerSecond: m3Seg.velocityCmPerSecond,
+    };
+    expect(inspectBass2Segment(repeatedSeg).locator).toContain('Segment 2');
+
     // Reject numeric claim missing locator or approved domain
     const missingLoc = validateNumericTraceability({
       reportedValue: 0.05,
@@ -104,6 +112,8 @@ describe('AegisμG Evidence Integrity, Gap Map, Question Explorer & Scorecard', 
     const queries = [
       'What is the critical oxygen concentration for a lunar habitat at 0.165 g?',
       'What is the exact flame spread rate on the Moon at 0.165 g?',
+      'Predict Martian 0.38 g flame spread behavior',
+      'Calculate 0.165 g lunar fire risk',
       'Certify PMMA safe for Martian habitats',
       'What did Apollo 99 combustion chamber measure?',
     ];

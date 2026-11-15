@@ -7,6 +7,7 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
+  Legend,
 } from 'recharts';
 import {
   ArrowRight,
@@ -214,6 +215,47 @@ export const MissionOverview: React.FC<MissionOverviewProps> = ({
         </div>
       </section>
 
+      {/* Gravity & Buoyancy Scientific Boundary */}
+      <section aria-label="Gravity and Buoyancy Regime Boundary" className="rounded-lg border border-slate-800 bg-[#0D1422] p-5 space-y-3">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <div>
+            <h2 className="text-base font-semibold text-slate-100">
+              Gravity Regime &amp; Buoyancy Boundary (Why 0 g ≠ Moon or Mars)
+            </h2>
+            <p className="text-xs text-slate-400">
+              All bundled numeric fire observations originate from ~0 g spacecraft chambers (NASA/TM-20210011385, OCHMO-TB-008). Partial-gravity regimes remain unmeasured.
+            </p>
+          </div>
+          <span className="font-mono text-[11px] text-amber-300">NO EMPIRICAL PARTIAL-G DATA</span>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+          <div className="rounded border border-teal-500/30 bg-[#070B14] p-3 space-y-1">
+            <div className="font-mono font-semibold text-teal-300">ISS / Cygnus (~0 g)</div>
+            <p className="text-slate-300 leading-relaxed">
+              Natural buoyancy absent; flames depend on forced ventilation, diffusion, and wall heat loss (BASS-II Table 5.1/7.1 empirical runs).
+            </p>
+          </div>
+          <div className="rounded border border-amber-500/30 bg-[#070B14] p-3 space-y-1">
+            <div className="font-mono font-semibold text-amber-300">Lunar Surface (0.165 g)</div>
+            <p className="text-slate-300 leading-relaxed">
+              Weak buoyant plumes re-emerge; exploration cabins may use ~34% O₂ / 56.5 kPa. 0 empirical 0.165 g measurements in workspace.
+            </p>
+          </div>
+          <div className="rounded border border-amber-500/30 bg-[#070B14] p-3 space-y-1">
+            <div className="font-mono font-semibold text-amber-300">Martian Surface (0.38 g)</div>
+            <p className="text-slate-300 leading-relaxed">
+              Mixed buoyancy + forced-flow regime alters heat feedback and smoke stratification. 0 empirical 0.38 g measurements in workspace.
+            </p>
+          </div>
+          <div className="rounded border border-slate-700 bg-[#070B14] p-3 space-y-1">
+            <div className="font-mono font-semibold text-slate-200">Earth Normal (1 g)</div>
+            <p className="text-slate-400 leading-relaxed">
+              Strong buoyant convection sweeps fresh oxidizer upward; terrestrial qualification cannot bound microgravity or partial-g risk.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Dynamic KPI Strip */}
       <section aria-label="Catalog Metrics" className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
         <div className="rounded-lg border border-slate-800 bg-[#0D1422] p-5">
@@ -355,6 +397,7 @@ export const MissionOverview: React.FC<MissionOverviewProps> = ({
                       color: '#F1F5F9',
                     }}
                   />
+                  <Legend wrapperStyle={{ fontSize: '11px', paddingTop: '6px' }} />
                   <Bar
                     yAxisId="left"
                     dataKey="records"

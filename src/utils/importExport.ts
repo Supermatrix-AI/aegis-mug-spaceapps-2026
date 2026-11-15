@@ -408,35 +408,42 @@ export function buildSyntheticQaFixtureCsv(): string {
   });
 }
 
+function csvSafeCell(value: string | number | null | undefined): string | number {
+  if (value === null || value === undefined) return '';
+  if (typeof value === 'number') return value;
+  const s = String(value);
+  return /^[=+\-@\t\r]/.test(s) ? `'${s}` : s;
+}
+
 export function exportRecordsToCsv(records: ExperimentRecord[]): string {
   const flat = records.map((r) => ({
-    experimentId: r.experimentId,
-    sourceId: r.sourceId,
-    investigationId: r.investigationId,
-    experimentFamily: r.experimentFamily,
-    paperTitle: r.paperTitle,
-    institution: r.institution,
-    sourceUrl: r.sourceUrl,
-    reportId: r.reportId ?? '',
-    material: r.material ?? 'Not reported / Not verified',
-    fuelType: r.fuelType ?? 'Not reported / Not verified',
-    gravityContext: r.gravityContext,
+    experimentId: csvSafeCell(r.experimentId),
+    sourceId: csvSafeCell(r.sourceId),
+    investigationId: csvSafeCell(r.investigationId),
+    experimentFamily: csvSafeCell(r.experimentFamily),
+    paperTitle: csvSafeCell(r.paperTitle),
+    institution: csvSafeCell(r.institution),
+    sourceUrl: csvSafeCell(r.sourceUrl),
+    reportId: csvSafeCell(r.reportId),
+    material: csvSafeCell(r.material ?? 'Not reported / Not verified'),
+    fuelType: csvSafeCell(r.fuelType ?? 'Not reported / Not verified'),
+    gravityContext: csvSafeCell(r.gravityContext),
     oxygenPercent: r.oxygenPercent ?? '',
     airflowVelocity: r.airflowVelocity ?? '',
-    airflowUnit: r.airflowUnit ?? '',
-    experimentGeometry: r.experimentGeometry ?? 'Not reported / Not verified',
-    measurementType: r.measurementType ?? 'Not reported / Not verified',
+    airflowUnit: csvSafeCell(r.airflowUnit),
+    experimentGeometry: csvSafeCell(r.experimentGeometry ?? 'Not reported / Not verified'),
+    measurementType: csvSafeCell(r.measurementType ?? 'Not reported / Not verified'),
     reportedValue: r.reportedValue ?? '',
-    units: r.units ?? '',
-    uncertainty: r.uncertainty ?? 'Not reported / Not verified',
-    citationLocator: r.citationLocator ?? 'Not reported / Not verified',
-    extractionMethod: r.extractionMethod,
-    verificationStatus: r.verificationStatus,
-    originType: r.originType,
-    retrievalDate: r.retrievalDate,
-    sha256Hash: r.sha256Hash ?? '',
-    observedOutcome: r.observedOutcome ?? 'Not reported / Not verified',
-    notes: r.notes ?? '',
+    units: csvSafeCell(r.units),
+    uncertainty: csvSafeCell(r.uncertainty ?? 'Not reported / Not verified'),
+    citationLocator: csvSafeCell(r.citationLocator ?? 'Not reported / Not verified'),
+    extractionMethod: csvSafeCell(r.extractionMethod),
+    verificationStatus: csvSafeCell(r.verificationStatus),
+    originType: csvSafeCell(r.originType),
+    retrievalDate: csvSafeCell(r.retrievalDate),
+    sha256Hash: csvSafeCell(r.sha256Hash),
+    observedOutcome: csvSafeCell(r.observedOutcome ?? 'Not reported / Not verified'),
+    notes: csvSafeCell(r.notes),
   }));
   return Papa.unparse(flat);
 }

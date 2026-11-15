@@ -217,10 +217,7 @@ export function inspectExperimentRecord(
 }
 
 export function inspectBass2Segment(segment: Bass2Segment): EvidenceInspectionRecord {
-  const testMeta = BASS2_TESTS.find((t) => t.id === segment.testId);
-  const segIndex = testMeta
-    ? testMeta.velocitiesCmPerSecond.findIndex((v) => v === segment.velocityCmPerSecond) + 1
-    : 1;
+  const segIndex = segment.segmentNumber;
   const hasNumericSpread = segment.spreadRateMmPerSecond !== null;
   const classification: ProvenanceClassification = hasNumericSpread
     ? 'NASA_OBSERVED'
@@ -969,8 +966,12 @@ function isUnsupportedQuery(query: string): string | null {
     /\b(exact|numerical|numeric|critical\s+oxygen|loi|limiting\s+oxygen|spread\s*rate|burn\s*rate|flammability\s+rating|extinction\s+limit)\b/.test(
       q
     );
-  if (hasPartialG && asksQuantitativeTarget) {
-    return 'Partial-gravity (0.165 g Lunar / 0.38 g Martian) flammability limits, critical O2 thresholds, and spread rates are unmeasured in the verified 0 g NASA catalog.';
+  const asksExtrapolatedBehavior =
+    /\b(predict|forecast|calculate|estimate|extrapolate|simulate)\b/.test(q) &&
+    /\b(flame|fire|spread|combustion|behavior|risk|ignition|growth|oxygen)\b/.test(q) &&
+    !/\b(can|do|does|are|could|would|should)\b.*\b0\s*g\b/.test(q);
+  if (hasPartialG && (asksQuantitativeTarget || asksExtrapolatedBehavior)) {
+    return 'Partial-gravity (0.165 g Lunar / 0.38 g Martian) flammability limits, critical O2 thresholds, and spread behavior are unmeasured in the verified 0 g NASA catalog.';
   }
   if (/\bcertif(y|ied|ication)\b/.test(q) && /\b(safe|flight|pmma|sibal|habitat|material)\b/.test(q)) {
     return 'AegisμG is an unofficial research triage prototype and never provides spacecraft material flight certification or NASA-STD-6001 sign-off.';

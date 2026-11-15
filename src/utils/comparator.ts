@@ -174,6 +174,36 @@ export function evaluateExperimentCompatibility(
           targetUnit,
           values: convertedValues,
         });
+
+        // Equal-value non-equivalence check: catch cases like M1 (0.071 mm/s) vs M5 (0.071 mm/s)
+        // where identical primary spread rates arise from very different physical configurations.
+        const maxVal = Math.max(...convertedValues.map((v) => v.value));
+        const minVal = Math.min(...convertedValues.map((v) => v.value));
+        const hasEqualOrNearEqualRates =
+          convertedValues.length >= 2 &&
+          (Math.abs(maxVal - minVal) <= 1e-4 ||
+            new Set(convertedValues.map((v) => v.value.toFixed(4))).size < convertedValues.length);
+
+        if (hasEqualOrNearEqualRates) {
+          const differingConditions: string[] = [];
+          if (new Set(matchedGroup.map((r) => r.material ?? '')).size > 1) {
+            differingConditions.push('sample thickness/material');
+          }
+          if (new Set(matchedGroup.map((r) => r.experimentGeometry ?? '')).size > 1) {
+            differingConditions.push('burning geometry (e.g., 1-sided vs 2-sided)');
+          }
+          if (new Set(matchedGroup.map((r) => `${r.airflowVelocity ?? ''}${r.airflowUnit ?? ''}`)).size > 1) {
+            differingConditions.push('forced airflow');
+          }
+          if (new Set(matchedGroup.map((r) => r.observedOutcome ?? '')).size > 1) {
+            differingConditions.push('burn duration & chamber O2 depletion');
+          }
+          if (differingConditions.length > 0) {
+            warnings.push(
+              `Equal measured values do not imply equal physical burning behavior: compared records share identical or near-identical primary values (${targetUnit}) despite differences in ${differingConditions.join(', ')}.`
+            );
+          }
+        }
       }
     } else {
       warnings.push(

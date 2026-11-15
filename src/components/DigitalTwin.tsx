@@ -4,14 +4,16 @@ import {
 } from 'recharts';
 import { AlertTriangle, Download, RotateCcw, FlaskConical } from 'lucide-react';
 import type { ExperimentRecord } from '../types/scientific.ts';
+import { BASS2_TESTS } from '../data/bass2Table51.ts';
 import {
   DEFAULT_OXYGEN_SCENARIO,
   computeScenarioDiagnostics,
+  exportOxygenScenarioCsv,
   replayConstantRate,
   simulateOxygenScenario,
   validateOxygenScenario,
 } from '../utils/digitalTwin.ts';
-import type { OxygenScenario, ScenarioGravity } from '../utils/digitalTwin.ts';
+import type { OxygenScenario, OxygenSimulation, ScenarioDiagnostics, ScenarioGravity } from '../utils/digitalTwin.ts';
 import { OriginTag, VerificationTag } from './ScientificLabels.tsx';
 
 interface Props {
@@ -39,13 +41,12 @@ const GRAVITIES: Array<{ value: ScenarioGravity; label: string }> = [
   { value: 'EARTH_1G', label: '1 g — Earth context (NOT predicted)' },
 ];
 
-function exportPoints(points: Array<{ timeMinutes: number; oxygenPercent: number }>) {
-  const lines = [
-    'time_minutes,calculated_oxygen_vol_percent,data_origin_NOT_NASA_DATA,model_id',
-    ...points.map(
-      (p) => `${p.timeMinutes},${p.oxygenPercent},NOT-NASA-DATA-HYPOTHETICAL,AEGIS_0D_OXYGEN_BALANCE_V1`
-    ),
-  ].join('\n');
+function downloadScenarioCsv(
+  scenario: OxygenScenario,
+  simulation: OxygenSimulation,
+  diagnostics: ScenarioDiagnostics | null
+) {
+  const lines = exportOxygenScenarioCsv(scenario, simulation, diagnostics);
   const blob = new Blob([lines], { type: 'text/csv;charset=utf-8' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
@@ -61,6 +62,7 @@ export const DigitalTwin: React.FC<Props> = ({ records }) => {
   const [scenario, setScenario] = useState<OxygenScenario>(DEFAULT_OXYGEN_SCENARIO);
   const [selectedId, setSelectedId] = useState('EXP-BASS2-M1');
   const [replayMinutes, setReplayMinutes] = useState(5);
+  const [yAxisMode, setYAxisMode] = useState<'focused' | 'full'>('focused');
   const errors = validateOxygenScenario(scenario);
   const result = errors.length ? null : simulateOxygenScenario(scenario);
   const diagnostics = errors.length ? null : computeScenarioDiagnostics(scenario);
@@ -74,9 +76,26 @@ export const DigitalTwin: React.FC<Props> = ({ records }) => {
     r.units === 'mm/s'
   );
   const selected = sourceRuns.find((r) => r.experimentId === selectedId) || sourceRuns[0] || null;
+  const selectedBass2Id = selected ? selected.experimentId.replace('EXP-BASS2-', '') : null;
+  const selectedTestMeta = selectedBass2Id
+    ? BASS2_TESTS.find((t) => t.id === selectedBass2Id) ?? null
+    : null;
   const replay = selected?.reportedValue != null
     ? replayConstantRate(selected.reportedValue, replayMinutes)
     : [];
+
+  let yDomain: [number, number] = [0, 100];
+  if (result && yAxisMode === 'focused') {
+    const vals = result.points.map((p) => p.oxygenPercent);
+    const minY = Math.min(...vals);
+    const maxY = Math.max(...vals);
+    const span = Math.max(0.2, maxY - minY);
+    const pad = Math.max(0.05, span * 0.15);
+    yDomain = [
+      Math.max(0, Number((minY - pad).toFixed(2))),
+      Math.min(100, Number((maxY + pad).toFixed(2))),
+    ];
+  }
 
   const updateNumber = (key: NumericField, value: string) => {
     setScenario((prev) => ({ ...prev, [key]: value === '' ? NaN : Number(value) }));
@@ -119,13 +138,15 @@ export const DigitalTwin: React.FC<Props> = ({ records }) => {
         <div className="flex flex-wrap items-start justify-between gap-2">
           <div>
             <div className="text-[11px] font-mono uppercase tracking-wider text-teal-400">
-              NASA MEASURED DATA · NASA/TM-20210011385 Table 5.1
+              NASA MEASURED RATE · NASA/TM-20210011385 Table 5.1 · CALCULATED d = v × t (NOT NASA TIME-SERIES)
             </div>
-            <h2 className="text-lg font-semibold text-slate-100 mt-0.5">1. NASA BASS-II evidence replay</h2>
+            <h2 className="text-lg font-semibold text-slate-100 mt-0.5">
+              1. NASA BASS-II Reported-Rate Straight-Line Illustration
+            </h2>
             <p className="text-xs text-slate-400 mt-1">
               Select a published single-condition Table 5.1 PMMA spread-rate measurement.
-              The straight line illustrates distance = reported rate × elapsed time,
-              NOT NASA-observed front position or a forecast.
+              The plotted line is an arithmetic illustration (distance = reported rate × elapsed time),
+              NOT NASA-observed spatial trajectory, time-series telemetry, or a fire forecast.
             </p>
           </div>
           {selected && (
@@ -163,20 +184,38 @@ export const DigitalTwin: React.FC<Props> = ({ records }) => {
         </div>
         {selected && (
           <>
-            <div className="grid gap-3 sm:grid-cols-3">
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
               <div className="border border-slate-800 bg-[#070B14] rounded p-3">
                 <div className="text-xs text-slate-400">NASA-reported flame spread</div>
                 <div className="font-mono text-xl text-teal-300 tabular-nums">{selected.reportedValue} mm/s</div>
               </div>
               <div className="border border-slate-800 bg-[#070B14] rounded p-3">
-                <div className="text-xs text-slate-400">Published initial O2</div>
-                <div className="font-mono text-xl tabular-nums">{selected.oxygenPercent ?? 'N/A'}%</div>
+                <div className="text-xs text-slate-400">Published test O2 (start → end)</div>
+                <div className="font-mono text-xl tabular-nums">
+                  {selectedTestMeta
+                    ? `${selectedTestMeta.initialOxygenVolPercent}% → ${selectedTestMeta.finalOxygenVolPercent}%`
+                    : `${selected.oxygenPercent ?? 'N/A'}%`}
+                </div>
               </div>
               <div className="border border-slate-800 bg-[#070B14] rounded p-3">
                 <div className="text-xs text-slate-400">Airflow</div>
                 <div className="font-mono text-xl tabular-nums">{selected.airflowVelocity ?? 'N/A'} {selected.airflowUnit ?? ''}</div>
               </div>
+              <div className="border border-slate-800 bg-[#070B14] rounded p-3">
+                <div className="text-xs text-slate-400">Observed Table 5.1 burn duration</div>
+                <div className="font-mono text-xl text-amber-300 tabular-nums">
+                  {selectedTestMeta ? `${selectedTestMeta.burnMinutes} min` : 'Not reported'}
+                </div>
+              </div>
             </div>
+            {selectedTestMeta && replayMinutes > selectedTestMeta.burnMinutes && (
+              <div className="rounded border border-amber-500/40 bg-amber-950/20 px-3 py-2 text-xs text-amber-200 flex items-start gap-2">
+                <AlertTriangle className="w-4 h-4 text-amber-300 shrink-0 mt-0.5" />
+                <span>
+                  Illustrative horizon ({replayMinutes} min) exceeds NASA Table 5.1 observed burn duration ({selectedTestMeta.burnMinutes} min for {selectedTestMeta.id}, {selectedTestMeta.thicknessMm} mm × {selectedTestMeta.widthCm} cm, {selectedTestMeta.burningSides}-sided). Values beyond {selectedTestMeta.burnMinutes} min extrapolate past the experimental burn.
+                </span>
+              </div>
+            )}
             <div className="h-60 w-full min-w-0">
               <ResponsiveContainer width="100%" height="100%" minWidth={0}>
                 <LineChart data={replay} margin={{ top: 10, right: 22, bottom: 10, left: 10 }}>
@@ -198,7 +237,7 @@ export const DigitalTwin: React.FC<Props> = ({ records }) => {
               >
                 Open original NASA report
               </a>
-              . Straight-line illustration does not incorporate burn-duration limits or changing experimental conditions.
+              . Straight-line illustration does not incorporate burn-duration limits, O₂ depletion, or changing experimental conditions.
             </p>
           </>
         )}
@@ -284,12 +323,33 @@ export const DigitalTwin: React.FC<Props> = ({ records }) => {
                 <div className="font-mono text-xl tabular-nums">{result.assumedHeatReleaseW.toFixed(2)} W</div>
               </div>
             </div>
+            <div className="flex flex-wrap items-center justify-between gap-2 pt-1">
+              <div className="flex flex-wrap items-center gap-2 text-[11px] font-mono">
+                <span className="text-slate-400">Y-Axis Scale:</span>
+                {yAxisMode === 'focused' ? (
+                  <span className="rounded border border-amber-500/40 bg-amber-950/30 px-2 py-0.5 text-amber-300">
+                    TRUNCATED Y-AXIS ({yDomain[0]}%–{yDomain[1]}% non-zero baseline)
+                  </span>
+                ) : (
+                  <span className="rounded border border-slate-700 bg-slate-900 px-2 py-0.5 text-slate-300">
+                    Full 0–100% Scale
+                  </span>
+                )}
+              </div>
+              <button
+                type="button"
+                onClick={() => setYAxisMode((m) => (m === 'focused' ? 'full' : 'focused'))}
+                className="rounded border border-slate-700 bg-slate-900 hover:bg-slate-800 px-3 py-1.5 min-h-[44px] text-xs font-mono text-slate-200 cursor-pointer"
+              >
+                {yAxisMode === 'focused' ? 'Switch to Full 0–100% Axis' : 'Switch to Focused Scale'}
+              </button>
+            </div>
             <div className="h-64 w-full min-w-0">
               <ResponsiveContainer width="100%" height="100%" minWidth={0}>
                 <LineChart data={result.points} margin={{ top: 10, right: 20, bottom: 10, left: 0 }}>
                   <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
                   <XAxis dataKey="timeMinutes" tick={{ fill: '#94a3b8', fontSize: 11 }} unit="m" />
-                  <YAxis domain={[0, 100]} tick={{ fill: '#94a3b8', fontSize: 11 }} unit="%" />
+                  <YAxis domain={yDomain} tick={{ fill: '#94a3b8', fontSize: 11 }} unit="%" />
                   <Tooltip contentStyle={{ background: '#0b1120', color: '#fff', borderColor: '#334155' }} />
                   <Line type="monotone" dataKey="oxygenPercent" name="Calculated O2 (vol% — NOT NASA DATA)" stroke="#f59e0b" dot={false} strokeWidth={2} />
                 </LineChart>
@@ -310,6 +370,10 @@ export const DigitalTwin: React.FC<Props> = ({ records }) => {
                     {diagnostics.steadyStateOxygenPercent !== null
                       ? `Asymptote = ${diagnostics.steadyStateOxygenPercent.toFixed(2)}% (τ = ${diagnostics.residenceTimeMinutes} min)`
                       : 'Sealed enclosure (no inlet dilution)'}
+                    {' · '}
+                    {diagnostics.massBalanceResidualMol !== null
+                      ? `Mass-balance residual = ${diagnostics.massBalanceResidualMol} mol`
+                      : 'Clamped at 0% O₂ depletion'}
                   </div>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
@@ -337,7 +401,7 @@ export const DigitalTwin: React.FC<Props> = ({ records }) => {
 
             <button
               type="button"
-              onClick={() => exportPoints(result.points)}
+              onClick={() => downloadScenarioCsv(scenario, result, diagnostics)}
               className="inline-flex items-center gap-2 rounded bg-teal-700 hover:bg-teal-600 text-white px-4 py-2.5 min-h-[44px] text-sm cursor-pointer"
             >
               <Download className="w-4 h-4" /> Export hypothetical curve CSV (NOT-NASA-DATA)

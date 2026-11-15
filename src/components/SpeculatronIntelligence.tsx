@@ -588,31 +588,58 @@ export const SpeculatronIntelligence: React.FC<SpeculatronIntelligenceProps> = (
           {/* 6-Stage Source-to-Claim Trace */}
           <div className="pt-3 border-t border-slate-800 space-y-2">
             <div className="font-mono text-[11px] uppercase tracking-wider text-slate-400">
-              Source-to-Claim Traceability Path
+              Source-to-Claim Traceability Path (Strict Source vs. App-Computed Separation)
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
-              {activeBriefing.evidenceChain.map((step) => (
-                <div
-                  key={step.stage}
-                  className="rounded border border-slate-800 bg-[#0D1422] p-2.5 space-y-1"
-                >
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="font-mono text-[11px] font-semibold text-teal-400">
-                      {step.stage}
-                    </span>
-                    <a
-                      href={step.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 font-mono text-[10px] text-amber-300 hover:text-amber-200"
-                    >
-                      <span>{step.locator}</span>
-                      <ExternalLink className="w-2.5 h-2.5" />
-                    </a>
+              {activeBriefing.evidenceChain.map((step) => {
+                const originLabel =
+                  step.origin === 'NASA_SOURCE'
+                    ? 'NASA Source'
+                    : step.origin === 'AEGIS_COMPUTED'
+                      ? 'AegisμG Computed'
+                      : 'Next Research';
+                const originBadgeClass =
+                  step.origin === 'NASA_SOURCE'
+                    ? 'text-teal-300 border-teal-500/40 bg-teal-950/30'
+                    : step.origin === 'AEGIS_COMPUTED'
+                      ? 'text-sky-300 border-sky-500/40 bg-sky-950/30'
+                      : 'text-amber-300 border-amber-500/40 bg-amber-950/30';
+                return (
+                  <div
+                    key={step.stage}
+                    className="rounded border border-slate-800 bg-[#0D1422] p-2.5 space-y-1.5"
+                  >
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <span className="font-mono text-[11px] font-semibold text-teal-400">
+                        {step.stage}
+                      </span>
+                      <span
+                        className={`rounded border px-1.5 py-0.5 font-mono text-[10px] whitespace-nowrap ${originBadgeClass}`}
+                      >
+                        {originLabel}
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-slate-300 leading-snug">{step.detail}</p>
+                    <div className="pt-0.5">
+                      {step.url ? (
+                        <a
+                          href={step.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 font-mono text-[10px] text-amber-300 hover:text-amber-200 underline"
+                        >
+                          <span>{step.locator}</span>
+                          <ExternalLink className="w-2.5 h-2.5 shrink-0" />
+                        </a>
+                      ) : (
+                        <span className="font-mono text-[10px] text-slate-400">
+                          {step.locator} (not authored by NASA)
+                        </span>
+                      )}
+                    </div>
                   </div>
-                  <p className="text-[11px] text-slate-300 leading-snug">{step.detail}</p>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>

@@ -43,7 +43,7 @@ No diffusion flames, pyrolysis, reaction kinetics, buoyancy, heat transfer, smok
 
 ## 4. Software verification & local diagnostics
 
-Seven Digital Twin invariant tests (`src/tests/digitalTwin.test.ts`), complemented by `11` baseline scientific tests (`src/tests/scientific.test.ts`), `9` Table 5.1 atlas tests (`src/tests/bass2Atlas.test.ts`), and `7` release/briefing/diagnostics validation tests (`src/tests/releaseValidation.test.ts`, **34 total tests**), exercise mathematical invariants: zero sink mass conservation, zero-flow depletion direction, ventilation convergence, input range checks, oxygen floor behavior, fixed-rate calorimetry conversion, gravity label invariance, straight-line replay arithmetic, and ideal-gas molar diagnostics + `0.5× / 1.0× / 2.0×` prescribed-sink sensitivity monotonicity (`computeScenarioDiagnostics`).
+Ten Digital Twin invariant tests (`src/tests/digitalTwin.test.ts`), complemented by `12` baseline scientific tests (`src/tests/scientific.test.ts`), `9` Table 5.1 atlas tests (`src/tests/bass2Atlas.test.ts`), `5` evidence platform tests (`src/tests/evidencePlatform.test.ts`), and `7` release/briefing validation tests (`src/tests/releaseValidation.test.ts`, **43 total tests across 5 suites**), exercise mathematical invariants: zero sink mass conservation, `durationMinutes === 0` boundary behavior, zero-flow depletion direction, ventilation convergence, input range checks, oxygen floor clamping with `null` mass-balance residual when depleted, exact analytical molar conservation (`massBalanceResidualMol < 1e-6 mol`), fixed-rate calorimetry conversion, gravity label invariance, straight-line replay arithmetic (with NASA Table 5.1 burn-duration extrapolation warning), CSV provenance metadata exports, and ideal-gas molar diagnostics + `0.5× / 1.0× / 2.0×` prescribed-sink sensitivity monotonicity (`computeScenarioDiagnostics`).
 
 Passing tests confirms software arithmetic and basic invariants only. It does **not** validate physical applicability or uncertainty. There is no calibrated model of combustion at 0 g, 0.165 g, or 0.38 g.
 
@@ -62,8 +62,8 @@ Passing tests confirms software arithmetic and basic invariants only. It does **
 NASA source of reported spread-rate values: [NASA/TM-20210011385 — BASS-II Summary Report](https://ntrs.nasa.gov/citations/20210011385), Table 5.1, p. 57 (printed).
 
 Files:
-- `src/utils/digitalTwin.ts` — pure math and validation.
-- `src/components/DigitalTwin.tsx` — user-controlled UI, provenance labels, plots and CSV export.
-- `src/tests/digitalTwin.test.ts` — software-level math tests.
+- `src/utils/digitalTwin.ts` — pure math, analytical CSTR mass-balance diagnostics, and metadata-stamped CSV generator (`exportOxygenScenarioCsv`).
+- `src/components/DigitalTwin.tsx` — user-controlled UI, NASA burn-duration limit guard in Section A, focused vs. full `0–100%` Y-axis toggle in Section B, provenance labels, plots, and CSV export.
+- `src/tests/digitalTwin.test.ts` — 10 software-level math, invariance, and CSV export tests.
 
-Any exported hypothetical scenario CSV is marked `NOT-NASA-DATA` in its filename (`aegis-exploratory-oxygen-balance-NOT-NASA-DATA.csv`) and CSV headers/rows (`data_origin_NOT_NASA_DATA = NOT-NASA-DATA-HYPOTHETICAL`).
+Any exported hypothetical scenario CSV is marked `NOT-NASA-DATA` in its filename (`aegis-exploratory-oxygen-balance-NOT-NASA-DATA.csv`), embedded `#` metadata header rows (`# model_id`, `# data_origin_NOT_NASA_DATA=NOT-NASA-DATA-HYPOTHETICAL`, `# validation_status`, `# assumptions`, `# params_units`, `# diagnostics`), and per-row columns (`NOT-NASA-DATA-HYPOTHETICAL`).

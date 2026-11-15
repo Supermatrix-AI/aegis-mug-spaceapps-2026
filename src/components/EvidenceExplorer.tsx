@@ -251,8 +251,9 @@ export const EvidenceExplorer: React.FC<EvidenceExplorerProps> = ({
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
           <div>
-            <label className="block text-[11px] text-slate-400 mb-1">Experiment Family</label>
+            <label htmlFor="filter-family" className="block text-[11px] text-slate-400 mb-1">Experiment Family</label>
             <select
+              id="filter-family"
               value={familyFilter}
               onChange={(e) => setFamilyFilter(e.target.value)}
               className="w-full rounded border border-slate-700 bg-[#070B14] px-2.5 py-1.5 text-xs text-slate-100"
@@ -267,8 +268,9 @@ export const EvidenceExplorer: React.FC<EvidenceExplorerProps> = ({
           </div>
 
           <div>
-            <label className="block text-[11px] text-slate-400 mb-1">Research Investigation</label>
+            <label htmlFor="filter-investigation" className="block text-[11px] text-slate-400 mb-1">Research Investigation</label>
             <select
+              id="filter-investigation"
               value={investigationFilter}
               onChange={(e) => setInvestigationFilter(e.target.value)}
               className="w-full rounded border border-slate-700 bg-[#070B14] px-2.5 py-1.5 text-xs text-slate-100"
@@ -283,8 +285,9 @@ export const EvidenceExplorer: React.FC<EvidenceExplorerProps> = ({
           </div>
 
           <div>
-            <label className="block text-[11px] text-slate-400 mb-1">Fuel / Material Class</label>
+            <label htmlFor="filter-material" className="block text-[11px] text-slate-400 mb-1">Fuel / Material Class</label>
             <select
+              id="filter-material"
               value={materialFilter}
               onChange={(e) => setMaterialFilter(e.target.value)}
               className="w-full rounded border border-slate-700 bg-[#070B14] px-2.5 py-1.5 text-xs text-slate-100"
@@ -299,8 +302,9 @@ export const EvidenceExplorer: React.FC<EvidenceExplorerProps> = ({
           </div>
 
           <div>
-            <label className="block text-[11px] text-slate-400 mb-1">Gravity Context</label>
+            <label htmlFor="filter-gravity" className="block text-[11px] text-slate-400 mb-1">Gravity Context</label>
             <select
+              id="filter-gravity"
               value={gravityFilter}
               onChange={(e) => setGravityFilter(e.target.value)}
               className="w-full rounded border border-slate-700 bg-[#070B14] px-2.5 py-1.5 text-xs text-slate-100"
@@ -315,8 +319,9 @@ export const EvidenceExplorer: React.FC<EvidenceExplorerProps> = ({
           </div>
 
           <div>
-            <label className="block text-[11px] text-slate-400 mb-1">Oxygen Availability</label>
+            <label htmlFor="filter-oxygen" className="block text-[11px] text-slate-400 mb-1">Oxygen Availability</label>
             <select
+              id="filter-oxygen"
               value={oxygenFilter}
               onChange={(e) => setOxygenFilter(e.target.value as 'ALL' | 'REPORTED' | 'MISSING')}
               className="w-full rounded border border-slate-700 bg-[#070B14] px-2.5 py-1.5 text-xs text-slate-100"
@@ -328,8 +333,9 @@ export const EvidenceExplorer: React.FC<EvidenceExplorerProps> = ({
           </div>
 
           <div>
-            <label className="block text-[11px] text-slate-400 mb-1">Airflow Availability</label>
+            <label htmlFor="filter-airflow" className="block text-[11px] text-slate-400 mb-1">Airflow Availability</label>
             <select
+              id="filter-airflow"
               value={airflowFilter}
               onChange={(e) => setAirflowFilter(e.target.value as 'ALL' | 'REPORTED' | 'MISSING')}
               className="w-full rounded border border-slate-700 bg-[#070B14] px-2.5 py-1.5 text-xs text-slate-100"
@@ -341,8 +347,9 @@ export const EvidenceExplorer: React.FC<EvidenceExplorerProps> = ({
           </div>
 
           <div>
-            <label className="block text-[11px] text-slate-400 mb-1">Measurement Type</label>
+            <label htmlFor="filter-measurement" className="block text-[11px] text-slate-400 mb-1">Measurement Type</label>
             <select
+              id="filter-measurement"
               value={measurementFilter}
               onChange={(e) => setMeasurementFilter(e.target.value)}
               className="w-full rounded border border-slate-700 bg-[#070B14] px-2.5 py-1.5 text-xs text-slate-100"
@@ -357,8 +364,9 @@ export const EvidenceExplorer: React.FC<EvidenceExplorerProps> = ({
           </div>
 
           <div>
-            <label className="block text-[11px] text-slate-400 mb-1">Verification Status</label>
+            <label htmlFor="filter-status" className="block text-[11px] text-slate-400 mb-1">Verification Status</label>
             <select
+              id="filter-status"
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
               className="w-full rounded border border-slate-700 bg-[#070B14] px-2.5 py-1.5 text-xs text-slate-100"
@@ -373,8 +381,9 @@ export const EvidenceExplorer: React.FC<EvidenceExplorerProps> = ({
           </div>
 
           <div>
-            <label className="block text-[11px] text-slate-400 mb-1">Evidence Level</label>
+            <label htmlFor="filter-level" className="block text-[11px] text-slate-400 mb-1">Evidence Level</label>
             <select
+              id="filter-level"
               value={levelFilter}
               onChange={(e) => setLevelFilter(e.target.value)}
               className="w-full rounded border border-slate-700 bg-[#070B14] px-2.5 py-1.5 text-xs text-slate-100"
@@ -559,9 +568,9 @@ export const EvidenceExplorer: React.FC<EvidenceExplorerProps> = ({
                             <dt className="text-slate-400">Retrieval Date:</dt>
                             <dd className="font-mono tabular-nums">{record.retrievalDate}</dd>
                           </div>
-                          <div className="flex justify-between gap-2">
-                            <dt className="text-slate-400">SHA-256 Digest:</dt>
-                            <dd className="font-mono truncate max-w-[220px]" title={record.sha256Hash ?? 'None'}>
+                          <div className="flex justify-between gap-2 min-w-0">
+                            <dt className="text-slate-400 shrink-0">SHA-256 Digest:</dt>
+                            <dd className="font-mono truncate min-w-0 max-w-[180px] sm:max-w-[220px]" title={record.sha256Hash ?? 'None'}>
                               {record.sha256Hash ?? 'Not hashed (catalog metadata)'}
                             </dd>
                           </div>
@@ -724,8 +733,11 @@ export const EvidenceExplorer: React.FC<EvidenceExplorerProps> = ({
                         </p>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                           <div>
-                            <label className="block text-slate-400 mb-1">New Verification Status</label>
+                            <label htmlFor={`edit-status-${record.experimentId}`} className="block text-slate-400 mb-1">
+                              New Verification Status
+                            </label>
                             <select
+                              id={`edit-status-${record.experimentId}`}
                               value={draftStatus}
                               onChange={(e) => setDraftStatus(e.target.value as VerificationStatus)}
                               className="w-full rounded border border-slate-700 bg-[#070B14] px-2.5 py-1.5 text-slate-100"
@@ -738,10 +750,11 @@ export const EvidenceExplorer: React.FC<EvidenceExplorerProps> = ({
                             </select>
                           </div>
                           <div>
-                            <label className="block text-slate-400 mb-1">
+                            <label htmlFor={`edit-citation-${record.experimentId}`} className="block text-slate-400 mb-1">
                               Citation Locator (Page / Table / Figure)
                             </label>
                             <input
+                              id={`edit-citation-${record.experimentId}`}
                               type="text"
                               value={draftCitation}
                               onChange={(e) => setDraftCitation(e.target.value)}
@@ -751,10 +764,11 @@ export const EvidenceExplorer: React.FC<EvidenceExplorerProps> = ({
                           </div>
                         </div>
                         <div>
-                          <label className="block text-slate-400 mb-1">
+                          <label htmlFor={`edit-notes-${record.experimentId}`} className="block text-slate-400 mb-1">
                             Reviewer Rationale (Required)
                           </label>
                           <textarea
+                            id={`edit-notes-${record.experimentId}`}
                             rows={2}
                             value={draftNotes}
                             onChange={(e) => setDraftNotes(e.target.value)}

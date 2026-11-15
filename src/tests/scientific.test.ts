@@ -160,13 +160,18 @@ describe('AegisμG Scientific Validation Suite (Phase 1 + Phase 2)', () => {
     expect(noNumericReport.sharedNumericDimensions.length).toBe(0);
     expect(noNumericReport.missingNumericExplanation.length).toBeGreaterThan(0);
 
-    // Real NASA BASS-II Table 5.1 runs M1 vs M5
+    // Real NASA BASS-II Table 5.1 runs M1 vs M5 (both 0.071 mm/s despite different conditions)
     const bassRuns = INITIAL_EXPERIMENT_RECORDS.filter(
       (r) => r.experimentId === 'EXP-BASS2-M1' || r.experimentId === 'EXP-BASS2-M5'
     );
     const realReport = evaluateExperimentCompatibility(bassRuns);
     expect(realReport.comparable).toBe(true);
     expect(realReport.warnings.some((w) => w.includes('geometry'))).toBe(true);
+    expect(
+      realReport.warnings.some((w) =>
+        w.includes('Equal measured values do not imply equal physical burning behavior')
+      )
+    ).toBe(true);
     expect(
       realReport.sharedNumericDimensions.find((d) => d.key === 'reportedValue')?.targetUnit
     ).toBe('mm/s');
@@ -289,5 +294,25 @@ describe('AegisμG Scientific Validation Suite (Phase 1 + Phase 2)', () => {
     const restored = JSON.parse(serialized) as typeof sessionSnapshot;
     expect(restored.statusOverrides['EXP-BASS2-M1'].verificationStatus).toBe('HUMAN_VERIFIED');
     expect(restored.events.length).toBe(INITIAL_PROVENANCE_EVENTS.length);
+  });
+
+  it('12. Neutralizes all dangerous CSV formula prefixes and XSS vectors in exports', () => {
+    const base = INITIAL_EXPERIMENT_RECORDS.find((r) => r.experimentId === 'EXP-BASS2-M1')!;
+    for (const payload of ['=1+1', '+CMD|calc', '-2+3', '@SUM(A1:A2)', '\t=cmd', '\r+cmd']) {
+      expect(sanitizeImportedText(payload).startsWith("'")).toBe(true);
+    }
+    expect(sanitizeImportedText('<img src=x onerror=alert(1)>')).not.toContain('<img');
+    const tamperedCsv = exportRecordsToCsv([
+      {
+        ...base,
+        paperTitle: '=HYPERLINK("http://evil.example")',
+        notes: sanitizeImportedText('@SUM(1,2)<script>bad</script>'),
+        uncertainty: '+CMD|calc',
+      },
+    ]);
+    expect(tamperedCsv).toContain("'=HYPERLINK");
+    expect(tamperedCsv).toContain("'@SUM");
+    expect(tamperedCsv).toContain("'+CMD");
+    expect(tamperedCsv).not.toContain('<script>');
   });
 });
