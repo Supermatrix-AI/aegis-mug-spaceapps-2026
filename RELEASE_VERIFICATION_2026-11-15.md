@@ -4,7 +4,8 @@
 **Team:** SPECULATRON AI  
 **Challenge:** NASA Space Apps Challenge 2026 (*Flame in Freefall: SI-Powered Fire Safety Insights from Microgravity Combustion Data*)  
 **Target Repository:** `https://github.com/Supermatrix-AI/aegis-mug-spaceapps-2026`  
-**Verification Timestamp:** `2026-11-15T03:55Z` (`07:55 UTC+4`)
+**Verification Timestamp:** `2026-11-15T13:39Z` (`17:39 UTC+4` UAE)  
+**Verified GitHub `main` HEAD:** `d2118bd377f06bd85fa67eb22eae8c4c51d5ec50` (note: final workspace updates to `src/App.tsx` and Phase 11 docs await owner push)
 
 ---
 
@@ -13,13 +14,13 @@
 - **Node.js:** `v22.23.2` (**VERIFIED**)
 - **npm:** `10.9.8` (**VERIFIED**)
 - **TypeScript (`npm run lint` -> `tsc --noEmit`):** Exit code `0`, `0` errors (**VERIFIED**)
-- **Automated Test Suite (`npm run test` -> `vitest run`):** `5` test files / `39` tests passed in `1.97s` (**TESTED & VERIFIED**):
-  - `src/tests/scientific.test.ts` — `11/11` passed (`66 ms`)
-  - `src/tests/evidencePlatform.test.ts` — `5/5` passed (`47 ms`)
-  - `src/tests/releaseValidation.test.ts` — `7/7` passed (`37 ms`)
+- **Automated Test Suite (`npm run test` -> `vitest run`):** `5` test files / `39` tests passed in `2.31s` (**TESTED & VERIFIED**):
+  - `src/tests/scientific.test.ts` — `11/11` passed (`83 ms`)
+  - `src/tests/evidencePlatform.test.ts` — `5/5` passed (`46 ms`)
+  - `src/tests/releaseValidation.test.ts` — `7/7` passed (`40 ms`)
   - `src/tests/bass2Atlas.test.ts` — `9/9` passed (`23 ms`)
   - `src/tests/digitalTwin.test.ts` — `7/7` passed (`15 ms`)
-- **Production Vite Build (`npm run build` -> `vite build`):** `2153` modules transformed cleanly in `1.70s` (`dist/index.html`, `dist/assets/index-x6RUTssb.css`, `dist/assets/index-BIiHuBtp.js`) (**VERIFIED**)
+- **Production Vite Build (`npm run build` -> `vite build`):** `2153` modules transformed cleanly in `1.73s` (`dist/index.html`, `dist/assets/index-x6RUTssb.css`, `dist/assets/index-5Nz8wdaf.js`) (**VERIFIED**)
 - **Official NASA Artifact Check (`npm run verify:nasa`):** Exit code `0` (**VERIFIED**):
   - `data/raw/nasa/TM-20210011385.pdf.txt` (`354,681` B, SHA-256 `56ee5bd7702b5c8235f9934468bb9d6e4ea143c4570d7eaa1da11d904b42ea3f`)
   - `data/raw/nasa/ntrs_20210011385.json` (`7,042` B, SHA-256 `3fcf1e93014a6c0e210bc77714c5a7f95b0ccbedb7e28390184e051d517ab9e9`)
@@ -37,7 +38,7 @@ Tested on isolated local port `3099` with `GEMINI_API_KEY=""` (process terminate
 |---|---|---|---|
 | `node server.ts` (`npm start` command) | Native startup under Node `v22.23.2` | Started cleanly (`NODE_START_OK`) | **VERIFIED** |
 | `GET /` | Production SPA HTML (`HTTP 200`) | `HTTP 200`, `<title>AegisμG — Microgravity Fire Safety Intelligence</title>` | **VERIFIED** |
-| `GET /assets/index-BIiHuBtp.js` | Built JS bundle served | `HTTP 200` | **VERIFIED** |
+| `GET /assets/*.js` | Built JS bundle served | `HTTP 200` | **VERIFIED** |
 | `GET /api/health` | `geminiConfigured: false` | `HTTP 200`, `geminiConfigured: false` | **VERIFIED** |
 | `GET /api/catalog` | Bundled NASA metadata & runs | `8` sources, `8` investigations, `16` records, `3` events | **VERIFIED** |
 | `POST /api/records/validate` | Blocks auto-promotion to `HUMAN_VERIFIED` | `validCount: 1, errorCount: 0, coercedStatus: 'SOURCE_LINK_ONLY'` | **VERIFIED** |
@@ -48,10 +49,11 @@ Tested on isolated local port `3099` with `GEMINI_API_KEY=""` (process terminate
 
 ---
 
-## 3. Security, GitHub Forensics & Deployment Status
+## 3. Security, GitHub Forensics, Demo PDF & Deployment Status
 
 - **Secret Scan:** `.env` absent; `.env.example` contains placeholders only; zero hardcoded `AIza*` / `sk-*` / `ghp_*` keys found in `src/`, `server.ts`, `scripts/`, or `submission/`. `.gitignore` ignores `.env*`, `node_modules/`, `dist/`, and `*.log`. (**VERIFIED**)
-- **GitHub Repository Sync (`Supermatrix-AI/aegis-mug-spaceapps-2026`):** Workspace (`/app/applet`) does not contain `.git`; local enhancements (`evidenceEngine.ts`, `EvidenceInspectorCard.tsx`, `data/raw/nasa/`, `scripts/verify-nasa-sources.mjs`, `submission/presentation.html`, updated docs) must be committed and pushed to `main`. (**PENDING OWNER ACTION**)
-- **GitHub Actions Forensics:** Prior workflow failure (`Run 43669448020` on `931d6281d6`) verified as 2-second pre-runner infrastructure block (`runner_id: 0`, `steps: []`, `conclusion: "failure"`), not a Vitest or lint error. (**VERIFIED**)
-- **Public Unauthenticated Deployment URL & Space Apps Resources Tab:** Neither an unauthenticated public production URL nor the Space Apps *Resources* tab (`000` timeout from sandbox) could be verified automatically from this workspace. (**PENDING OWNER ACTION / UNVERIFIED**)
-- **Hackathon Timeline Disclosure:** Pre-`09:00 UAE` commits (`55bb69b341`, `49386b23d1`, `5f024bea6d`) documented transparently in `HACKATHON_DEVELOPMENT_DISCLOSURE.md` (**Ruling Pending — contact Local Lead / GO Team**).
+- **Public 7-Slide Demo PDF:** `https://github.com/Supermatrix-AI/aegis-mug-spaceapps-2026/blob/main/submission/AegisMuG-SpaceApps-2026-7-Slide-Demo.pdf` (`HTTP 200`, `14,099` B, `7` verified readable slides covering Problem, BASS-II `20/43/39/4`, 9 Views, `M3`, Offline BM25 & Abstention, Digital Twin Boundaries, and Open Science). (**VERIFIED**)
+- **GitHub Repository Sync (`Supermatrix-AI/aegis-mug-spaceapps-2026`):** Workspace (`/app/applet`) does not contain `.git`; `main` on GitHub is at `d2118bd377` (`render.yaml` & `submission/AegisMuG-SpaceApps-2026-7-Slide-Demo.pdf` synced locally), while final `src/App.tsx` journey bar and Phase 11 docs await owner push. (**OWNER ACTION REQUIRED**)
+- **GitHub Actions Forensics:** Run `43713957382` (`d2118bd377`, `2026-11-15T12:27:45Z` -> `12:27:48Z`) failed in 3 seconds before runner provisioning (`runner_id: 0`, `steps: []`, `conclusion: "failure"`), matching earlier pre-runner infrastructure block `43669448020` rather than any TypeScript/Vitest failure. (**VERIFIED**)
+- **Public Live Application URL (`NOT DEPLOYED`):** AI Studio Shared App URL `https://ais-pre-vle43tr4bszlmmgual4rke-566753127465.asia-east1.run.app/` returned **`HTTP 404`**. Full-stack `render.yaml` (`plan: free`, `healthCheckPath: /api/health`) is ready as fallback. Publish and verify in an incognito browser before submitting. (**OWNER ACTION REQUIRED**)
+- **Space Apps Resources Tab & Hackathon Disclosure:** `spaceappschallenge.org` timed out (`HTTP 000`) from sandbox (**UNVERIFIED — check logged in**). Pre-`09:00 UAE` commits (`55bb69b341`, `49386b23d1`, `5f024bea6d`) documented transparently in `HACKATHON_DEVELOPMENT_DISCLOSURE.md` (**ELIGIBILITY RULING PENDING**).

@@ -4,8 +4,9 @@
 - **Team / Creator:** SPECULATRON AI
 - **Challenge Title:** Flame in Freefall: SI-Powered Fire Safety Insights from Microgravity Combustion Data
 - **Challenge Link:** https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/
-- **Live Application URL:** `[PENDING OWNER ACTION — Verify an unauthenticated public deployment URL in incognito before portal submission]`
-- **Public GitHub Repository URL:** `https://github.com/Supermatrix-AI/aegis-mug-spaceapps-2026` `[main at cde52ac7cf; workspace enhancements & submission/presentation.html staged locally — PENDING OWNER ACTION to push]`
+- **Live Application URL:** `[NOT DEPLOYED — Shared Cloud Run URL https://ais-pre-vle43tr4bszlmmgual4rke-566753127465.asia-east1.run.app/ returned HTTP 404 on 2026-11-15; publish via AI Studio UI or Render blueprint (render.yaml) and verify unauthenticated access in incognito]`
+- **Public 7-Slide Demo PDF:** https://github.com/Supermatrix-AI/aegis-mug-spaceapps-2026/blob/main/submission/AegisMuG-SpaceApps-2026-7-Slide-Demo.pdf (`HTTP 200`, `7` slides)
+- **Public GitHub Repository URL:** `https://github.com/Supermatrix-AI/aegis-mug-spaceapps-2026` `[main at d2118bd377f06bd85fa67eb22eae8c4c51d5ec50; final Phase 8/11 enhancements in AI Studio workspace pending owner push to main]`
 
 ## Problem Definition
 
@@ -53,20 +54,23 @@ AegisμG includes the **Digital Twin Sandbox** featuring a verified NASA Table 5
 > **[0:08–0:19]** "We organize all 20 NASA BASS-II PMMA tests, preserve 4 missing rates and unmeasured segment oxygen as null, surface the `M3` airflow exception, and run an offline Question Explorer that refuses unverified claims."  
 > **[0:19–0:30]** "With our Evidence Gap Map, 6-stage DIWA provenance scorecard, and clearly separated hypothetical Digital Twin, AegisμG delivers accountable NASA fire-safety intelligence."
 
-### Option B — 7-Slide Pitch Deck (`submission/presentation.html`)
+### Option B — Published 7-Slide Pitch Deck (`submission/AegisMuG-SpaceApps-2026-7-Slide-Demo.pdf`)
 
-1. **Slide 1 — Title & Problem:** AegisμG by SPECULATRON AI · NASA Space Apps 2026 (*Flame in Freefall: SI-Powered Fire Safety Insights*) · Independent unofficial research prototype addressing fragmented NASA data and invalid `0 g` -> partial-g extrapolation.
-2. **Slide 2 — Verified NASA Evidence Base:** `NASA/TM-20210011385` (`20` tests, `43` segments, `39` spread observations, `4` nulls, Table 7.1 SIBAL), `PSI-25`, `PSI-69`/`PSI-98` DataCite DOIs, `OCHMO-TB-008`, and `npm run verify:nasa` SHA-256 verification.
-3. **Slide 3 — Integrity & Missing-Data Guardrails:** `NASA_OBSERVED` .. `UNVERIFIED` taxonomy, `NEEDS_SOURCE_CHECK` validation, `null` preservation (`"Not reported / Not verified"`), and dimension-checked unit gates.
-4. **Slide 4 — BASS-II Table 5.1 Atlas & M3 Counterexample:** Interactive multi-axis explorer with empirical Table 5.1 plot highlighting `12/13` upward directional alignment and `M3` decreasing (`0.029 -> 0.024 mm/s`) alongside O2 depletion.
-5. **Slide 5 — Offline BM25 Question Explorer & Evidence Gap Map:** Zero-key grounded Q&A (`Q1–Q8`) with automatic abstention on lunar/Martian predictions or safety certifications, plus `OBSERVED` vs `NO_MEASUREMENT` gap matrix.
-6. **Slide 6 — Digital Twin Boundaries (`NOT NASA DATA`):** Strict separation between NASA Table 5.1 linear replay and the unvalidated 0D compartment oxygen balance (`AEGIS_0D_OXYGEN_BALANCE_V1`).
-7. **Slide 7 — Reliability Scorecard, Verification & Impact:** 6-stage DIWA provenance scorecard (`MODEL VALIDATION: NOT VALIDATED`), `39/39` passing automated tests across 5 suites, and MIT-licensed open-source release.
+Published on GitHub `main` (`d2118bd377`): <https://github.com/Supermatrix-AI/aegis-mug-spaceapps-2026/blob/main/submission/AegisMuG-SpaceApps-2026-7-Slide-Demo.pdf> (7 pages, `14,099` B, `HTTP 200`; static backup also in `submission/presentation.html`).
+
+1. **Slide `01 / 07` — Title & Problem:** `Flame in Freefall` — Microgravity Fire Safety Intelligence (`AegisμG` by `SPECULATRON AI`); 48-hour research prototype preventing invalid `0 g` -> partial-g extrapolation.
+2. **Slide `02 / 07` — Verified NASA Evidence Base:** `NASA/TM-20210011385` (`Table 5.1`, p. 57: `20` tests, `43` segments, `39` spread observations, `4` nulls) + Table 7.1 SIBAL + `PSI-25` / `PSI-69` / `PSI-98` + `OCHMO-TB-008`.
+3. **Slide `03 / 07` — 9-View Interactive Research Architecture:** Evidence Workspace, Table 5.1 Atlas, Offline Question Explorer (`Q1–Q8`), Evidence Gap Map, 6-Stage DIWA Provenance Scorecard, and Digital Twin Lab.
+4. **Slide `04 / 07` — BASS-II Table 5.1 Counterexample (`M3`):** `12/13` upward directional segments align with airflow vs spread; `M3` (`0.029 -> 0.024 mm/s`) decreases alongside concurrent chamber O2 depletion (`20.8% -> 19.7%`).
+5. **Slide `05 / 07` — Offline BM25 Grounded Q&A & Abstention:** Zero-API-key research retrieval (`GEMINI_API_KEY` blank returns `DETERMINISTIC_FALLBACK`) with automated abstention on out-of-scope partial-g/safety queries.
+6. **Slide `06 / 07` — Digital Twin Strict Isolation (`NOT NASA DATA`):** Clear boundary between NASA Table 5.1 replay and hypothetical `AEGIS_0D_OXYGEN_BALANCE_V1` (`HYPOTHETICAL | NOT VALIDATED | NOT CERTIFIED`).
+7. **Slide `07 / 07` — Open Science, Reproducibility & Honest Status:** `39/39` tests (`5` suites), `npm run verify:nasa` SHA-256 verification, MIT license, and explicit disclosure that public cloud deployment must be verified independently.
 
 ### Public Release Verification & Disclosure Note
 
-As of November 15, 2026:
-- All local workspace code, tests (`39/39` across 5 suites), NASA artifact verification (`npm run verify:nasa`), and `submission/presentation.html` are verified locally (see `RELEASE_VERIFICATION_2026-11-15.md` and `JUDGING_READINESS_CHECKLIST.md`).
-- **Pre-09:00 UAE Commit Disclosure:** Three early commits (`55bb69b341`, `49386b23d1`, `5f024bea6d`) occurred between `08:06` and `08:44 UTC+4` on Nov 14 prior to `09:00 UTC+4` local start; transparently disclosed in `HACKATHON_DEVELOPMENT_DISCLOSURE.md` (**Ruling Pending — contact Local Lead / GO Team**).
-- Verify git push, an unauthenticated public deployment URL in incognito, and export/host the 7-slide PDF or <=30s video before clicking **Submit for Judging**.
+As of November 15, 2026 (`17:39 UAE` / `13:39 UTC`):
+- GitHub `main` (`d2118bd377f06bd85fa67eb22eae8c4c51d5ec50`) includes `render.yaml` and the verified public 7-slide PDF (`submission/AegisMuG-SpaceApps-2026-7-Slide-Demo.pdf`). Final workspace updates (`src/App.tsx` journey bar, `submission/FINAL_NASA_PORTAL_COPY_PASTE.md`, `submission/OWNER_FINAL_FIVE_ACTIONS.md`, and updated Phase 11 docs) are verified locally (`RELEASE_VERIFICATION_2026-11-15.md` & `JUDGING_READINESS_CHECKLIST.md`) and await push to `main`.
+- GitHub Actions Run `43713957382` (`d2118bd377`) failed in 3 seconds before runner provisioning (`runner_id: 0`, `steps: []`), matching an infrastructure/quota block rather than a test failure.
+- **Pre-09:00 UAE Commit Disclosure:** Three early commits (`55bb69b341`, `49386b23d1`, `5f024bea6d`) occurred between `08:06` and `08:44 UTC+4` on Nov 14 prior to `09:00 UTC+4` local start; transparently disclosed in `HACKATHON_DEVELOPMENT_DISCLOSURE.md` (**ELIGIBILITY RULING PENDING — contact Abu Dhabi Local Lead / GO Team**).
+- Publish via AI Studio UI or Render (`render.yaml`), verify an unauthenticated public deployment URL in incognito, paste fields from `submission/FINAL_NASA_PORTAL_COPY_PASTE.md`, and click **Submit for Judging** before **23:59 UAE**.
 

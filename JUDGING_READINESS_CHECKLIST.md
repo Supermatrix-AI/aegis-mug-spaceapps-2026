@@ -15,7 +15,7 @@
 | **Creativity** | Combines an authentic 20-test / 43-segment Table 5.1 Atlas, an offline zero-key BM25 Question Explorer with strict anti-fabrication abstention, a 6-stage DIWA provenance scorecard, and an explicitly quarantined hypothetical 0D digital twin. | `Bass2Atlas.tsx`, `evidenceEngine.ts`, `EvidenceInspectorCard.tsx`, `DigitalTwin.tsx` | **IMPLEMENTED** |
 | **Validity** | Preserves `4` untracked spread rates (`M6`/`M12`) and `43/43` unmeasured segment O2 values as `null`; highlights the `M3` counterexample (`0.029 -> 0.024 mm/s`); marks hypothetical twin curves `NOT NASA DATA · NOT VALIDATED`. | `bass2Table51.ts`, `scripts/verify-nasa-sources.mjs`, `evidencePlatform.test.ts` | **VERIFIED & TESTED** |
 | **Relevance** | Directly addresses *Flame in Freefall* using `NASA/TM-20210011385` (BASS-II), `PSI-25`, `PSI-69` (FLEX DOI `10.60555/mbq8-0451`), `PSI-98` (Saffire-I DOI `10.60555/0t15-1z43`), and `OCHMO-TB-008`. | `SOURCES.md`, `NASA_DATA_MANIFEST.md`, `nasaCatalog.ts` | **VERIFIED** |
-| **Presentation** | 6-step in-app **Guided Scientific Demo**, dark-telemetry standalone 7-slide HTML pitch deck (`submission/presentation.html`), and ≤30-second spoken demo script (`submission/README.md`). | `App.tsx`, `submission/presentation.html`, `submission/README.md` | **IMPLEMENTED** (PDF/video upload **PENDING OWNER ACTION**) |
+| **Presentation** | 6-step in-app **Guided Scientific Demo** (`QUESTION -> NASA SOURCE -> ... -> RESEARCH RECOMMENDATION`), published 7-slide PDF (`submission/AegisMuG-SpaceApps-2026-7-Slide-Demo.pdf`), standalone HTML deck (`submission/presentation.html`), and ≤30-second spoken demo script (`submission/README.md`). | `App.tsx`, `submission/AegisMuG-SpaceApps-2026-7-Slide-Demo.pdf` (`HTTP 200`, 7 pages), `submission/README.md` | **VERIFIED** (PDF public on GitHub) |
 
 ---
 
@@ -32,11 +32,11 @@
 
 ---
 
-## 3. Official Demo & Competition Eligibility Checklist (Owner Actions Required)
+## 3. Official Demo & Competition Eligibility Checklist (Owner Actions & Unknowns)
 
-- [ ] **GitHub Sync (`PENDING OWNER ACTION`):** Push final verified workspace files (including `data/raw/nasa/`, `scripts/verify-nasa-sources.mjs`, `submission/`, and docs) to `https://github.com/Supermatrix-AI/aegis-mug-spaceapps-2026` (`main`), and confirm GitHub Actions `CI` workflow passes on an active runner (resolving earlier pre-runner infrastructure block `43669448020`).
-- [ ] **Pre-09:00 UAE Commit Disclosure (`PENDING OWNER ACTION`):** Send the draft clarification in `HACKATHON_DEVELOPMENT_DISCLOSURE.md` to your Local Lead / Global Organizing Team regarding commits `55bb69b341`, `49386b23d1`, and `5f024bea6d` (`08:06–08:44 UTC+4` on Nov 14).
-- [ ] **Challenge Resources Tab Check (`PENDING OWNER ACTION`):** Log into `spaceappschallenge.org` and inspect the *Resources* tab on *Flame in Freefall* (unreadable from offline sandbox).
-- [ ] **Incognito Live URL Verification (`PENDING OWNER ACTION`):** Open deployed production URL in an incognito browser without Google login and verify zero errors.
-- [ ] **Export & Upload 7-Slide PDF or ≤30s Video (`PENDING OWNER ACTION`):** Print `submission/presentation.html` to PDF (`submission/AegisMuG-SpaceApps-2026-Deck.pdf`) OR record a ≤30-second video using `submission/README.md`, then verify public link visibility in incognito.
-- [ ] **Portal Finalization (`PENDING OWNER ACTION`):** Fill project summary, GitHub link, public demo/PDF link, AI disclosure, and NASA sources on the Space Apps Project page, and click **Submit for Judging** before **Nov 15, 2026 11:59 PM** local time.
+- [x] **Public 7-Slide Demo PDF Verified:** `https://github.com/Supermatrix-AI/aegis-mug-spaceapps-2026/blob/main/submission/AegisMuG-SpaceApps-2026-7-Slide-Demo.pdf` (`HTTP 200`, 7 readable slides). **Verify incognito browser access once before submitting.**
+- [ ] **GitHub Sync (`OWNER ACTION REQUIRED`):** Push final workspace updates (`src/App.tsx` journey bar, `submission/FINAL_NASA_PORTAL_COPY_PASTE.md`, `submission/OWNER_FINAL_FIVE_ACTIONS.md`, and updated docs) to `https://github.com/Supermatrix-AI/aegis-mug-spaceapps-2026` (`main`), and check GitHub Actions runner/billing settings (Run `43713957382` stopped at `runner_id: 0` with `0` steps).
+- [ ] **Pre-09:00 UAE Commit Disclosure (`ELIGIBILITY RULING PENDING`):** Send the draft clarification in `HACKATHON_DEVELOPMENT_DISCLOSURE.md` to your Abu Dhabi Local Lead / Global Organizing Team regarding commits `55bb69b341`, `49386b23d1`, and `5f024bea6d` (`08:06–08:44 UTC+4` on Nov 14).
+- [ ] **Challenge Resources Tab Check (`UNKNOWN / OWNER ACTION REQUIRED`):** Log into `spaceappschallenge.org` and inspect the *Resources* tab on *Flame in Freefall* (`HTTP 000` timeout from sandbox).
+- [ ] **Live Public Deployment & Incognito Check (`OWNER ACTION REQUIRED`):** Shared AI Studio URL returned `HTTP 404` (`NOT DEPLOYED`). Run AI Studio **Publish** or Render `render.yaml`, then verify `/`, `/api/health`, `/api/catalog`, BASS-II Atlas, Question Explorer, and Digital Twin load cleanly in an incognito browser without login.
+- [ ] **Portal Finalization (`NOT CONFIRMED — OWNER ACTION REQUIRED`):** Copy fields 1–8 from `submission/FINAL_NASA_PORTAL_COPY_PASTE.md` into the Space Apps Project page, confirm team Members tab, review terms, and click **Submit for Judging** before **Nov 15, 2026 23:59 UAE time**.

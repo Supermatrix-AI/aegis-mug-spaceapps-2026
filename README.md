@@ -77,7 +77,7 @@ npm run verify:nasa
 
 ## Deployment
 
-AegisμG builds to a standard Node.js + Vite SPA (`dist/`) served by `server.ts` on `process.env.PORT || 3000`. It can be deployed cleanly to Cloud Run, Render, Railway, or Fly.io with no external database required. Never expose `GEMINI_API_KEY` in client-side `VITE_*` variables.
+AegisμG builds to a standard Node.js + Vite SPA (`dist/`) served by `server.ts` on `process.env.PORT || 3000` (runs natively on Node `v22.23.2` via `npm start`). It deploys cleanly via Google AI Studio Cloud Run **Publish** or Render using the included `render.yaml` Blueprint (`plan: free`, `healthCheckPath: /api/health`) with zero external database required. Never expose `GEMINI_API_KEY` in client-side `VITE_*` variables.
 
 ## Digital Twin Model Boundary
 
@@ -91,5 +91,6 @@ See `DIGITAL_TWIN_METHOD.md` for formulas, assumptions, safeguards, tests, and `
 ## Public GitHub Repository, Submission Deck & Disclosures
 
 - **Repository:** `https://github.com/Supermatrix-AI/aegis-mug-spaceapps-2026` (MIT License for newly authored code; zero private source code or secrets from private SPECULATRON AI or DIWA repositories).
-- **Submission Deck:** Standalone 7-slide HTML pitch deck at `submission/presentation.html` (with narration guide & PDF export steps in `submission/README.md`).
+- **Published 7-Slide PDF Demo:** `submission/AegisMuG-SpaceApps-2026-7-Slide-Demo.pdf` (`https://github.com/Supermatrix-AI/aegis-mug-spaceapps-2026/blob/main/submission/AegisMuG-SpaceApps-2026-7-Slide-Demo.pdf`) alongside standalone HTML deck `submission/presentation.html`.
+- **Portal Pack & Owner Checklist:** See `submission/FINAL_NASA_PORTAL_COPY_PASTE.md`, `submission/OWNER_FINAL_FIVE_ACTIONS.md`, and `submission/README.md`.
 - **Audit & Eligibility Documentation:** See `NASA_DATA_MANIFEST.md`, `HACKATHON_DEVELOPMENT_DISCLOSURE.md`, `COMPETITIVE_BENCHMARK.md`, `JUDGING_READINESS_CHECKLIST.md`, `RELEASE_VERIFICATION_2026-11-15.md`, `FINAL_SPACEAPPS_2026_SUBMISSION_PACK.md`, `METHODOLOGY.md`, and `AI_DISCLOSURE.md`.

@@ -95,46 +95,63 @@ const NAV_ITEMS: Array<{ id: NavSection; label: string; icon: React.ComponentTyp
   { id: 'about', label: 'About & Export', icon: BookOpen },
 ];
 
+const RESEARCH_JOURNEY_STAGES = [
+  'QUESTION',
+  'NASA SOURCE',
+  'EXPERIMENT',
+  'MEASUREMENT',
+  'SCIENTIFIC INTERPRETATION',
+  'EVIDENCE GAP',
+  'RESEARCH RECOMMENDATION',
+] as const;
+
 const GUIDED_DEMO_STEPS: Array<{
   step: number;
   section: NavSection;
+  activeStages: readonly string[];
   title: string;
   takeaway: string;
 }> = [
   {
     step: 1,
     section: 'explorer',
-    title: 'Step 1: NASA Data Foundation & Missing-Value Discipline',
+    activeStages: ['QUESTION', 'NASA SOURCE', 'EXPERIMENT'],
+    title: 'Step 1: Question, NASA Source & Experiment Grounding',
     takeaway: 'Every catalog record separates NASA_OBSERVED / SOURCE_MATCHED facts from METADATA_ONLY PSI records—nulls stay null.',
   },
   {
     step: 2,
     section: 'evidence-atlas',
-    title: 'Step 2: BASS-II M3 Observation & Table 5.1 Atlas',
+    activeStages: ['EXPERIMENT', 'MEASUREMENT', 'SCIENTIFIC INTERPRETATION'],
+    title: 'Step 2: BASS-II Measurements & M3 Scientific Exception',
     takeaway: '20 tests / 43 velocity segments (39 numeric + 4 nulls in M6/M12) reveal 12/13 aligned tests and M3 counterexample (10 cm/s -> 0.029 vs 20 cm/s -> 0.024 mm/s).',
   },
   {
     step: 3,
     section: 'provenance',
-    title: 'Step 3: Evidence Provenance & Scientific Reliability Scorecard',
+    activeStages: ['NASA SOURCE', 'MEASUREMENT', 'SCIENTIFIC INTERPRETATION'],
+    title: 'Step 3: 6-Stage DIWA Provenance & Scientific Reliability Scorecard',
     takeaway: 'Inspect 6-stage DIWA lineage, artifact SHA-256 verification, and transparent numerators/denominators without safety overclaims.',
   },
   {
     step: 4,
     section: 'comparator',
-    title: 'Step 4: Scientific Comparison & Dimensional Integrity',
+    activeStages: ['MEASUREMENT', 'SCIENTIFIC INTERPRETATION', 'EVIDENCE GAP'],
+    title: 'Step 4: Scientific Comparison & Dimensional Integrity Gate',
     takeaway: 'Compare compatible BASS-II PMMA runs (M1 vs M5) while refusing to plot incompatible or missing PSI dimensions.',
   },
   {
     step: 5,
     section: 'intelligence',
-    title: 'Step 5: Research Relevance, Question Explorer & Evidence Gaps',
-    takeaway: 'Use deterministic BM25 Question Explorer, inspect OBSERVED vs NO_MEASUREMENT Moon/Mars gaps, and view strict 0 g vs 0.165 g / 0.38 g boundaries.',
+    activeStages: ['QUESTION', 'SCIENTIFIC INTERPRETATION', 'EVIDENCE GAP', 'RESEARCH RECOMMENDATION'],
+    title: 'Step 5: Offline BM25 Question Explorer, Evidence Gaps & Next Research',
+    takeaway: 'Use deterministic BM25 Question Explorer with abstention, inspect OBSERVED vs NO_MEASUREMENT Moon/Mars gaps, and derive next NASA PSI/partial-g priorities.',
   },
   {
     step: 6,
     section: 'digital-twin',
-    title: 'Step 6: Hypothetical Digital Twin Boundaries',
+    activeStages: ['EVIDENCE GAP', 'RESEARCH RECOMMENDATION'],
+    title: 'Step 6: Hypothetical Digital Twin Boundaries & Recommendations',
     takeaway: 'NASA spread-rate replay remains isolated from Section B (NOT NASA DATA, NOT VALIDATED, NOT CERTIFIED, NOT A FIRE-SPREAD PREDICTION).',
   },
 ];
@@ -453,43 +470,69 @@ export default function App() {
             <div
               role="region"
               aria-label="Guided Scientific Demo"
-              className="mb-6 rounded-lg border border-amber-500/40 bg-[#0D1422] p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3"
+              className="mb-6 rounded-lg border border-amber-500/40 bg-[#0D1422] p-4 space-y-3"
             >
-              <div className="space-y-1">
-                <div className="text-[11px] font-mono uppercase tracking-wider text-amber-400">
-                  Guided Scientific Demo · Step {GUIDED_DEMO_STEPS[demoStepIndex].step} of {GUIDED_DEMO_STEPS.length}
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                <div className="space-y-1">
+                  <div className="text-[11px] font-mono uppercase tracking-wider text-amber-400">
+                    Guided Scientific Demo · Step {GUIDED_DEMO_STEPS[demoStepIndex].step} of {GUIDED_DEMO_STEPS.length}
+                  </div>
+                  <div className="text-sm font-semibold text-slate-100">
+                    {GUIDED_DEMO_STEPS[demoStepIndex].title}
+                  </div>
+                  <p className="text-xs text-slate-300">
+                    {GUIDED_DEMO_STEPS[demoStepIndex].takeaway}
+                  </p>
                 </div>
-                <div className="text-sm font-semibold text-slate-100">
-                  {GUIDED_DEMO_STEPS[demoStepIndex].title}
+                <div className="flex flex-wrap items-center gap-2 shrink-0">
+                  <button
+                    type="button"
+                    disabled={demoStepIndex === 0}
+                    onClick={() => handleAdvanceDemo(-1)}
+                    className="rounded border border-slate-700 bg-slate-900 hover:bg-slate-800 disabled:opacity-40 px-3 py-2 min-h-[44px] text-xs text-slate-200 cursor-pointer"
+                  >
+                    Previous
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => handleAdvanceDemo(1)}
+                    className="inline-flex items-center gap-1 rounded bg-amber-500 hover:bg-amber-400 px-3 py-2 min-h-[44px] text-xs font-medium text-slate-950 cursor-pointer"
+                  >
+                    <span>{demoStepIndex === GUIDED_DEMO_STEPS.length - 1 ? 'Finish Demo' : 'Next Step'}</span>
+                    <ChevronRight className="w-3.5 h-3.5" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setDemoStepIndex(null)}
+                    className="rounded border border-slate-700 bg-slate-900 hover:bg-slate-800 px-3 py-2 min-h-[44px] text-xs text-slate-400 cursor-pointer"
+                  >
+                    Exit
+                  </button>
                 </div>
-                <p className="text-xs text-slate-300">
-                  {GUIDED_DEMO_STEPS[demoStepIndex].takeaway}
-                </p>
               </div>
-              <div className="flex flex-wrap items-center gap-2 shrink-0">
-                <button
-                  type="button"
-                  disabled={demoStepIndex === 0}
-                  onClick={() => handleAdvanceDemo(-1)}
-                  className="rounded border border-slate-700 bg-slate-900 hover:bg-slate-800 disabled:opacity-40 px-3 py-2 min-h-[44px] text-xs text-slate-200 cursor-pointer"
-                >
-                  Previous
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleAdvanceDemo(1)}
-                  className="inline-flex items-center gap-1 rounded bg-amber-500 hover:bg-amber-400 px-3 py-2 min-h-[44px] text-xs font-medium text-slate-950 cursor-pointer"
-                >
-                  <span>{demoStepIndex === GUIDED_DEMO_STEPS.length - 1 ? 'Finish Demo' : 'Next Step'}</span>
-                  <ChevronRight className="w-3.5 h-3.5" />
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setDemoStepIndex(null)}
-                  className="rounded border border-slate-700 bg-slate-900 hover:bg-slate-800 px-3 py-2 min-h-[44px] text-xs text-slate-400 cursor-pointer"
-                >
-                  Exit
-                </button>
+              <div
+                aria-label="Scientific Research Journey Stages"
+                className="flex flex-wrap items-center gap-1.5 pt-2 border-t border-slate-800/80 text-[10px] font-mono"
+              >
+                {RESEARCH_JOURNEY_STAGES.map((stage, idx) => {
+                  const isActive = GUIDED_DEMO_STEPS[demoStepIndex].activeStages.includes(stage);
+                  return (
+                    <React.Fragment key={stage}>
+                      <span
+                        className={`rounded px-2 py-0.5 border ${
+                          isActive
+                            ? 'border-teal-500/50 bg-teal-500/15 text-teal-300 font-semibold'
+                            : 'border-slate-800 bg-slate-900/70 text-slate-500'
+                        }`}
+                      >
+                        {stage}
+                      </span>
+                      {idx < RESEARCH_JOURNEY_STAGES.length - 1 && (
+                        <span aria-hidden="true" className="text-slate-600">→</span>
+                      )}
+                    </React.Fragment>
+                  );
+                })}
               </div>
             </div>
           )}
