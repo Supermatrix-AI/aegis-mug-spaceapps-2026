@@ -1,0 +1,18 @@
+# AegisμG — independent NASA Space Apps 2026 research prototype
+# Deploys the existing React/Vite + Express app together (not a static-only mockup).
+# Optional Gemini synthesis is disabled until a server-side GEMINI_API_KEY is set securely.
+services:
+  - type: web
+    name: aegis-mug-spaceapps-2026
+    runtime: node
+    plan: free
+    region: frankfurt
+    branch: main
+    buildCommand: npm install --no-audit --no-fund && npm run lint && npm run test && npm run build && npm run verify:nasa
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: 22.23.2
